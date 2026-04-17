@@ -144,7 +144,7 @@ export default function MobileFirstLayout({ shop, listings, reviews }: MobileFir
                             )}
 
                             {shop.logoUrl ? (
-                                <img src={shop.logoUrl} alt={shop.name} className="h-8 max-w-[150px] object-contain" />
+                                <img src={shop.logoUrl} alt={shop.name} className="h-20 md:h-[120px] max-w-[400px] object-contain" />
                             ) : (
                                 <span className="font-bold text-lg" style={{ color: headerText }}>{shop.name}</span>
                             )}
@@ -453,7 +453,7 @@ export default function MobileFirstLayout({ shop, listings, reviews }: MobileFir
                     <div className="flex items-center justify-center gap-2 mb-4 opacity-50">
                         <span className="text-xs">Powered by</span>
                         {siteSettings.logo ? (
-                            <img src={siteSettings.logo} alt="VideoBoutique" className="h-5 w-auto object-contain" />
+                            <img src={siteSettings.logo} alt="VideoBoutique" className="h-8 w-auto object-contain" />
                         ) : (
                             <span className="font-bold text-orange-500">VideoBoutique</span>
                         )}

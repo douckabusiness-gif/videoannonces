@@ -28,7 +28,7 @@ export default function Footer() {
                                 <img
                                     src={siteSettings.logo}
                                     alt={siteSettings.siteName}
-                                    className="h-12 object-contain"
+                                    className="max-h-[200px] w-auto object-contain"
                                 />
                             ) : (
                                 <div className="flex items-center gap-2">

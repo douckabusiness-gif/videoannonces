@@ -300,7 +300,7 @@ export default function HomeLayoutAlibabaMulti({ siteSettings }: LayoutProps) {
                                 <img
                                     src={siteSettings.logo}
                                     alt={siteSettings.siteName}
-                                    className="h-10 object-contain"
+                                    className="h-16 object-contain"
                                 />
                             ) : (
                                 <>

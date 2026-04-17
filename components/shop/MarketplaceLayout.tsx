@@ -166,7 +166,7 @@ export default function MarketplaceLayout({ shop, listings }: MarketplaceLayoutP
                                     <img
                                         src={shop.logoUrl}
                                         alt={shop.name}
-                                        className="h-12 md:h-16 w-auto object-contain mb-1"
+                                        className="h-20 md:h-[200px] w-auto max-w-[600px] object-contain mb-1"
                                     />
                                 ) : (
                                     <h1 className="font-black text-2xl text-gray-900 tracking-tight leading-none">
@@ -439,7 +439,7 @@ export default function MarketplaceLayout({ shop, listings }: MarketplaceLayoutP
                         <div className="flex items-center gap-1 opacity-70 hover:opacity-100 transition">
                             <span>Propulsé par</span>
                             {siteSettings.logo ? (
-                                <img src={siteSettings.logo} alt="VideoBoutique" className="h-6 w-auto object-contain" />
+                                <img src={siteSettings.logo} alt="VideoBoutique" className="h-10 w-auto object-contain" />
                             ) : (
                                 <span className="font-bold text-orange-500">VideoBoutique</span>
                             )}

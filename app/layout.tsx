@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 // import { Inter } from "next/font/google"; // Disabled due to connection errors
 import "./globals.css";
 import { Providers } from "./providers";
+import { prisma } from "@/lib/prisma";
 import ChatbotWidget from "@/components/ChatbotWidget";
 import { I18nProvider } from "@/contexts/I18nContext";
 import InstallPrompt from "@/components/pwa/InstallPrompt";
@@ -15,15 +16,26 @@ const inter = Inter({
 });
 */
 
-export const metadata: Metadata = {
-  title: "VideoAnnonces-CI - Petites Annonces Vidéo en Côte d'Ivoire",
-  description: "La première plateforme de petites annonces 100% vidéo en Côte d'Ivoire. Vendez et achetez en vidéo facilement.",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "VideoAnnonces-CI",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await prisma.siteSettings.findFirst();
+  const siteName = settings?.siteName || "VideoAnnonces-CI";
+  const description = settings?.siteDescription || "La première plateforme de petites annonces 100% vidéo en Côte d'Ivoire.";
+  const icon = settings?.favicon || "/icon.png";
+
+  return {
+    title: `${siteName} - Petites Annonces Vidéo en Côte d'Ivoire`,
+    description: description,
+    icons: {
+      icon: icon,
+      apple: icon,
+    },
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "default",
+      title: siteName,
+    },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#FF6B00",

@@ -196,7 +196,7 @@ export default function Sidebar({ className = '', onNavigate, isVendor, userName
                 <div className="p-6 border-b border-purple-500/20">
                     <Link href="/" className="block group mb-4">
                         {siteSettings?.logo ? (
-                            <div className="relative w-full h-[60px] flex items-center justify-start">
+                            <div className="relative w-full h-auto min-h-[80px] flex items-center justify-start py-2">
                                 {/* Glow effect behind logo */}
                                 <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-600/20 blur-xl opacity-0 group-hover:opacity-100 transition duration-500" />
 
@@ -204,7 +204,7 @@ export default function Sidebar({ className = '', onNavigate, isVendor, userName
                                     src={siteSettings.logo}
                                     alt={siteSettings.siteName || 'VideoAnnonces'}
                                     className="relative z-10 h-full w-auto max-w-full object-contain object-left transition-transform duration-300 group-hover:scale-105"
-                                    style={{ maxHeight: '57px', maxWidth: '314px' }}
+                                    style={{ maxHeight: '200px', maxWidth: '100%' }}
                                 />
                             </div>
                         ) : (

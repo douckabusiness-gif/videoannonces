@@ -428,7 +428,7 @@ export default function EcommerceLayout({ shop, listings }: EcommerceLayoutProps
                                     <img
                                         src={siteSettings.logo}
                                         alt={siteSettings.siteName || 'VideoAnnonces'}
-                                        className="h-8 w-auto object-contain"
+                                        className="h-12 w-auto object-contain"
                                     />
                                 ) : (
                                     <span className="text-xl font-black bg-gradient-to-r from-orange-500 via-green-500 to-orange-600 bg-clip-text text-transparent">
