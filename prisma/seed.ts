@@ -1,0 +1,388 @@
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
+
+const prisma = new PrismaClient();
+
+async function main() {
+    console.log('🌱 Début du seeding...');
+
+    // Hash du mot de passe pour tous les comptes démo
+    const hashedPassword = await bcrypt.hash('demo123', 10);
+
+    // 1. Créer des utilisateurs démo
+    console.log('👤 Création des utilisateurs...');
+
+    const demoUser = await prisma.user.upsert({
+        where: { phone: '+2250700000001' },
+        update: {},
+        create: {
+            phone: '+2250700000001',
+            name: 'Jean Kouassi',
+            email: 'jean@demo.com',
+            password: hashedPassword,
+            verified: true,
+            premium: false,
+            subdomain: 'jean-shop',
+            bio: 'Vendeur de confiance depuis 2020',
+            rating: 4.5,
+            totalRatings: 45,
+            totalSales: 120,
+        },
+    });
+
+    const premiumUser1 = await prisma.user.upsert({
+        where: { phone: '+2250700000002' },
+        update: {},
+        create: {
+            phone: '+2250700000002',
+            name: 'Boutique TechPro',
+            email: 'techpro@demo.com',
+            password: hashedPassword,
+            verified: true,
+            premium: true,
+            isPremium: true, // Pour la section Boutiques Premium
+            subdomain: 'techpro',
+            bio: '🏆 Spécialiste en électronique et gadgets high-tech. Livraison rapide partout en Côte d\'Ivoire.',
+            rating: 4.8,
+            totalRatings: 156,
+            totalSales: 450,
+        },
+    });
+
+    const premiumUser2 = await prisma.user.upsert({
+        where: { phone: '+2250700000003' },
+        update: {},
+        create: {
+            phone: '+2250700000003',
+            name: 'Fashion Store CI',
+            email: 'fashion@demo.com',
+            password: hashedPassword,
+            verified: true,
+            premium: true,
+            isPremium: true, // Pour la section Boutiques Premium
+            subdomain: 'fashion-ci',
+            bio: '👗 Mode et accessoires tendance. Collection exclusive importée.',
+            rating: 4.7,
+            totalRatings: 98,
+            totalSales: 320,
+        },
+    });
+
+    const premiumUser3 = await prisma.user.upsert({
+        where: { phone: '+2250700000004' },
+        update: {},
+        create: {
+            phone: '+2250700000004',
+            name: 'Auto Plus Abidjan',
+            email: 'autoplus@demo.com',
+            password: hashedPassword,
+            verified: true,
+            premium: true,
+            isPremium: true, // Pour la section Boutiques Premium
+            subdomain: 'autoplus',
+            bio: '🚗 Vente de véhicules d\'occasion vérifiés. Garantie et financement disponibles.',
+            rating: 4.9,
+            totalRatings: 203,
+            totalSales: 89,
+        },
+    });
+
+    console.log('✅ Utilisateurs créés');
+
+    // 2. Créer des annonces urgentes
+    console.log('⚡ Création des annonces urgentes...');
+
+    const urgentListings = [
+        {
+            userId: demoUser.id,
+            title: 'iPhone 14 Pro Max 256GB - URGENT',
+            description: 'iPhone 14 Pro Max en excellent état, 256GB, couleur Deep Purple. Vente urgente pour voyage. Tous accessoires inclus.',
+            price: 450000,
+            category: 'electronics',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1678652197950-d4b8e6c20d6e?w=800',
+            location: 'Cocody, Abidjan',
+            isUrgent: true,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 30,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        {
+            userId: premiumUser1.id,
+            title: 'MacBook Pro M2 - Prix Cassé !',
+            description: 'MacBook Pro 14" M2, 16GB RAM, 512GB SSD. Neuf sous garantie. Offre limitée !',
+            price: 850000,
+            category: 'electronics',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800',
+            location: 'Plateau, Abidjan',
+            isUrgent: true,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 45,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        {
+            userId: premiumUser2.id,
+            title: 'Sac à Main Louis Vuitton - Urgent',
+            description: 'Sac à main Louis Vuitton authentique, modèle Neverfull MM. Certificat d\'authenticité inclus.',
+            price: 320000,
+            category: 'fashion',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800',
+            location: 'Marcory, Abidjan',
+            isUrgent: true,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 25,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        {
+            userId: premiumUser3.id,
+            title: 'Toyota Corolla 2020 - Départ Urgent',
+            description: 'Toyota Corolla 2020, 45000 km, excellent état. Climatisation, vitres électriques. Vente urgente.',
+            price: 8500000,
+            category: 'vehicles',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800',
+            location: 'Yopougon, Abidjan',
+            isUrgent: true,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 60,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+    ];
+
+    for (const listing of urgentListings) {
+        await prisma.listing.create({ data: listing });
+    }
+
+    console.log('✅ Annonces urgentes créées');
+
+    // 3. Créer des annonces normales
+    console.log('📦 Création des annonces normales...');
+
+    const normalListings = [
+        {
+            userId: premiumUser1.id,
+            title: 'Samsung Galaxy S23 Ultra',
+            description: 'Samsung Galaxy S23 Ultra 512GB, couleur Phantom Black. État neuf, sous garantie.',
+            price: 550000,
+            category: 'electronics',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800',
+            location: 'Cocody, Abidjan',
+            isUrgent: false,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 35,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        {
+            userId: premiumUser1.id,
+            title: 'AirPods Pro 2ème génération',
+            description: 'AirPods Pro 2ème génération, neufs dans leur boîte. Réduction de bruit active.',
+            price: 95000,
+            category: 'electronics',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=800',
+            location: 'Plateau, Abidjan',
+            isUrgent: false,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 20,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        {
+            userId: premiumUser2.id,
+            title: 'Robe de Soirée Élégante',
+            description: 'Magnifique robe de soirée, taille M, couleur bordeaux. Parfaite pour événements.',
+            price: 45000,
+            category: 'fashion',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800',
+            location: 'Marcory, Abidjan',
+            isUrgent: false,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 28,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        {
+            userId: premiumUser2.id,
+            title: 'Sneakers Nike Air Max',
+            description: 'Nike Air Max 2023, pointure 42, neuves. Design moderne et confortable.',
+            price: 65000,
+            category: 'fashion',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800',
+            location: 'Cocody, Abidjan',
+            isUrgent: false,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 22,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        {
+            userId: demoUser.id,
+            title: 'Canapé 3 Places Moderne',
+            description: 'Canapé 3 places en tissu gris, très confortable. Excellent état, peu utilisé.',
+            price: 180000,
+            category: 'home',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800',
+            location: 'Yopougon, Abidjan',
+            isUrgent: false,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 40,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        {
+            userId: premiumUser3.id,
+            title: 'Honda Civic 2019',
+            description: 'Honda Civic 2019, automatique, 60000 km. Entretien régulier, carnet à jour.',
+            price: 7200000,
+            category: 'vehicles',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800',
+            location: 'Abobo, Abidjan',
+            isUrgent: false,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 55,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        {
+            userId: demoUser.id,
+            title: 'Villa Duplex 5 Pièces',
+            description: 'Magnifique villa duplex de 5 pièces avec piscine et jardin. Quartier résidentiel calme et sécurisé.',
+            price: 150000000,
+            category: 'real-estate',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1600596542815-22b8c153bd95?w=800',
+            location: 'Riviera Golf, Abidjan',
+            isUrgent: true,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 60,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        {
+            userId: premiumUser1.id,
+            title: 'Installation Caméras Surveillance',
+            description: 'Service professionnel d\'installation de caméras de surveillance. Devis gratuit.',
+            price: 50000,
+            category: 'services',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800',
+            location: 'Abidjan',
+            isUrgent: false,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 45,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        {
+            userId: premiumUser2.id,
+            title: 'Vélo de Route Carbon',
+            description: 'Vélo de route cadre carbone, équipement Shimano Ultegra. Très léger et performant.',
+            price: 850000,
+            category: 'sports',
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+            thumbnailUrl: 'https://images.unsplash.com/photo-1532298229144-0ec0c57e36cf?w=800',
+            location: 'Zone 4, Abidjan',
+            isUrgent: false,
+            status: 'active',
+            moderationStatus: 'approved',
+            duration: 30,
+            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+    ];
+
+    for (const listing of normalListings) {
+        await prisma.listing.create({ data: listing });
+    }
+
+    console.log('✅ Annonces normales créées');
+
+    console.log('\n🎉 Seeding terminé avec succès !');
+    console.log('\n📋 Résumé :');
+    console.log(`   - 4 utilisateurs créés (1 normal, 3 premium)`);
+    console.log(`   - 4 annonces urgentes`);
+    console.log(`   - 6 annonces normales`);
+    console.log(`\n🔑 Identifiants de connexion :`);
+    console.log(`   Email: jean@demo.com | Mot de passe: demo123`);
+    console.log(`   Email: techpro@demo.com | Mot de passe: demo123`);
+    console.log(`   Email: fashion@demo.com | Mot de passe: demo123`);
+    console.log(`   Email: autoplus@demo.com | Mot de passe: demo123`);
+    console.log('💰 Création des méthodes de paiement...');
+
+    const paymentMethods = [
+        {
+            name: 'Orange Money',
+            code: 'OM',
+            phoneNumber: '0700000000',
+            description: 'Paiement via Orange Money',
+            instruction: 'Composez le #144*... pour effectuer le paiement de {amount} FCFA vers le 0700000000.',
+            icon: '🟠',
+            color: 'from-orange-500 to-orange-600',
+            active: true,
+            order: 1
+        },
+        {
+            name: 'Wave',
+            code: 'WAVE',
+            phoneNumber: '0700000000',
+            description: 'Paiement sans frais via Wave',
+            instruction: 'Envoyez {amount} FCFA vers le 0700000000 via l\'application Wave.',
+            icon: '🌊',
+            color: 'from-blue-400 to-blue-500',
+            active: true,
+            order: 2
+        },
+        {
+            name: 'MTN Mobile Money',
+            code: 'MTN',
+            phoneNumber: '0500000000',
+            description: 'Paiement via MTN MoMo',
+            instruction: 'Composez le *133*... pour envoyer {amount} FCFA vers le 0500000000.',
+            icon: '🟡',
+            color: 'from-yellow-400 to-yellow-500',
+            active: true,
+            order: 3
+        },
+        {
+            name: 'Moov Money',
+            code: 'MOOV',
+            phoneNumber: '0100000000',
+            description: 'Paiement via Moov Money',
+            instruction: 'Effectuez un transfert de {amount} FCFA vers le 0100000000.',
+            icon: '🔵',
+            color: 'from-blue-600 to-blue-700',
+            active: true,
+            order: 4
+        }
+    ];
+
+    for (const method of paymentMethods) {
+        await prisma.paymentMethod.upsert({
+            where: { code: method.code },
+            update: method,
+            create: method,
+        });
+    }
+
+    console.log('✅ Méthodes de paiement créées');
+}
+
+main()
+    .catch((e) => {
+        console.error('❌ Erreur lors du seeding:', e);
+        process.exit(1);
+    })
+    .finally(async () => {
+        await prisma.$disconnect();
+    });

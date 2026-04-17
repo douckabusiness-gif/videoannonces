@@ -1,0 +1,1302 @@
+[2026-01-04T02:46:49.800Z] 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:333:39
+
+  330 if (accentColor) dataToUpdate.accentColor = accentColor;
+  331 if (backgroundColor) dataToUpdate.backgroundColor = backgroundColor;
+  332 if (settings) {
+→ 333     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#FF6B35",
+              secondaryColor: "#F7931E",
+              accentColor: "#FDC830",
+              backgroundColor: "#000000",
+              ~~~~~~~~~~~~~~~
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `backgroundColor`. Available options are marked with ?.
+PrismaClientValidationError: 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:333:39
+
+  330 if (accentColor) dataToUpdate.accentColor = accentColor;
+  331 if (backgroundColor) dataToUpdate.backgroundColor = backgroundColor;
+  332 if (settings) {
+→ 333     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#FF6B35",
+              secondaryColor: "#F7931E",
+              accentColor: "#FDC830",
+              backgroundColor: "#000000",
+              ~~~~~~~~~~~~~~~
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `backgroundColor`. Available options are marked with ?.
+    at Nn (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async POST (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:333:13)
+    at async AppRouteRouteModule.do (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:37789)
+    at async AppRouteRouteModule.handle (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:45045)
+    at async responseGenerator (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15485:38)
+    at async AppRouteRouteModule.handleResponse (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:187851)
+    at async handleResponse (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15547:32)
+    at async handler (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15600:13)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1413:9)
+    at async DevServer.renderPageComponent (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1465:24)
+    at async DevServer.renderToResponseImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1515:32)
+    at async DevServer.pipeImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1021:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\next-server.js:394:17)
+    at async DevServer.handleRequestImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:912:17)
+    at async C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:382:20
+    at async Span.traceAsyncFn (C:\laragon\www\videoannonces-ci\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:378:24)
+    at async invokeRender (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:436:24)
+    at async requestHandlerImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:484:13)
+    at async Server.requestListener (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\start-server.js:226:13)
+---
+[2026-01-04T15:04:30.725Z] 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:39
+
+  332 if (body.headerColor) dataToUpdate.headerColor = body.headerColor;
+  333 if (body.footerColor) dataToUpdate.footerColor = body.footerColor;
+  334 if (settings) {
+→ 335     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#2875bd",
+              headerColor: "#eb0000",
+              ~~~~~~~~~~~
+              footerColor: "#fa0000",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerColor`. Available options are marked with ?.
+PrismaClientValidationError: 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:39
+
+  332 if (body.headerColor) dataToUpdate.headerColor = body.headerColor;
+  333 if (body.footerColor) dataToUpdate.footerColor = body.footerColor;
+  334 if (settings) {
+→ 335     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#2875bd",
+              headerColor: "#eb0000",
+              ~~~~~~~~~~~
+              footerColor: "#fa0000",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerColor`. Available options are marked with ?.
+    at Nn (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async POST (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:13)
+    at async AppRouteRouteModule.do (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:37789)
+    at async AppRouteRouteModule.handle (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:45045)
+    at async responseGenerator (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15485:38)
+    at async AppRouteRouteModule.handleResponse (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:187851)
+    at async handleResponse (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15547:32)
+    at async handler (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15600:13)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1413:9)
+    at async DevServer.renderPageComponent (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1465:24)
+    at async DevServer.renderToResponseImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1515:32)
+    at async DevServer.pipeImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1021:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\next-server.js:394:17)
+    at async DevServer.handleRequestImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:912:17)
+    at async C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:382:20
+    at async Span.traceAsyncFn (C:\laragon\www\videoannonces-ci\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:378:24)
+    at async invokeRender (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:436:24)
+    at async requestHandlerImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:484:13)
+    at async Server.requestListener (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\start-server.js:226:13)
+---
+[2026-01-04T15:04:34.244Z] 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:39
+
+  332 if (body.headerColor) dataToUpdate.headerColor = body.headerColor;
+  333 if (body.footerColor) dataToUpdate.footerColor = body.footerColor;
+  334 if (settings) {
+→ 335     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#2875bd",
+              headerColor: "#eb0000",
+              ~~~~~~~~~~~
+              footerColor: "#fa0000",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerColor`. Available options are marked with ?.
+PrismaClientValidationError: 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:39
+
+  332 if (body.headerColor) dataToUpdate.headerColor = body.headerColor;
+  333 if (body.footerColor) dataToUpdate.footerColor = body.footerColor;
+  334 if (settings) {
+→ 335     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#2875bd",
+              headerColor: "#eb0000",
+              ~~~~~~~~~~~
+              footerColor: "#fa0000",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerColor`. Available options are marked with ?.
+    at Nn (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async POST (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:13)
+    at async AppRouteRouteModule.do (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:37789)
+    at async AppRouteRouteModule.handle (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:45045)
+    at async responseGenerator (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15485:38)
+    at async AppRouteRouteModule.handleResponse (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:187851)
+    at async handleResponse (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15547:32)
+    at async handler (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15600:13)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1413:9)
+    at async DevServer.renderPageComponent (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1465:24)
+    at async DevServer.renderToResponseImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1515:32)
+    at async DevServer.pipeImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1021:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\next-server.js:394:17)
+    at async DevServer.handleRequestImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:912:17)
+    at async C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:382:20
+    at async Span.traceAsyncFn (C:\laragon\www\videoannonces-ci\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:378:24)
+    at async invokeRender (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:436:24)
+    at async requestHandlerImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:484:13)
+    at async Server.requestListener (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\start-server.js:226:13)
+---
+[2026-01-04T15:04:49.122Z] 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:39
+
+  332 if (body.headerColor) dataToUpdate.headerColor = body.headerColor;
+  333 if (body.footerColor) dataToUpdate.footerColor = body.footerColor;
+  334 if (settings) {
+→ 335     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#2875bd",
+              headerColor: "#f00540",
+              ~~~~~~~~~~~
+              footerColor: "#eb0000",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerColor`. Available options are marked with ?.
+PrismaClientValidationError: 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:39
+
+  332 if (body.headerColor) dataToUpdate.headerColor = body.headerColor;
+  333 if (body.footerColor) dataToUpdate.footerColor = body.footerColor;
+  334 if (settings) {
+→ 335     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#2875bd",
+              headerColor: "#f00540",
+              ~~~~~~~~~~~
+              footerColor: "#eb0000",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerColor`. Available options are marked with ?.
+    at Nn (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async POST (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:13)
+    at async AppRouteRouteModule.do (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:37789)
+    at async AppRouteRouteModule.handle (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:45045)
+    at async responseGenerator (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15485:38)
+    at async AppRouteRouteModule.handleResponse (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:187851)
+    at async handleResponse (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15547:32)
+    at async handler (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15600:13)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1413:9)
+    at async DevServer.renderPageComponent (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1465:24)
+    at async DevServer.renderToResponseImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1515:32)
+    at async DevServer.pipeImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1021:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\next-server.js:394:17)
+    at async DevServer.handleRequestImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:912:17)
+    at async C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:382:20
+    at async Span.traceAsyncFn (C:\laragon\www\videoannonces-ci\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:378:24)
+    at async invokeRender (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:436:24)
+    at async requestHandlerImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:484:13)
+    at async Server.requestListener (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\start-server.js:226:13)
+---
+[2026-01-04T15:04:52.134Z] 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:39
+
+  332 if (body.headerColor) dataToUpdate.headerColor = body.headerColor;
+  333 if (body.footerColor) dataToUpdate.footerColor = body.footerColor;
+  334 if (settings) {
+→ 335     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#2875bd",
+              headerColor: "#f00540",
+              ~~~~~~~~~~~
+              footerColor: "#eb0000",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerColor`. Available options are marked with ?.
+PrismaClientValidationError: 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:39
+
+  332 if (body.headerColor) dataToUpdate.headerColor = body.headerColor;
+  333 if (body.footerColor) dataToUpdate.footerColor = body.footerColor;
+  334 if (settings) {
+→ 335     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#2875bd",
+              headerColor: "#f00540",
+              ~~~~~~~~~~~
+              footerColor: "#eb0000",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerColor`. Available options are marked with ?.
+    at Nn (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async POST (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:335:13)
+    at async AppRouteRouteModule.do (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:37789)
+    at async AppRouteRouteModule.handle (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:45045)
+    at async responseGenerator (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15485:38)
+    at async AppRouteRouteModule.handleResponse (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:187851)
+    at async handleResponse (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15547:32)
+    at async handler (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15600:13)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1413:9)
+    at async DevServer.renderPageComponent (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1465:24)
+    at async DevServer.renderToResponseImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1515:32)
+    at async DevServer.pipeImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1021:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\next-server.js:394:17)
+    at async DevServer.handleRequestImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:912:17)
+    at async C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:382:20
+    at async Span.traceAsyncFn (C:\laragon\www\videoannonces-ci\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:378:24)
+    at async invokeRender (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:436:24)
+    at async requestHandlerImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:484:13)
+    at async Server.requestListener (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\start-server.js:226:13)
+---
+[2026-01-04T15:29:00.857Z] 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:39
+
+  334 if (body.headerTextColor) dataToUpdate.headerTextColor = body.headerTextColor;
+  335 if (body.footerTextColor) dataToUpdate.footerTextColor = body.footerTextColor;
+  336 if (settings) {
+→ 337     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#242628",
+              headerColor: "#0d6f0b",
+              footerColor: "#397f0b",
+              headerTextColor: "#fafafa",
+              ~~~~~~~~~~~~~~~
+              footerTextColor: "#ffffff",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerTextColor`. Available options are marked with ?.
+PrismaClientValidationError: 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:39
+
+  334 if (body.headerTextColor) dataToUpdate.headerTextColor = body.headerTextColor;
+  335 if (body.footerTextColor) dataToUpdate.footerTextColor = body.footerTextColor;
+  336 if (settings) {
+→ 337     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#242628",
+              headerColor: "#0d6f0b",
+              footerColor: "#397f0b",
+              headerTextColor: "#fafafa",
+              ~~~~~~~~~~~~~~~
+              footerTextColor: "#ffffff",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerTextColor`. Available options are marked with ?.
+    at Nn (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async POST (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:13)
+    at async AppRouteRouteModule.do (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:37789)
+    at async AppRouteRouteModule.handle (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:45045)
+    at async responseGenerator (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15485:38)
+    at async AppRouteRouteModule.handleResponse (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:187851)
+    at async handleResponse (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15547:32)
+    at async handler (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15600:13)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1413:9)
+    at async DevServer.renderPageComponent (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1465:24)
+    at async DevServer.renderToResponseImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1515:32)
+    at async DevServer.pipeImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1021:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\next-server.js:394:17)
+    at async DevServer.handleRequestImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:912:17)
+    at async C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:382:20
+    at async Span.traceAsyncFn (C:\laragon\www\videoannonces-ci\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:378:24)
+    at async invokeRender (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:436:24)
+    at async requestHandlerImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:484:13)
+    at async Server.requestListener (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\start-server.js:226:13)
+---
+[2026-01-04T15:29:03.877Z] 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:39
+
+  334 if (body.headerTextColor) dataToUpdate.headerTextColor = body.headerTextColor;
+  335 if (body.footerTextColor) dataToUpdate.footerTextColor = body.footerTextColor;
+  336 if (settings) {
+→ 337     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#242628",
+              headerColor: "#0d6f0b",
+              footerColor: "#397f0b",
+              headerTextColor: "#fafafa",
+              ~~~~~~~~~~~~~~~
+              footerTextColor: "#ffffff",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerTextColor`. Available options are marked with ?.
+PrismaClientValidationError: 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:39
+
+  334 if (body.headerTextColor) dataToUpdate.headerTextColor = body.headerTextColor;
+  335 if (body.footerTextColor) dataToUpdate.footerTextColor = body.footerTextColor;
+  336 if (settings) {
+→ 337     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#242628",
+              headerColor: "#0d6f0b",
+              footerColor: "#397f0b",
+              headerTextColor: "#fafafa",
+              ~~~~~~~~~~~~~~~
+              footerTextColor: "#ffffff",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerTextColor`. Available options are marked with ?.
+    at Nn (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async POST (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:13)
+    at async AppRouteRouteModule.do (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:37789)
+    at async AppRouteRouteModule.handle (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:45045)
+    at async responseGenerator (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15485:38)
+    at async AppRouteRouteModule.handleResponse (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:187851)
+    at async handleResponse (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15547:32)
+    at async handler (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15600:13)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1413:9)
+    at async DevServer.renderPageComponent (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1465:24)
+    at async DevServer.renderToResponseImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1515:32)
+    at async DevServer.pipeImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1021:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\next-server.js:394:17)
+    at async DevServer.handleRequestImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:912:17)
+    at async C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:382:20
+    at async Span.traceAsyncFn (C:\laragon\www\videoannonces-ci\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:378:24)
+    at async invokeRender (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:436:24)
+    at async requestHandlerImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:484:13)
+    at async Server.requestListener (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\start-server.js:226:13)
+---
+[2026-01-04T15:30:55.310Z] 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:39
+
+  334 if (body.headerTextColor) dataToUpdate.headerTextColor = body.headerTextColor;
+  335 if (body.footerTextColor) dataToUpdate.footerTextColor = body.footerTextColor;
+  336 if (settings) {
+→ 337     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#242628",
+              headerColor: "#0d6f0b",
+              footerColor: "#397f0b",
+              headerTextColor: "#fafafa",
+              ~~~~~~~~~~~~~~~
+              footerTextColor: "#ffffff",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerTextColor`. Available options are marked with ?.
+PrismaClientValidationError: 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:39
+
+  334 if (body.headerTextColor) dataToUpdate.headerTextColor = body.headerTextColor;
+  335 if (body.footerTextColor) dataToUpdate.footerTextColor = body.footerTextColor;
+  336 if (settings) {
+→ 337     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#242628",
+              headerColor: "#0d6f0b",
+              footerColor: "#397f0b",
+              headerTextColor: "#fafafa",
+              ~~~~~~~~~~~~~~~
+              footerTextColor: "#ffffff",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerTextColor`. Available options are marked with ?.
+    at Nn (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async POST (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:13)
+    at async AppRouteRouteModule.do (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:37789)
+    at async AppRouteRouteModule.handle (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:45045)
+    at async responseGenerator (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15485:38)
+    at async AppRouteRouteModule.handleResponse (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:187851)
+    at async handleResponse (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15547:32)
+    at async handler (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15600:13)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1413:9)
+    at async DevServer.renderPageComponent (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1465:24)
+    at async DevServer.renderToResponseImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1515:32)
+    at async DevServer.pipeImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1021:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\next-server.js:394:17)
+    at async DevServer.handleRequestImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:912:17)
+    at async C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:382:20
+    at async Span.traceAsyncFn (C:\laragon\www\videoannonces-ci\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:378:24)
+    at async invokeRender (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:436:24)
+    at async requestHandlerImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:484:13)
+    at async Server.requestListener (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\start-server.js:226:13)
+---
+[2026-01-04T15:31:05.343Z] 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:39
+
+  334 if (body.headerTextColor) dataToUpdate.headerTextColor = body.headerTextColor;
+  335 if (body.footerTextColor) dataToUpdate.footerTextColor = body.footerTextColor;
+  336 if (settings) {
+→ 337     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#242628",
+              headerColor: "#0d6f0b",
+              footerColor: "#397f0b",
+              headerTextColor: "#ffffff",
+              ~~~~~~~~~~~~~~~
+              footerTextColor: "#f0f0f0",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerTextColor`. Available options are marked with ?.
+PrismaClientValidationError: 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:39
+
+  334 if (body.headerTextColor) dataToUpdate.headerTextColor = body.headerTextColor;
+  335 if (body.footerTextColor) dataToUpdate.footerTextColor = body.footerTextColor;
+  336 if (settings) {
+→ 337     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#332e2e",
+              secondaryColor: "#2c05f0",
+              accentColor: "#5cfd30",
+              backgroundColor: "#242628",
+              headerColor: "#0d6f0b",
+              footerColor: "#397f0b",
+              headerTextColor: "#ffffff",
+              ~~~~~~~~~~~~~~~
+              footerTextColor: "#f0f0f0",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `headerTextColor`. Available options are marked with ?.
+    at Nn (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async POST (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:337:13)
+    at async AppRouteRouteModule.do (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:37789)
+    at async AppRouteRouteModule.handle (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:45045)
+    at async responseGenerator (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15485:38)
+    at async AppRouteRouteModule.handleResponse (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:187851)
+    at async handleResponse (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15547:32)
+    at async handler (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15600:13)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1413:9)
+    at async DevServer.renderPageComponent (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1465:24)
+    at async DevServer.renderToResponseImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1515:32)
+    at async DevServer.pipeImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1021:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\next-server.js:394:17)
+    at async DevServer.handleRequestImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:912:17)
+    at async C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:382:20
+    at async Span.traceAsyncFn (C:\laragon\www\videoannonces-ci\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:378:24)
+    at async invokeRender (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:436:24)
+    at async requestHandlerImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:484:13)
+    at async Server.requestListener (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\start-server.js:226:13)
+---
+[2026-01-04T17:33:03.676Z] 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:340:39
+
+  337 if (body.shopsBgColor) dataToUpdate.shopsBgColor = body.shopsBgColor;
+  338 if (body.recentBgColor) dataToUpdate.recentBgColor = body.recentBgColor;
+  339 if (settings) {
+→ 340     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#7f0536",
+              secondaryColor: "#7f0536",
+              accentColor: "#5cfd30",
+              backgroundColor: "#242628",
+              headerColor: "#7f0536",
+              footerColor: "#7f0536",
+              headerTextColor: "#003cf0",
+              footerTextColor: "#003cf0",
+              urgentBgColor: "#7f0536",
+              ~~~~~~~~~~~~~
+              shopsBgColor: "#7f0536",
+              recentBgColor: "#7f0536",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `urgentBgColor`. Available options are marked with ?.
+PrismaClientValidationError: 
+Invalid `prisma.siteSettings.update()` invocation in
+C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:340:39
+
+  337 if (body.shopsBgColor) dataToUpdate.shopsBgColor = body.shopsBgColor;
+  338 if (body.recentBgColor) dataToUpdate.recentBgColor = body.recentBgColor;
+  339 if (settings) {
+→ 340     await prisma.siteSettings.update({
+            where: {
+              id: "cmja9rbrj0000kcpglvfs96x2"
+            },
+            data: {
+              primaryColor: "#7f0536",
+              secondaryColor: "#7f0536",
+              accentColor: "#5cfd30",
+              backgroundColor: "#242628",
+              headerColor: "#7f0536",
+              footerColor: "#7f0536",
+              headerTextColor: "#003cf0",
+              footerTextColor: "#003cf0",
+              urgentBgColor: "#7f0536",
+              ~~~~~~~~~~~~~
+              shopsBgColor: "#7f0536",
+              recentBgColor: "#7f0536",
+          ?   id?: String | StringFieldUpdateOperationsInput,
+          ?   siteName?: String | StringFieldUpdateOperationsInput,
+          ?   siteSlogan?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   siteDescription?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   heroSubtitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   urgentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   recentSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   shopsSectionTitle?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   logo?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   favicon?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactEmail?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   contactPhone?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   address?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialFacebook?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTwitter?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialInstagram?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialLinkedIn?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialYouTube?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   socialTikTok?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   maintenanceMode?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   maintenanceMessage?: String | NullableStringFieldUpdateOperationsInput | Null,
+          ?   homeLayout?: String | StringFieldUpdateOperationsInput,
+          ?   dashboardLayout?: String | StringFieldUpdateOperationsInput,
+          ?   enableAIDescriptionGenerator?: Boolean | BoolFieldUpdateOperationsInput,
+          ?   homepageSections?: NullableJsonNullValueInput | Json,
+          ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+          ?   updatedAt?: DateTime | DateTimeFieldUpdateOperationsInput
+            }
+          })
+
+Unknown argument `urgentBgColor`. Available options are marked with ?.
+    at Nn (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at ei.handleRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6911)
+    at ei.handleAndLogRequestError (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6593)
+    at ei.request (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:121:6300)
+    at async a (C:\laragon\www\videoannonces-ci\node_modules\@prisma\client\runtime\library.js:130:9551)
+    at async POST (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\[root-of-the-server]__b734bd8c._.js:340:13)
+    at async AppRouteRouteModule.do (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:37789)
+    at async AppRouteRouteModule.handle (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:5:45045)
+    at async responseGenerator (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15485:38)
+    at async AppRouteRouteModule.handleResponse (C:\laragon\www\videoannonces-ci\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js:1:187851)
+    at async handleResponse (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15547:32)
+    at async handler (C:\laragon\www\videoannonces-ci\.next\dev\server\chunks\node_modules_next_ad7dfe62._.js:15600:13)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1413:9)
+    at async DevServer.renderPageComponent (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1465:24)
+    at async DevServer.renderToResponseImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1515:32)
+    at async DevServer.pipeImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:1021:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\next-server.js:394:17)
+    at async DevServer.handleRequestImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\base-server.js:912:17)
+    at async C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:382:20
+    at async Span.traceAsyncFn (C:\laragon\www\videoannonces-ci\node_modules\next\dist\trace\trace.js:157:20)
+    at async DevServer.handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\dev\next-dev-server.js:378:24)
+    at async invokeRender (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:240:21)
+    at async handleRequest (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:436:24)
+    at async requestHandlerImpl (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\router-server.js:484:13)
+    at async Server.requestListener (C:\laragon\www\videoannonces-ci\node_modules\next\dist\server\lib\start-server.js:226:13)
+---

@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.gitignore
+*.log
+Dockerfile
+.dockerignore
+# Réduire le contexte (éviter médias / dumps énormes hors SQL monté par compose)
+**/*.mp4
+**/*.mov
+**/*.mkv
+**/*.zip
+**/*.7z

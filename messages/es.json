@@ -1,0 +1,660 @@
+{
+    "common": {
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "close": "Cerrar",
+        "confirm": "Confirmar",
+        "loading": "Cargando...",
+        "search": "Buscar",
+        "filter": "Filtrar",
+        "upload": "Subir",
+        "download": "Descargar",
+        "preview": "Vista previa",
+        "error": "Error",
+        "success": "Éxito",
+        "warning": "Advertencia",
+        "urgent": "URGENTE",
+        "premium": "PREMIUM"
+    },
+    "nav": {
+        "home": "Inicio",
+        "dashboard": "Panel de control",
+        "shop": "Mi tienda",
+        "products": "Productos",
+        "orders": "Pedidos",
+        "settings": "Configuración",
+        "logout": "Cerrar sesión",
+        "login": "Iniciar sesión",
+        "register": "Registrarse"
+    },
+    "dashboard": {
+        "title": "Panel de control",
+        "welcome": "Bienvenido",
+        "stats": "Estadísticas",
+        "recentActivity": "Actividad reciente",
+        "menu": {
+            "dashboard": "Panel de control",
+            "listings": "Mis anuncios",
+            "createListing": "Crear anuncio",
+            "messages": "Mensajes",
+            "analytics": "Estadísticas",
+            "myShop": "Mi tienda",
+            "reviews": "Reseñas de Clientes",
+            "subscription": "Suscripción",
+            "automation": "Respuestas Auto",
+            "settings": "Configuración",
+            "logout": "Cerrar sesión"
+        },
+        "welcomeUser": "Bienvenido, {name} 👋",
+        "subtitle": "Tu panel de control cósmico",
+        "stats": {
+            "activeListings": "Anuncios activos",
+            "totalViews": "Vistas totales",
+            "messages": "Mensajes",
+            "responseRate": "Tasa de respuesta"
+        },
+        "quickActions": {
+            "title": "Acciones rápidas",
+            "create": {
+                "title": "Crear anuncio",
+                "desc": "Publica un nuevo anuncio de video"
+            },
+            "viewListings": {
+                "title": "Ver mis anuncios",
+                "desc": "Gestiona tus anuncios existentes"
+            },
+            "messages": {
+                "title": "Mensajes",
+                "desc": "Responde a tus clientes"
+            },
+            "premium": {
+                "title": "Pasar a Premium",
+                "desc": "Desbloquea todas las funcionalidades"
+            }
+        },
+        "premiumBanner": {
+            "title": "¡Pasa a Premium!",
+            "desc": "Anuncios ilimitados, subdominio personalizado, análisis avanzados y más",
+            "cta": "Descubrir Premium →"
+        }
+    },
+    "listings": {
+        "title": "Mis anuncios",
+        "subtitle": "{count} anuncio{s} en total",
+        "createButton": "Nuevo anuncio",
+        "filters": {
+            "all": "Todos",
+            "active": "Activos",
+            "expired": "Expirados",
+            "draft": "Borradores"
+        },
+        "status": {
+            "active": "Activo",
+            "expired": "Expirado",
+            "draft": "Borrador"
+        },
+        "empty": {
+            "title": "Sin anuncios",
+            "desc": "Comienza creando tu primer anuncio de video",
+            "cta": "Crear anuncio"
+        },
+        "card": {
+            "boosted": "Destacado",
+            "view": "Ver",
+            "boost": "Destacar",
+            "edit": "Editar"
+        },
+        "loading": "Cargando..."
+    },
+    "messages": {
+        "page": {
+            "title": "Mensajería",
+            "desc": "Chatea en vivo con tus compradores y vendedores."
+        },
+        "layout": {
+            "title": "💬 Mensajes",
+            "empty": {
+                "title": "Tus mensajes",
+                "desc": "Selecciona una conversación para empezar a chatear",
+                "cta": "Explorar anuncios"
+            }
+        },
+        "window": {
+            "header": "Conversación",
+            "me": "Yo",
+            "geoError": "Geolocalización no soportada",
+            "geoRetrieveError": "Imposible recuperar tu ubicación",
+            "imageSent": "Imagen enviada",
+            "audioSent": "Mensaje de voz",
+            "locationSent": "📍 Mi ubicación actual",
+            "sharedImage": "Imagen compartida",
+            "viewMap": "Ver mi ubicación en Maps",
+            "sendImage": "Enviar una imagen",
+            "recordAudio": "Grabar un mensaje de voz",
+            "shareLocation": "Compartir mi ubicación",
+            "inputPlaceholder": "Escribe un mensaje..."
+        }
+    },
+    "createListing": {
+        "header": {
+            "badge": "✨ Nuevo anuncio",
+            "title": "Crea tu anuncio\n<span class='text-gradient'>con video</span>",
+            "subtitle": "Presenta tu producto en video para atraer 3x más compradores"
+        },
+        "video": {
+            "title": "Video de presentación",
+            "step": "Paso 1/2 - Obligatorio",
+            "dragDrop": "Haz clic para subir tu video",
+            "formats": "MP4, MOV, AVI - Max 150MB",
+            "duration": "⏱️ Duración recomendada: 30-60 segundos",
+            "change": "🔄 Cambiar video",
+            "uploadError": "Error al subir video"
+        },
+        "details": {
+            "title": "Detalles del anuncio",
+            "step": "Paso 2/2 - Rellena todos los campos",
+            "form": {
+                "title": {
+                    "label": "📝 Título del anuncio *",
+                    "placeholder": "Ej: iPhone 13 Pro Max 256GB"
+                },
+                "description": {
+                    "label": "✍️ Descripción detallada *",
+                    "placeholder": "Describe tu producto en detalle: estado, accesorios incluidos, motivo de venta...",
+                    "aiButton": "🤖 Generar con IA",
+                    "aiGenerating": "Generando...",
+                    "tip": "💡 ¡Cuanto más detallada sea tu descripción, más rápido venderás!"
+                },
+                "price": {
+                    "label": "💰 Precio (FCFA) *",
+                    "placeholder": "50000"
+                },
+                "category": {
+                    "label": "🏷️ Categoría *",
+                    "placeholder": "Selecciona una categoría",
+                    "options": {
+                        "electronics": "Electrónica",
+                        "fashion": "Moda",
+                        "vehicles": "Vehículos",
+                        "real-estate": "Inmobiliaria",
+                        "services": "Servicios",
+                        "home": "Hogar",
+                        "sports": "Deportes",
+                        "other": "Otro"
+                    }
+                },
+                "location": {
+                    "label": "📍 Ciudad (Costa de Marfil) *",
+                    "placeholder": "Selecciona tu ciudad"
+                },
+                "quartier": {
+                    "label": "🏘️ Barrio *",
+                    "placeholder": "Selecciona tu barrio"
+                }
+            }
+        },
+        "submit": {
+            "loading": "Publicando...",
+            "uploading": "Subiendo...",
+            "default": "🚀 Publicar mi anuncio",
+            "reassurance": "✅ Gratis · Publicación instantánea · Visible para miles de compradores"
+        },
+        "alerts": {
+            "selectVideo": "Por favor selecciona un video",
+            "fillTitleCategory": "¡Por favor completa el título y la categoría primero!",
+            "createError": "Error al crear el anuncio",
+            "aiError": "Error durante la generación"
+        }
+    },
+    "analytics": {
+        "header": {
+            "title": "Analítica Avanzada",
+            "subtitle": "Sigue tu rendimiento en detalle"
+        },
+        "timeRange": {
+            "7days": "Últimos 7 días",
+            "30days": "Últimos 30 días",
+            "90days": "Últimos 90 días",
+            "1year": "1 año"
+        },
+        "stats": {
+            "totalViews": "Vistas totales",
+            "totalClicks": "Clics totales",
+            "conversionRate": "Tasa de conversión",
+            "avgViewDuration": "Duración media",
+            "totalRevenue": "Ingresos estimados",
+            "activeListings": "Anuncios activos"
+        },
+        "charts": {
+            "viewsPerDay": "Vistas por día",
+            "topListings": "Mejores anuncios",
+            "columns": {
+                "views": "vistas",
+                "clicks": "clics",
+                "conversion": "conversión"
+            }
+        },
+        "insights": {
+            "insightTitle": "Insight",
+            "insightText": "Tus anuncios reciben <strong>23% más vistas</strong> el fin de semana. ¡Considera publicar nuevos anuncios los viernes!",
+            "recommendationTitle": "Recomendación",
+            "recommendationText": "Los videos de <strong>30-45 segundos</strong> tienen una tasa de conversión <strong>2x mayor</strong>. ¡Optimiza tus próximos videos!"
+        },
+        "loading": "Cargando estadísticas..."
+    },
+    "settings": {
+        "header": {
+            "title": "Configuración",
+            "subtitle": "Gestiona tu información personal"
+        },
+        "profile": {
+            "title": "Perfil",
+            "name": "Nombre completo",
+            "email": "Email",
+            "phone": "Teléfono",
+            "bio": "Bio",
+            "bioPlaceholder": "Cuéntanos sobre ti..."
+        },
+        "notifications": {
+            "title": "Notificaciones",
+            "messages": "Nuevos mensajes",
+            "views": "Nuevas vistas",
+            "expired": "Anuncios expirados"
+        },
+        "save": "Guardar cambios",
+        "saved": "¡Configuración guardada!",
+        "chat": {
+            "title": "Chat en Vivo",
+            "subtitle": "Configure el soporte al cliente para su tienda",
+            "provider": {
+                "label": "Proveedor de Chat",
+                "tawk": "Tawk.to",
+                "crisp": "Crisp",
+                "whatsapp": "WhatsApp"
+            },
+            "chatId": {
+                "label": "ID del Widget (Property ID / Website ID)",
+                "placeholder": "Ingrese el ID de su widget...",
+                "help": "Para WhatsApp, ingrese su número en formato internacional sin el + (ej: 2250707070707)"
+            },
+            "save": "Guardar Configuración",
+            "saving": "Guardando...",
+            "success": "¡Configuración de chat actualizada con éxito!",
+            "error": "Error al actualizar la configuración."
+        }
+    },
+    "admin": {
+        "settings": {
+            "title": "Configuración del Sistema",
+            "subtitle": "Configure la configuración global de la plataforma",
+            "new": "+ Nueva Configuración",
+            "empty": {
+                "title": "Sin configuración",
+                "desc": "Haga clic en \"Nueva Configuración\" para comenzar"
+            },
+            "prompts": {
+                "key": "Clave:",
+                "value": "Valor:",
+                "description": "Descripción:",
+                "category": "Categoría (general, payments, moderation):",
+                "newValue": "Nuevo Valor:"
+            },
+            "modify": "Editar",
+            "quickSettings": {
+                "title": "Configuración Rápida",
+                "platformCommission": "Comisión de Plataforma (%)",
+                "listingDuration": "Duración del Anuncio (días)",
+                "premiumPrice": "Precio Premium (FCFA/mes)",
+                "autoModeration": "Moderación Automática",
+                "enabled": "Activada",
+                "disabled": "Desactivada",
+                "save": "Guardar Cambios"
+            }
+        },
+        "sidebar": {
+            "overview": "Vista general",
+            "users": "Usuarios",
+            "listings": "Anuncios",
+            "categories": "Categorías",
+            "subscriptions": "Suscripciones",
+            "boosts": "Boosts",
+            "moderation": "Moderación",
+            "settings": "Configuración",
+            "i18n": "🌍 Multi-idioma",
+            "automation": "Automatización",
+            "analytics": "Analítica",
+            "logs": "Logs del Sistema",
+            "plans": "Planes",
+            "paymentMethods": "Métodos de Pago",
+            "generalSettings": "Configuración General",
+            "emailSettings": "Configuración Email",
+            "seoSettings": "SEO",
+            "banner": "Banner",
+            "homeAppearance": "Página de Inicio",
+            "backToSite": "Volver al Sitio",
+            "logout": "Cerrar Sesión",
+            "adminPanel": "Panel de Admin",
+            "adminRole": "Administrador"
+        },
+        "i18n": {
+            "title": "Configuración de Idiomas",
+            "subtitle": "Gestionar idiomas y traducciones de la plataforma",
+            "enable": {
+                "title": "Activar Multi-idioma",
+                "desc": "Si está desactivado, todo el sitio se mostrará solo en el idioma predeterminado."
+            },
+            "defaultLanguage": {
+                "label": "Idioma predeterminado del sitio",
+                "help": "Este idioma se utilizará para los nuevos visitantes."
+            },
+            "availableLanguages": {
+                "label": "Idiomas disponibles"
+            },
+            "autoDetect": "Detectar automáticamente el idioma del navegador",
+            "save": "Guardar Configuración",
+            "saving": "Guardando...",
+            "success": "¡Configuración guardada con éxito!",
+            "error": "Error al guardar"
+        }
+    },
+    "sidebar": {
+        "create": {
+            "back": "← Volver al dashboard",
+            "title": "Crear Live Shopping",
+            "subtitle": "Vende tus productos en vivo con tus clientes",
+            "form": {
+                "title": "Título del live *",
+                "titlePlaceholder": "Ej: Nueva colección otoño 2024",
+                "description": "Descripción",
+                "descriptionPlaceholder": "Describe lo que vas a presentar...",
+                "scheduledAt": "Programar para más tarde (opcional)",
+                "scheduledAtHelp": "Dejar vacío para iniciar inmediatamente"
+            },
+            "info": {
+                "title": "📹 Antes de empezar:",
+                "list": [
+                    "• Asegúrate de tener una buena conexión a internet",
+                    "• Permite el acceso a tu cámara y micrófono",
+                    "• Prepara los productos que quieres mostrar",
+                    "• Prueba tu iluminación y sonido"
+                ]
+            },
+            "buttons": {
+                "cancel": "Cancelar",
+                "submit": "🎥 Crear Live",
+                "loading": "Creando..."
+            },
+            "auth": {
+                "title": "Inicio de sesión requerido",
+                "login": "Iniciar sesión"
+            }
+        }
+    },
+    "live": {
+        "create": {
+            "back": "← Volver al dashboard",
+            "title": "Crear Live Shopping",
+            "subtitle": "Vende tus productos en vivo con tus clientes",
+            "form": {
+                "title": "Título del live *",
+                "titlePlaceholder": "Ej: Nueva colección otoño 2024",
+                "description": "Descripción",
+                "descriptionPlaceholder": "Describe lo que vas a presentar...",
+                "scheduledAt": "Programar para más tarde (opcional)",
+                "scheduledAtHelp": "Dejar vacío para iniciar inmediatamente"
+            },
+            "info": {
+                "title": "📹 Antes de empezar:",
+                "list": [
+                    "• Asegúrate de tener una buena conexión a internet",
+                    "• Permite el acceso a tu cámara y micrófono",
+                    "• Prepara los productos que quieres mostrar",
+                    "• Prueba tu iluminación y sonido"
+                ]
+            },
+            "buttons": {
+                "cancel": "Cancelar",
+                "submit": "🎥 Crear Live",
+                "loading": "Creando..."
+            },
+            "auth": {
+                "title": "Inicio de sesión requerido",
+                "login": "Iniciar sesión"
+            }
+        }
+    },
+    "shop": {
+        "title": "Mi tienda",
+        "subdomain": "Subdominio",
+        "subdomainPlaceholder": "mitienda",
+        "subdomainHelp": "URL de tu tienda",
+        "bio": "Descripción corta",
+        "bioPlaceholder": "Describe tu tienda en pocas palabras...",
+        "bioCharacters": "caracteres",
+        "banner": "Banner",
+        "bannerUpload": "Subir un banner",
+        "bannerUrlLabel": "O introduce una URL",
+        "bannerPlaceholder": "https://ejemplo.com/banner.jpg",
+        "logo": "Logo",
+        "logoUpload": "Subir un logo",
+        "logoUrlLabel": "O introduce una URL",
+        "logoPlaceholder": "https://ejemplo.com/logo.png",
+        "video": "Vídeo de presentación",
+        "videoUpload": "Subir un vídeo",
+        "videoUrlLabel": "O introduce una URL (YouTube, Vimeo, MP4...)",
+        "videoPlaceholder": "https://youtube.com/watch?v=...",
+        "videoFormats": "Formatos aceptados: MP4, WebM, AVI, MOV",
+        "videoNote": "💡 Para YouTube/Vimeo, la vista previa no se mostrará aquí pero funcionará en tu tienda",
+        "theme": "Tema de la tienda",
+        "colors": "Colores de la Tienda",
+        "primaryColor": "Color Primario",
+        "secondaryColor": "Color Secundario",
+        "whatsapp": "Contacto WhatsApp",
+        "whatsappPlaceholder": "+34 XXX XXX XXX",
+        "whatsappHelp": "Botón flotante para contacto directo",
+        "badges": "Insignias de confianza",
+        "badgesHelp": "Selecciona tus garantías",
+        "businessHours": "Horario de Atención",
+        "open": "Abierto",
+        "closed": "Cerrado",
+        "saving": "Guardando...",
+        "saveChanges": "Guardar cambios",
+        "tabs": {
+            "general": "General",
+            "design": "Diseño",
+            "features": "Funcionalidades",
+            "social": "Redes Sociales",
+            "content": "Contenido"
+        },
+        "subtitle": "Personaliza tu tienda ultra-premium",
+        "createSubdomain": "Crear mi subdominio",
+        "subdomainDesc": "Elige la URL única de tu tienda",
+        "yourSubdomain": "Tu subdominio",
+        "verify": "Verificar",
+        "verifying": "Verificando...",
+        "available": "¡Este subdominio está disponible!",
+        "notAvailable": "Subdominio no disponible",
+        "claim": "Reservar este subdominio",
+        "online": "¡Tu tienda está en línea!",
+        "accessibleAt": "Accesible en:",
+        "advancedCustomization": "Personalización Avanzada",
+        "new": "NUEVO",
+        "shopLogo": "Logo de la Tienda",
+        "socialConnect": "Conecta tus páginas sociales",
+        "aboutSection": "Sección \"Sobre Nosotros\"",
+        "aboutDesc": "Historia detallada de tu tienda",
+        "aboutPlaceholder": "Cuenta tu historia, tus valores, lo que te hace único...",
+        "premiumFeature": "Funcionalidad Premium",
+        "upgradeToPremium": "Pasar a Premium",
+        "premiumDesc": "¡Crea tu tienda personalizada ultra-premium con video, WhatsApp, testimonios y más!",
+        "successUpdate": "¡Tienda actualizada con éxito!",
+        "errorUpdate": "Error al actualizar la tienda",
+        "checkError": "Error durante la verificación",
+        "claimError": "Error durante la reserva",
+        "saveChanges": "Guardar cambios",
+        "shopTheme": "Tema de la tienda",
+        "shopBanner": "Banner de la tienda",
+        "uploadBanner": "Subir un banner",
+        "enterUrl": "O ingresa una URL",
+        "preview": "Vista previa:",
+        "shopColors": "Colores de la Tienda",
+        "primaryColor": "Color Primario",
+        "secondaryColor": "Color Secundario",
+        "uploadLogo": "Subir un logo",
+        "logoPreview": "Vista previa del logo:",
+        "presentationVideo": "Video de presentación",
+        "videoDesc": "YouTube, Vimeo, enlace directo MP4 o subir",
+        "uploadVideo": "Subir un video",
+        "videoUrlLabel": "O ingresa una URL (YouTube, Vimeo, MP4...)",
+        "whatsappContact": "Contacto WhatsApp",
+        "whatsappDesc": "Botón flotante para contacto directo",
+        "trustBadges": "Insignias de confianza",
+        "selectGuarantees": "Selecciona tus garantías",
+        "businessHours": "Horarios de Atención",
+        "open": "Abierto",
+        "closed": "Cerrado",
+        "socialTitle": "Redes Sociales",
+        "socialDesc": "Conecta tus páginas sociales"
+    },
+    "auth": {
+        "login": "Iniciar sesión",
+        "register": "Registrarse",
+        "email": "Email",
+        "phone": "Número de teléfono",
+        "name": "Nombre completo",
+        "language": "Idioma preferido",
+        "password": "Contraseña",
+        "confirmPassword": "Confirmar contraseña",
+        "forgotPassword": "¿Olvidaste tu contraseña?",
+        "rememberMe": "Recuérdame",
+        "noAccount": "¿No tienes cuenta?",
+        "hasAccount": "¿Ya tienes cuenta?",
+        "loginButton": "Iniciar sesión",
+        "registerButton": "Registrarse",
+        "createAccount": "Crear mi cuenta",
+        "loggingIn": "Iniciando sesión...",
+        "registering": "Registrando...",
+        "backToHome": "Volver al inicio",
+        "loginSubtitle": "Accede a tu espacio cósmico",
+        "registerSubtitle": "Únete al universo cósmico",
+        "acceptTerms": "Al registrarte, aceptas nuestros",
+        "terms": "Términos de servicio",
+        "errors": {
+            "loginFailed": "Teléfono o contraseña incorrectos",
+            "generic": "Ha ocurrido un error",
+            "passwordMismatch": "Las contraseñas no coinciden",
+            "passwordLength": "La contraseña debe tener al menos 6 caracteres"
+        }
+    },
+    "badges": {
+        "moneyBack": "Garantía de devolución",
+        "securePayment": "Pago seguro",
+        "fastDelivery": "Entrega rápida",
+        "support": "Soporte 24/7"
+    },
+    "days": {
+        "monday": "Lunes",
+        "tuesday": "Martes",
+        "wednesday": "Miércoles",
+        "thursday": "Jueves",
+        "friday": "Viernes",
+        "saturday": "Sábado",
+        "sunday": "Domingo"
+    },
+    "home": {
+        "hero": {
+            "title": "Compra y Vende con Anuncios de Video",
+            "subtitle": "El marketplace moderno donde cada producto cobra vida en video",
+            "searchPlaceholder": "Buscar anuncios...",
+            "allCategories": "Todas las categorías",
+            "searchButton": "Buscar",
+            "exploreButton": "🎥 Explorar Anuncios",
+            "createButton": "✨ Crear Anuncio"
+        },
+        "sections": {
+            "urgent": "Anuncios Urgentes",
+            "urgentSubtitle": "¡Aprovecha rápido!",
+            "shops": "Tiendas Premium",
+            "shopsSubtitle": "Las mejores tiendas y sus productos",
+            "categories": "Explorar por Categoría",
+            "recent": "Todos los Anuncios",
+            "viewAll": "Ver Todo",
+            "featuredProducts": "Productos Destacados",
+            "noProducts": "No hay productos disponibles"
+        },
+        "luxury": {
+            "hero": {
+                "title": "MERCADO CÓSMICO",
+                "subtitle": "🌌 Explora el Universo del Comercio de Video 🚀"
+            },
+            "search": {
+                "placeholder": "🔍 Buscar...",
+                "categories": "🌟 Categorías"
+            },
+            "cta": {
+                "explore": "EXPLORAR",
+                "discover": "🎥 Descubrir",
+                "create": "✨ Crear"
+            },
+            "sections": {
+                "urgent": "URGENTE",
+                "shops": "GALAXIA PREMIUM",
+                "categories": "UNIVERSO",
+                "collection": "✨ COLECCIÓN",
+                "noListings": "🌌 No hay anuncios en este universo"
+            }
+        },
+        "cosmic": {
+            "hero": {
+                "title": "VIDEOBOUTIQUE",
+                "subtitle": "El Mercado de Referencia"
+            },
+            "search": {
+                "placeholder": "Buscar en el universo..."
+            },
+            "cta": {
+                "ready": "¿Listo para Vender? 🚀",
+                "join": "Únete a miles de vendedores en VideoBoutique",
+                "button": "Crear un Anuncio →"
+            }
+        },
+        "nebula": {
+            "hero": {
+                "title": "VIDEOBOUTIQUE",
+                "subtitle": "Tu Mercado Premium"
+            },
+            "search": {
+                "placeholder": "Explora la nebulosa..."
+            },
+            "cta": {
+                "ready": "¿Listo para Vender? 🚀",
+                "join": "Únete a miles de vendedores en VideoBoutique",
+                "button": "Crear un Anuncio →"
+            }
+        },
+        "categories": {
+            "all": "Todo",
+            "electronics": "Electrónica",
+            "fashion": "Moda",
+            "vehicles": "Vehículos",
+            "realEstate": "Inmobiliaria",
+            "services": "Servicios",
+            "home": "Hogar",
+            "sports": "Deportes",
+            "other": "Otro"
+        },
+        "footer": {
+            "about": "Sobre Nosotros",
+            "quickLinks": "Enlaces Rápidos",
+            "support": "Soporte",
+            "followUs": "Síguenos",
+            "rights": "© 2025 VideoBoutique. Todos los derechos reservados.",
+            "helpCenter": "Centro de Ayuda",
+            "contact": "Contacto",
+            "terms": "Términos",
+            "privacy": "Privacidad"
+        }
+    }
+}

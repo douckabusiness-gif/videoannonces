@@ -1,0 +1,362 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+
+interface AutomationConfig {
+    id: string;
+    feature: string;
+    name: string;
+    description: string;
+    category: string;
+    enabled: boolean;
+    usageCount: number;
+    totalCost: number;
+    dailyQuota: number | null;
+    monthlyQuota: number | null;
+    priority: number;
+    _count: { logs: number };
+}
+
+interface Stats {
+    overview: {
+        totalConfigs: number;
+        enabledConfigs: number;
+        disabledConfigs: number;
+        totalExecutions: number;
+        successExecutions: number;
+        failedExecutions: number;
+        successRate: number;
+        totalCost: number;
+        period: number;
+    };
+    byCategory: Array<{ category: string; count: number }>;
+    dailyStats: Array<{ date: string; count: number; success: number; failed: number }>;
+    topFeatures: Array<{ feature: string; count: number; avgExecutionTime: number; totalCost: number }>;
+}
+
+export default function AutomationDashboard() {
+    const { data: session, status } = useSession();
+    const router = useRouter();
+    const [configs, setConfigs] = useState<AutomationConfig[]>([]);
+    const [stats, setStats] = useState<Stats | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [togglingFeature, setTogglingFeature] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (status === 'unauthenticated') {
+            router.push('/admin/login');
+        } else if (status === 'authenticated') {
+            fetchData();
+        }
+    }, [status]);
+
+    const fetchData = async () => {
+        setError(null);
+        try {
+            const [configsRes, statsRes] = await Promise.all([
+                fetch('/api/admin/automation'),
+                fetch('/api/admin/automation/stats?period=7')
+            ]);
+
+            if (!configsRes.ok) {
+                const errorData = await configsRes.json();
+                throw new Error(errorData.error || `Erreur ${configsRes.status}`);
+            }
+
+            if (configsRes.ok) {
+                const data = await configsRes.json();
+                setConfigs(data);
+
+                // Si aucune config, afficher un message clair
+                if (data.length === 0) {
+                    setError('Aucune configuration trouvée. Lancez le script de seed : npx ts-node seed-automation.ts');
+                }
+            }
+
+            if (statsRes.ok) {
+                const data = await statsRes.json();
+                setStats(data);
+            }
+        } catch (error: any) {
+            console.error('Erreur chargement données:', error);
+            setError(error.message || 'Erreur de chargement des données');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const toggleAutomation = async (feature: string, currentState: boolean) => {
+        if (!confirm(`Voulez-vous vraiment ${currentState ? 'désactiver' : 'activer'} cette automatisation ?`)) {
+            return;
+        }
+
+        setTogglingFeature(feature);
+
+        try {
+            const res = await fetch('/api/admin/automation/toggle', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ feature, enabled: !currentState })
+            });
+
+            if (res.ok) {
+                await fetchData();
+            } else {
+                alert('Erreur lors du changement d\'état');
+            }
+        } catch (error) {
+            console.error('Erreur toggle:', error);
+            alert('Erreur serveur');
+        } finally {
+            setTogglingFeature(null);
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="text-center">
+                    <div className="text-6xl mb-4 animate-pulse">🤖</div>
+                    <p className="text-gray-600">Chargement du dashboard...</p>
+                </div>
+            </div>
+        );
+    }
+
+    const filteredConfigs = selectedCategory === 'all'
+        ? configs
+        : configs.filter(c => c.category === selectedCategory);
+
+    const categories = [
+        { id: 'all', name: 'Toutes', icon: '📊', color: 'gray' },
+        { id: 'moderation', name: 'Modération', icon: '🛡️', color: 'red' },
+        { id: 'content', name: 'Contenu', icon: '✍️', color: 'blue' },
+        { id: 'analytics', name: 'Analytics', icon: '📈', color: 'purple' },
+        { id: 'engagement', name: 'Engagement', icon: '🎯', color: 'green' }
+    ];
+
+    const getCategoryColor = (category: string) => {
+        const colors: Record<string, string> = {
+            moderation: 'from-red-500 to-red-600',
+            content: 'from-blue-500 to-blue-600',
+            analytics: 'from-purple-500 to-purple-600',
+            engagement: 'from-green-500 to-green-600'
+        };
+        return colors[category] || 'from-gray-500 to-gray-600';
+    };
+
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-8">
+            <div className="max-w-7xl mx-auto">
+                {/* Header */}
+                <div className="mb-8">
+                    <div className="flex items-center justify-between mb-4">
+                        <div>
+                            <h1 className="text-4xl font-black text-gray-900 mb-2">
+                                🤖 IA & Automatisation
+                            </h1>
+                            <p className="text-gray-600">
+                                Gérez et surveillez toutes vos automatisations intelligentes
+                            </p>
+                        </div>
+                        <Link
+                            href="/admin"
+                            className="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-xl font-bold transition"
+                        >
+                            ← Retour Admin
+                        </Link>
+                    </div>
+                </div>
+
+                {/* Error Banner */}
+                {error && (
+                    <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-6 mb-8">
+                        <div className="flex items-start gap-4">
+                            <div className="text-4xl">⚠️</div>
+                            <div className="flex-1">
+                                <h3 className="text-lg font-black text-red-900 mb-2">Erreur de Chargement</h3>
+                                <p className="text-red-700 mb-3">{error}</p>
+                                <div className="flex gap-3">
+                                    <button
+                                        onClick={() => {
+                                            setError(null);
+                                            fetchData();
+                                        }}
+                                        className="px-4 py-2 bg-red-600 text-white rounded-lg font-bold hover:bg-red-700 transition"
+                                    >
+                                        🔄 Réessayer
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            console.log('=== DEBUG INFO ===');
+                                            console.log('Configs:', configs);
+                                            console.log('Stats:', stats);
+                                            console.log('Error:', error);
+                                            alert('Informations de debug envoyées dans la console (F12)');
+                                        }}
+                                        className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-bold hover:bg-gray-300 transition"
+                                    >
+                                        🐛 Debug Console
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Stats Overview */}
+                {stats && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border-2 border-green-200">
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="text-sm font-bold text-gray-600">ACTIVES</span>
+                                <span className="text-3xl">✅</span>
+                            </div>
+                            <div className="text-4xl font-black text-green-600">
+                                {stats.overview.enabledConfigs}
+                            </div>
+                            <div className="text-sm text-gray-500 mt-1">
+                                sur {stats.overview.totalConfigs} automatisations
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border-2 border-blue-200">
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="text-sm font-bold text-gray-600">EXÉCUTIONS</span>
+                                <span className="text-3xl">⚡</span>
+                            </div>
+                            <div className="text-4xl font-black text-blue-600">
+                                {stats.overview.totalExecutions.toLocaleString()}
+                            </div>
+                            <div className="text-sm text-gray-500 mt-1">
+                                {stats.overview.period} derniers jours
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border-2 border-purple-200">
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="text-sm font-bold text-gray-600">TAUX SUCCÈS</span>
+                                <span className="text-3xl">📊</span>
+                            </div>
+                            <div className="text-4xl font-black text-purple-600">
+                                {stats.overview.successRate}%
+                            </div>
+                            <div className="text-sm text-gray-500 mt-1">
+                                {stats.overview.successExecutions} réussies
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-2xl p-6 shadow-sm border-2 border-orange-200">
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="text-sm font-bold text-gray-600">COÛTS</span>
+                                <span className="text-3xl">💰</span>
+                            </div>
+                            <div className="text-4xl font-black text-orange-600">
+                                ${stats.overview.totalCost.toFixed(2)}
+                            </div>
+                            <div className="text-sm text-gray-500 mt-1">
+                                Total dépensé
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Category Filter */}
+                <div className="bg-white rounded-2xl p-6 shadow-sm mb-8">
+                    <h2 className="text-xl font-black text-gray-900 mb-4">Filtrer par catégorie</h2>
+                    <div className="flex flex-wrap gap-3">
+                        {categories.map(cat => (
+                            <button
+                                key={cat.id}
+                                onClick={() => setSelectedCategory(cat.id)}
+                                className={`px-6 py-3 rounded-xl font-bold transition-all ${selectedCategory === cat.id
+                                    ? `bg-gradient-to-r ${getCategoryColor(cat.id)} text-white shadow-lg scale-105`
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    }`}
+                            >
+                                <span className="mr-2">{cat.icon}</span>
+                                {cat.name}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Automations Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {filteredConfigs.map(config => (
+                        <div
+                            key={config.id}
+                            className={`bg-white rounded-2xl p-6 shadow-sm border-2 transition-all ${config.enabled ? 'border-green-200' : 'border-gray-200'
+                                }`}
+                        >
+                            <div className="flex items-start justify-between mb-4">
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <h3 className="text-xl font-black text-gray-900">
+                                            {config.name}
+                                        </h3>
+                                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${config.enabled
+                                            ? 'bg-green-100 text-green-700'
+                                            : 'bg-gray-100 text-gray-600'
+                                            }`}>
+                                            {config.enabled ? '✅ ACTIF' : '⏸️ INACTIF'}
+                                        </span>
+                                    </div>
+                                    <p className="text-sm text-gray-600 mb-3">
+                                        {config.description}
+                                    </p>
+                                    <div className="flex flex-wrap gap-2 text-xs">
+                                        <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded-lg">
+                                            📊 {config._count.logs} exécutions
+                                        </span>
+                                        {config.totalCost > 0 && (
+                                            <span className="px-2 py-1 bg-orange-100 text-orange-700 rounded-lg">
+                                                💰 ${config.totalCost.toFixed(2)}
+                                            </span>
+                                        )}
+                                        {config.dailyQuota && (
+                                            <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-lg">
+                                                📈 {config.usageCount}/{config.dailyQuota} quota
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={() => toggleAutomation(config.feature, config.enabled)}
+                                    disabled={togglingFeature === config.feature}
+                                    className={`flex-1 px-4 py-3 rounded-xl font-bold transition-all ${config.enabled
+                                        ? 'bg-red-100 text-red-700 hover:bg-red-200'
+                                        : 'bg-green-100 text-green-700 hover:bg-green-200'
+                                        } ${togglingFeature === config.feature ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                >
+                                    {togglingFeature === config.feature ? '⏳' : config.enabled ? '⏸️ Désactiver' : '▶️ Activer'}
+                                </button>
+                                <Link
+                                    href={`/admin/automation/${config.feature}`}
+                                    className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-bold transition"
+                                >
+                                    ⚙️ Config
+                                </Link>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {filteredConfigs.length === 0 && (
+                    <div className="text-center py-12 bg-white rounded-2xl">
+                        <div className="text-6xl mb-4">🤖</div>
+                        <p className="text-gray-600">Aucune automatisation dans cette catégorie</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}

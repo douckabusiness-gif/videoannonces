@@ -1,0 +1,58 @@
+# VideoBoutique — MySQL (import SQL) + Redis + Next.js
+# Démarrage : docker compose up --build -d
+# Réimporter le dump : docker compose down -v puis docker compose up --build -d
+# Mot de passe root MySQL : variable MYSQL_ROOT_PASSWORD (défaut videoboutique_root)
+
+services:
+  db:
+    image: mariadb:11.4
+    container_name: videoboutique-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-videoboutique_root}
+      MYSQL_DATABASE: doucka2026_videoboutique
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./doucka2026_videoboutique.sql:/docker-entrypoint-initdb.d/01-import.sql:ro
+      - ./docker/mysql-init/02-sitesettings-prisma-align.sql:/docker-entrypoint-initdb.d/02-sitesettings-prisma-align.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 60s
+
+  redis:
+    image: redis:7-alpine
+    container_name: videoboutique-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: videoboutique-app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: mysql://root:${MYSQL_ROOT_PASSWORD:-videoboutique_root}@db:3306/doucka2026_videoboutique
+      REDIS_URL: redis://redis:6379
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL:-http://localhost:3000}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./public/uploads:/app/public/uploads
+
+volumes:
+  mysql_data:

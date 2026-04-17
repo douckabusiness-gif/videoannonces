@@ -1,0 +1,859 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Utilisateurs
+model User {
+  id              String    @id @default(cuid())
+  phone           String    @unique
+  name            String
+  email           String?   @unique
+  password        String
+  avatar          String?
+  language        String    @default("fr") // fr, ar, en
+  verified        Boolean   @default(false)
+  premium         Boolean   @default(false)
+  premiumUntil    DateTime?
+  isPremium       Boolean   @default(false) // Pour la section "Boutiques Premium"
+  premiumTier     String    @default("free") // free, premium, pro
+  role            String    @default("USER") // USER, ADMIN
+  isVendor        Boolean   @default(false) // CLIENT ou VENDEUR
+  suspended       Boolean   @default(false)
+  suspendedUntil  DateTime?
+  suspendedReason String?   @db.Text
+
+  // Sous-domaine & Boutique
+  subdomain    String? @unique
+  customDomain String? @unique
+  bannerUrl    String?
+  bio          String? @db.Text
+  shopTheme    String  @default("default")
+  socialLinks  Json?
+
+  // Nouvelles fonctionnalités boutique premium
+  videoUrl       String? // Vidéo de présentation boutique
+  whatsappNumber String? // Numéro WhatsApp pour contact
+  aiReplyEnabled Boolean @default(true) // Activer/Désactiver les réponses IA
+
+  galleryImages Json? // [{url, caption, type}]
+  testimonials  Json? // [{name, message, rating, avatar, date}]
+  trustBadges   Json? // [{icon, text}] - Badges de confiance
+
+  fontFamily      String? @default("inter") // 'inter', 'roboto', 'opensans', 'lato', 'montserrat'
+  activePromotion Json? // {title, discount, endDate, description}
+  aboutSection    String? @db.Text // Section "À propos" détaillée
+
+  // Phase 1 - Personnalisation essentiels
+  customColors  Json? // {primary: "#FF5733", secondary: "#C70039"}
+  logoUrl       String? // Logo boutique personnalisé
+  backgroundUrl String? // Image de fond ou couleur hex (#f5f5f5)
+  businessHours Json? // {monday: {open: "09:00", close: "18:00", closed: false}, ...}
+  shopLayout    String  @default("mobile-first") // "mobile-first" | "ecommerce"
+
+  // SEO Vendeur
+  seoTitle       String?
+  seoDescription String? @db.Text
+  seoKeywords    String? @db.Text
+
+  rating       Float @default(0)
+  totalRatings Int   @default(0)
+  totalSales   Int   @default(0)
+
+  listings          Listing[]
+  messages          Message[]
+  conversations     Conversation[]
+  reviews           Review[]
+  favorites         Favorite[]
+  payments          Payment[]
+  subscription      Subscription?
+  badges            UserBadge[]
+  pushSubscriptions PushSubscription[]
+  notifications     Notification[]
+  adminLogs         AdminLog[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([phone])
+  @@index([email])
+  @@index([subdomain])
+
+  @@map("user")
+}
+
+// Badges System
+enum BadgeType {
+  VERIFIED // Identité vérifiée
+  TOP_SELLER // Top vendeur (>50 ventes)
+  FAST_RESPONDER // Répond en <1h
+  PREMIUM // Abonnement premium
+  NEW_SELLER // Nouveau (<30 jours)
+  TRUSTED // 100% avis positifs
+  EXPERT // Spécialiste catégorie
+}
+
+model Badge {
+  id          String    @id @default(cuid())
+  type        BadgeType @unique
+  name        String
+  nameFr      String
+  nameAr      String?
+  description String    @db.Text
+  icon        String // Emoji ou URL
+  color       String // Couleur hex
+
+  // Critères d'attribution
+  criteria Json? // Conditions pour obtenir
+
+  userBadges UserBadge[]
+
+  createdAt DateTime @default(now())
+
+  @@map("badge")
+}
+
+model UserBadge {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badgeType BadgeType
+  badge     Badge     @relation(fields: [badgeType], references: [type])
+
+  // Attribution
+  awardedAt DateTime  @default(now())
+  expiresAt DateTime? // Certains badges expirent
+
+  @@unique([userId, badgeType])
+  @@index([userId])
+
+  @@map("userbadge")
+}
+
+enum NotificationType {
+  MESSAGE // Nouveau message
+  SALE // Vente effectuée
+  ORDER // Nouvelle commande
+  REVIEW // Nouvel avis
+  SYSTEM // Notification système
+}
+
+// Annonces
+model Listing {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  title        String
+  description  String @db.Text
+  price        Int // En FCFA
+  category     String
+  videoUrl     String
+  thumbnailUrl String
+  duration     Int // En secondes
+
+  location  String
+  quartier  String? // Quartier/Neighbourhood
+  latitude  Float?
+  longitude Float?
+
+  status           String    @default("active") // active, sold, expired, deleted
+  moderationStatus String    @default("pending") // pending, approved, rejected
+  moderatedBy      String?
+  moderatedAt      DateTime?
+  rejectionReason  String?   @db.Text
+  views            Int       @default(0)
+  boosted          Boolean   @default(false)
+  boostedUntil     DateTime?
+  isUrgent         Boolean   @default(false) // Pour la section "Annonces Urgentes"
+
+  messages  Message[]
+  favorites Favorite[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime // 30 jours par défaut
+
+  @@index([category, status, createdAt])
+  @@index([userId])
+
+  @@map("listing")
+}
+
+// Conversations
+model Conversation {
+  id            String    @id @default(cuid())
+  listingId     String?
+  buyerId       String
+  sellerId      String
+  buyer         User      @relation(fields: [buyerId], references: [id])
+  lastMessage   String?   @db.Text
+  lastMessageAt DateTime?
+  unreadCount   Int       @default(0)
+
+  messages Message[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([buyerId])
+  @@index([sellerId])
+  @@index([listingId])
+
+  @@map("conversation")
+}
+
+// Messages
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  listingId      String?
+  listing        Listing?     @relation(fields: [listingId], references: [id])
+  senderId       String
+  sender         User         @relation(fields: [senderId], references: [id])
+  content        String       @db.Text
+  type           String       @default("text") // text, image, video, audio
+  mediaUrl       String?
+  read           Boolean      @default(false)
+
+  // Métadonnées pour messages vocaux
+  audioDuration Int? // Durée en secondes
+  fileSize      Int? // Taille en bytes
+
+  // Accusés de lecture
+  deliveredAt DateTime? // Quand le message a été délivré
+  readAt      DateTime? // Quand le message a été lu
+
+  // Suppression de messages
+  deleted       Boolean   @default(false)
+  deletedAt     DateTime?
+  deletedForAll Boolean   @default(false)
+
+  createdAt DateTime @default(now())
+
+  @@index([conversationId])
+  @@index([listingId])
+  @@index([senderId])
+
+  @@map("message")
+}
+
+// Avis
+model Review {
+  id         String  @id @default(cuid())
+  reviewerId String
+  reviewer   User    @relation(fields: [reviewerId], references: [id])
+  reviewedId String // ID du vendeur
+  rating     Int // 1-5
+  comment    String? @db.Text
+  featured   Boolean @default(false) // Pour afficher sur la boutique
+
+  createdAt DateTime @default(now())
+
+  @@index([reviewerId])
+  @@index([reviewedId])
+
+  @@map("review")
+}
+
+// Favoris
+model Favorite {
+  id        String  @id @default(cuid())
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
+  listingId String
+  listing   Listing @relation(fields: [listingId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, listingId])
+  @@index([userId])
+  @@index([listingId])
+
+  @@map("favorite")
+}
+
+// Paiements
+model Payment {
+  id            String  @id @default(cuid())
+  userId        String
+  user          User    @relation(fields: [userId], references: [id])
+  amount        Int // En FCFA
+  currency      String  @default("XOF")
+  status        String  @default("pending") // pending, completed, failed, refunded, rejected
+  paymentMethod String // orange_money, mtn_momo, wave, etc. (Legacy string)
+  
+  // Relation Manuelle
+  paymentMethodId String?
+  method          PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
+
+  transactionId String? // ID de transaction saisi par l'utilisateur
+  proofUrl      String? // Capture d'écran
+  adminNote     String? // Note de l'admin
+
+  reference     String  @unique
+  metadata      Json? // Données supplémentaires
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([reference])
+
+  @@map("payment")
+}
+
+// Abonnements
+model Subscription {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id])
+  plan            String // free, premium, pro
+  status          String    @default("active") // active, cancelled, expired
+  startDate       DateTime  @default(now())
+  endDate         DateTime?
+  autoRenew       Boolean   @default(true)
+  paymentMethodId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+
+  @@map("subscription")
+}
+
+// Plans d'abonnement
+model SubscriptionPlan {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  description String? @db.Text
+  price       Int // Prix mensuel en FCFA
+  features    Json // Liste des fonctionnalités
+
+  // Limites
+  maxListings         Int? // Nombre max d'annonces
+  maxVideosPerListing Int? @default(1) // Nombre max de vidéos par annonce
+  maxVideoDuration    Int? // Durée max des vidéos en secondes
+
+  // Fonctionnalités Premium
+  allowSubdomain     Boolean @default(false)
+  allowCustomDomain  Boolean @default(false)
+  allowLiveStreaming Boolean @default(false)
+  allowStories       Boolean @default(false)
+
+  // Affichage
+  priority Int     @default(0)
+  active   Boolean @default(true)
+  popular  Boolean @default(false)
+  color    String? // Couleur pour l'affichage
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([active])
+
+  @@map("subscriptionplan")
+}
+
+// Packages de boost
+model BoostPackage {
+  id          String  @id @default(cuid())
+  name        String
+  description String? @db.Text
+  price       Int // Prix en FCFA
+  duration    Int // Durée en jours
+  features    Json // Fonctionnalités du boost
+  active      Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([active])
+
+  @@map("boostpackage")
+}
+
+// Notifications
+model Notification {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type  NotificationType
+  title String
+  body  String           @db.Text
+  icon  String?
+  url   String?
+
+  // Données associées
+  data Json?
+
+  // Statut
+  read Boolean @default(false)
+  sent Boolean @default(false)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([read])
+  @@index([createdAt])
+
+  @@map("notification")
+}
+
+// Templates d'automatisation
+model AutomationTemplate {
+  id          String  @id @default(cuid())
+  userId      String
+  name        String
+  description String? @db.Text
+  trigger     String // new_message, listing_view, etc.
+  conditions  Json // Conditions pour déclencher
+  actions     Json // Actions à effectuer
+  active      Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([active])
+
+  @@map("automationtemplate")
+}
+
+// Modes de paiement disponibles
+model PaymentMethod {
+  id          String  @id @default(cuid())
+  name        String // Orange Money, MTN MoMo, Wave, etc.
+  code        String  @unique // orange_money, mtn_momo, wave
+  description String? @db.Text
+  icon        String? // URL de l'icône ou emoji
+  color       String  @default("from-gray-500 to-gray-600") // Gradient Tailwind
+  active      Boolean @default(true)
+  order       Int     @default(0) // Ordre d'affichage
+  config      Json? // Configuration spécifique (API keys, etc.)
+
+  // Informations de contact
+  phoneNumber String? // Numéro pour les paiements
+  paymentLink String? @db.Text // Lien Wave ou autre
+  instruction String? @db.Text // Instructions spécifiques
+
+  payments    Payment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([active])
+  @@index([code])
+  @@index([order])
+
+  @@map("paymentmethod")
+}
+
+// Message sur page de paiement
+model PaymentMessage {
+  id        String   @id @default(cuid())
+  message   String   @db.Text
+  active    Boolean  @default(true)
+  bgColor   String   @default("#FF6B35")
+  textColor String   @default("#FFFFFF")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("paymentmessage")
+}
+
+// ============================================
+// ADMIN FEATURES - NEW MODELS
+// ============================================
+
+// Paramètres du Site
+model SiteSettings {
+  id              String  @id @default(cuid())
+  siteName        String  @default("VideoBoutique")
+  siteSlogan      String? // Slogan du site
+  siteDescription String? @db.Text
+
+  // Section Héro
+  heroTitle    String? @db.Text // Titre de la section héro
+  heroSubtitle String? @db.Text // Sous-titre de la section héro
+
+  // Titres des Sections
+  urgentSectionTitle String? @default("Annonces Urgentes")
+  recentSectionTitle String? @default("Annonces Récentes")
+  shopsSectionTitle  String? @default("Boutiques Premium")
+
+  logo         String?
+  favicon      String?
+  pwaIcon      String?
+  contactEmail String?
+  contactPhone String?
+  address      String? @db.Text
+
+  // Réseaux sociaux
+  socialFacebook  String?
+  socialTwitter   String?
+  socialInstagram String?
+  socialLinkedIn  String?
+  socialYouTube   String?
+  socialTikTok    String?
+
+  // Paramètres additionnels
+  maintenanceMode    Boolean @default(false)
+  maintenanceMessage String? @db.Text
+
+  // Layout & Apparence
+  homeLayout      String @default("modern") // "modern", "luxury"
+  dashboardLayout String @default("nebula") // "nebula", "orbital", "holographic"
+  primaryColor    String @default("#FF6B35")
+  secondaryColor  String @default("#F7931E")
+  accentColor     String @default("#FDC830")
+  backgroundColor String @default("#FFF7ED")
+  headerColor     String @default("#FFFFFF")
+  footerColor     String @default("#FFFFFF")
+  headerTextColor String @default("#000000")
+  footerTextColor String @default("#000000")
+  urgentBgColor   String @default("#FFFFFF")
+  shopsBgColor    String @default("#FFFFFF")
+  recentBgColor   String @default("#FFFFFF")
+  urgentTextColor String @default("#000000")
+  shopsTextColor  String @default("#000000")
+  recentTextColor String @default("#000000")
+
+  // IA & Automatisation
+  enableAIDescriptionGenerator Boolean @default(true) // 🤖 Générateur IA de descriptions
+
+  homepageSections Json? // Configuration de l'ordre et de la visibilité des sections
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sitesettings")
+}
+
+// Configuration Email
+model EmailConfig {
+  id           String  @id @default(cuid())
+  smtpHost     String
+  smtpPort     Int
+  smtpUser     String
+  smtpPassword String  @db.Text // Encrypted
+  fromEmail    String
+  fromName     String
+  isActive     Boolean @default(false)
+
+  // Templates
+  welcomeTemplate       String? @db.Text
+  verificationTemplate  String? @db.Text
+  resetPasswordTemplate String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("emailconfig")
+}
+
+// Catégories
+model Category {
+  id          String  @id @default(cuid())
+  name        String
+  nameFr      String
+  nameAr      String?
+  nameEn      String?
+  slug        String  @unique
+  icon        String?
+  image       String?
+  description String? @db.Text
+  order       Int     @default(0)
+  isActive    Boolean @default(true)
+  color       String? // Couleur pour l'affichage
+
+  // Hiérarchie
+  parentId     String?
+  parent       Category?  @relation("SubCategories", fields: [parentId], references: [id], onDelete: SetNull)
+  subcategories Category[] @relation("SubCategories")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([order])
+  @@index([parentId])
+
+  @@map("category")
+}
+
+// Configuration SEO
+model SeoSettings {
+  id                 String  @id @default(cuid())
+  defaultTitle       String?
+  defaultDescription String? @db.Text
+  defaultKeywords    String? @db.Text
+
+  // Open Graph
+  ogImage String?
+  ogType  String? @default("website")
+
+  // Twitter Cards
+  twitterHandle   String?
+  twitterCardType String? @default("summary_large_image")
+
+  // Analytics
+  googleAnalyticsId  String?
+  googleTagManagerId String?
+  facebookPixelId    String?
+
+  // Sitemap
+  sitemapEnabled Boolean @default(true)
+  robotsTxt      String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("seosettings")
+}
+
+// Key-Value Settings store (used for admin configs like homepage banner)
+model Setting {
+  id          String  @id @default(cuid())
+  key         String  @unique
+  value       String  @db.Text
+  description String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+
+  @@map("setting")
+}
+
+// Logs Système
+model SystemLog {
+  id        String  @id @default(cuid())
+  type      String // 'info', 'warning', 'error', 'success'
+  category  String // 'user', 'listing', 'payment', 'system', 'email', 'security'
+  action    String // Action effectuée
+  message   String  @db.Text
+  metadata  Json? // Données additionnelles
+  userId    String? // Utilisateur concerné
+  ipAddress String?
+  userAgent String? @db.Text
+
+  createdAt DateTime @default(now())
+
+  @@index([type])
+  @@index([category])
+  @@index([createdAt])
+  @@index([userId])
+
+  @@map("systemlog")
+}
+
+// Push Notifications
+model PushSubscription {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  endpoint String @unique
+  p256dh   String // Clé publique
+  auth     String // Clé d'authentification
+
+  // Métadonnées
+  userAgent String?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+
+  @@map("pushsubscription")
+}
+
+// Publicités / Bannières
+model Ad {
+  id       String  @id @default(cuid())
+  title    String
+  imageUrl String
+  linkUrl  String
+  position String // 'top', 'middle', 'bottom'
+  isActive Boolean @default(true)
+
+  // Métriques
+  clicks      Int @default(0)
+  impressions Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([position, isActive])
+
+  @@map("ad")
+}
+
+// Messages de contact
+model ContactMessage {
+  id      String  @id @default(cuid())
+  name    String
+  email   String
+  phone   String?
+  subject String
+  message String  @db.Text
+  status  String  @default("pending") // pending, replied, closed
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+
+  @@map("contactmessage")
+}
+
+// ============================================
+// AI & AUTOMATION SYSTEM
+// ============================================
+
+// Configuration des automatisations IA
+model AutomationConfig {
+  id          String @id @default(cuid())
+  feature     String @unique // 'moderation_ai', 'chatbot_ai', 'description_generator', etc.
+  name        String // Nom affiché
+  description String @db.Text
+  category    String // 'moderation', 'content', 'analytics', 'engagement'
+
+  // État
+  enabled Boolean @default(false)
+
+  // Configuration
+  config      Json? // Paramètres spécifiques à chaque feature
+  apiProvider String? // 'openai', 'anthropic', 'custom'
+  apiKey      String? @db.Text // Crypté
+  apiEndpoint String?
+
+  // Quotas et limites
+  dailyQuota   Int?
+  monthlyQuota Int?
+  usageCount   Int      @default(0)
+  lastResetAt  DateTime @default(now())
+
+  // Coûts
+  costPerCall Float? // En USD
+  totalCost   Float  @default(0)
+
+  // Planification
+  schedule   Json? // Horaires d'activation
+  conditions Json? // Conditions d'activation
+
+  // Métadonnées
+  priority Int    @default(0)
+  version  String @default("1.0")
+
+  // Relations
+  logs AutomationLog[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([feature])
+  @@index([enabled])
+  @@index([category])
+
+  @@map("automationconfig")
+}
+
+// Logs des automatisations
+model AutomationLog {
+  id       String           @id @default(cuid())
+  configId String
+  config   AutomationConfig @relation(fields: [configId], references: [id], onDelete: Cascade)
+
+  // Action
+  action  String // 'executed', 'failed', 'skipped'
+  feature String
+
+  // Détails
+  input  Json? // Données d'entrée
+  output Json? // Résultat
+  error  String? @db.Text
+
+  // Performance
+  executionTime Int? // En millisecondes
+  tokensUsed    Int?
+  cost          Float?
+
+  // Contexte
+  userId     String?
+  targetId   String? // ID de l'élément traité (listing, message, etc.)
+  targetType String? // 'listing', 'message', 'user'
+
+  // Métadonnées
+  metadata Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([configId])
+  @@index([feature])
+  @@index([action])
+  @@index([createdAt])
+  @@index([userId])
+
+  @@map("automationlog")
+}
+
+// Logs Admin
+model AdminLog {
+  id         String  @id @default(cuid())
+  adminId    String
+  admin      User    @relation(fields: [adminId], references: [id])
+  action     String
+  targetType String
+  targetId   String?
+  details    Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([adminId])
+  @@index([action])
+
+  @@map("adminlog")
+}
+
+// Configuration Système
+model SystemSettings {
+  id        String   @id @default(cuid())
+  key       String   @unique // ex: 'i18n_settings'
+  value     Json // Configuration JSON
+  updatedAt DateTime @updatedAt
+
+  @@map("systemsettings")
+}
+
+// Codes de vérification email
+model VerificationCode {
+  id        String   @id @default(cuid())
+  email     String
+  code      String // 6 chiffres
+  type      String // "EMAIL_VERIFICATION" | "PASSWORD_RESET"
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([email, code])
+  @@index([expiresAt])
+
+  @@map("verificationcode")
+}
