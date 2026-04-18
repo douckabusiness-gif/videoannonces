@@ -8,6 +8,11 @@ import MobileNavigation from '@/components/MobileNavigation';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import MainHeader from '@/components/MainHeader';
 import HomeLayoutModern from '@/components/layouts/HomeLayoutModern';
+import HomeLayoutCosmicWave from '@/components/layouts/HomeLayoutCosmicWave';
+import HomeLayoutLuxury from '@/components/layouts/HomeLayoutLuxury';
+import HomeLayoutClassic from '@/components/layouts/HomeLayoutClassic';
+import HomeLayoutNebulaGrid from '@/components/layouts/HomeLayoutNebulaGrid';
+import HomeLayoutAlibabaMulti from '@/components/layouts/HomeLayoutAlibabaMulti';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -23,6 +28,7 @@ export default function Home() {
     secondaryColor: '',
     accentColor: '',
     backgroundColor: '',
+    homeLayout: 'modern' as string, // Default layout
   });
 
   const [loading, setLoading] = useState(true);
@@ -53,6 +59,27 @@ export default function Home() {
     background: siteSettings.backgroundColor || '#FFF7ED',
   };
 
+  const renderLayout = () => {
+    const layout = siteSettings.homeLayout || 'modern';
+    
+    switch (layout) {
+      case 'cosmic':
+      case 'cosmicwave':
+        return <HomeLayoutCosmicWave siteSettings={siteSettings} />;
+      case 'luxury':
+        return <HomeLayoutLuxury siteSettings={siteSettings} />;
+      case 'classic':
+        return <HomeLayoutClassic siteSettings={siteSettings} />;
+      case 'nebulagrid':
+        return <HomeLayoutNebulaGrid siteSettings={siteSettings} />;
+      case 'alibabamulti':
+        return <HomeLayoutAlibabaMulti siteSettings={siteSettings} />;
+      case 'modern':
+      default:
+        return <HomeLayoutModern colors={colors} siteSettings={siteSettings} />;
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-white">
@@ -67,7 +94,7 @@ export default function Home() {
   return (
     <>
       <MainHeader siteSettings={siteSettings} />
-      <HomeLayoutModern colors={colors} siteSettings={siteSettings} />
+      {renderLayout()}
       <Footer />
 
       {/* Navigation Mobile Globale (affichée par dessus le layout) */}

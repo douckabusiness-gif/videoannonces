@@ -54,14 +54,16 @@ export default function HomeLayoutCosmicWave({ siteSettings: initialSiteSettings
     });
 
     const [sections, setSections] = useState<any[]>(
-        initialSiteSettings?.homepageSections?.filter((s: any) => s.enabled) || [
-            { id: 'hero', type: 'system' },
-            { id: 'banner', type: 'system' },
-            { id: 'urgent', type: 'system' },
-            { id: 'shops', type: 'system' },
-            { id: 'recent', type: 'system' },
-            { id: 'categories', type: 'system' },
-        ]
+        (initialSiteSettings?.homepageSections && Array.isArray(initialSiteSettings.homepageSections))
+            ? initialSiteSettings.homepageSections.filter((s: any) => s.enabled)
+            : [
+                { id: 'hero', type: 'system' },
+                { id: 'categories', type: 'system' },
+                { id: 'banner', type: 'system' },
+                { id: 'urgent', type: 'system' },
+                { id: 'shops', type: 'system' },
+                { id: 'recent', type: 'system' },
+            ]
     );
 
     useEffect(() => {
@@ -100,16 +102,16 @@ export default function HomeLayoutCosmicWave({ siteSettings: initialSiteSettings
                     });
                 }
 
-                if (data.homepageSections && Array.isArray(data.homepageSections) && data.homepageSections.length > 0) {
+                if (data.homepageSections && Array.isArray(data.homepageSections) && data.homepageSections.some((s: any) => s.enabled)) {
                     setSections(data.homepageSections.filter((s: any) => s.enabled));
                 } else {
                     setSections([
                         { id: 'hero', type: 'system' },
+                        { id: 'categories', type: 'system' },
                         { id: 'banner', type: 'system' },
                         { id: 'urgent', type: 'system' },
                         { id: 'shops', type: 'system' },
                         { id: 'recent', type: 'system' },
-                        { id: 'categories', type: 'system' },
                     ]);
                 }
             }
