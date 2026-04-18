@@ -58,8 +58,10 @@ export async function GET(
                     select: {
                         listings: true,
                         messages: true,
-                        conversations: true,
-                        reviews: true,
+                        buyerConversations: true,
+                        sellerConversations: true,
+                        reviewsGiven: true,
+                        reviewsReceived: true,
                         payments: true
                     }
                 },

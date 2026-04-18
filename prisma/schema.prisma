@@ -77,8 +77,10 @@ model User {
 
   listings          Listing[]
   messages          Message[]
-  conversations     Conversation[]
-  reviews           Review[]
+  buyerConversations  Conversation[] @relation("BuyerConversations")
+  sellerConversations Conversation[] @relation("SellerConversations")
+  reviewsGiven      Review[]       @relation("Reviewer")
+  reviewsReceived   Review[]       @relation("Reviewed")
   favorites         Favorite[]
   payments          Payment[]
   subscription      Subscription?
@@ -157,7 +159,7 @@ enum NotificationType {
 model Listing {
   id     String @id @default(cuid())
   userId String
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   title        String
   description  String @db.Text
@@ -201,7 +203,8 @@ model Conversation {
   listingId     String?
   buyerId       String
   sellerId      String
-  buyer         User      @relation(fields: [buyerId], references: [id])
+  buyer         User      @relation("BuyerConversations", fields: [buyerId], references: [id], onDelete: Cascade)
+  seller        User      @relation("SellerConversations", fields: [sellerId], references: [id], onDelete: Cascade)
   lastMessage   String?   @db.Text
   lastMessageAt DateTime?
   unreadCount   Int       @default(0)
@@ -222,11 +225,11 @@ model Conversation {
 model Message {
   id             String       @id @default(cuid())
   conversationId String
-  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   listingId      String?
-  listing        Listing?     @relation(fields: [listingId], references: [id])
+  listing        Listing?     @relation(fields: [listingId], references: [id], onDelete: Cascade)
   senderId       String
-  sender         User         @relation(fields: [senderId], references: [id])
+  sender         User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
   content        String       @db.Text
   type           String       @default("text") // text, image, video, audio
   mediaUrl       String?
@@ -258,8 +261,9 @@ model Message {
 model Review {
   id         String  @id @default(cuid())
   reviewerId String
-  reviewer   User    @relation(fields: [reviewerId], references: [id])
+  reviewer   User    @relation("Reviewer", fields: [reviewerId], references: [id], onDelete: Cascade)
   reviewedId String // ID du vendeur
+  reviewed   User    @relation("Reviewed", fields: [reviewedId], references: [id], onDelete: Cascade)
   rating     Int // 1-5
   comment    String? @db.Text
   featured   Boolean @default(false) // Pour afficher sur la boutique
@@ -276,9 +280,9 @@ model Review {
 model Favorite {
   id        String  @id @default(cuid())
   userId    String
-  user      User    @relation(fields: [userId], references: [id])
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   listingId String
-  listing   Listing @relation(fields: [listingId], references: [id])
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
 
@@ -293,7 +297,7 @@ model Favorite {
 model Payment {
   id            String  @id @default(cuid())
   userId        String
-  user          User    @relation(fields: [userId], references: [id])
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   amount        Int // En FCFA
   currency      String  @default("XOF")
   status        String  @default("pending") // pending, completed, failed, refunded, rejected
@@ -324,7 +328,7 @@ model Payment {
 model Subscription {
   id              String    @id @default(cuid())
   userId          String    @unique
-  user            User      @relation(fields: [userId], references: [id])
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   plan            String // free, premium, pro
   status          String    @default("active") // active, cancelled, expired
   startDate       DateTime  @default(now())
@@ -831,7 +835,7 @@ model AutomationLog {
 model AdminLog {
   id         String  @id @default(cuid())
   adminId    String
-  admin      User    @relation(fields: [adminId], references: [id])
+  admin      User    @relation(fields: [adminId], references: [id], onDelete: Cascade)
   action     String
   targetType String
   targetId   String?

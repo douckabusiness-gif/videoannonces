@@ -104,10 +104,15 @@ export default function AdminUsersPage() {
             });
 
             if (res.ok) {
+                alert('Utilisateur supprimé avec succès');
                 fetchUsers();
+            } else {
+                const data = await res.json();
+                alert(`Erreur: ${data.error || 'Impossible de supprimer l\'utilisateur'}`);
             }
         } catch (error) {
             console.error('Error deleting user:', error);
+            alert('Une erreur est survenue lors de la suppression');
         }
     };
 
