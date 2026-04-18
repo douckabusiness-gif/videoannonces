@@ -22,10 +22,10 @@ export async function GET(
         }
 
         return NextResponse.json(category);
-    } catch (error) {
+    } catch (error: any) {
         console.error('Erreur récupération catégorie:', error);
         return NextResponse.json(
-            { error: 'Erreur serveur' },
+            { error: `Erreur serveur: ${error.message || 'Inconnue'}` },
             { status: 500 }
         );
     }
@@ -39,7 +39,12 @@ export async function PUT(
     try {
         const { id } = await props.params;
         const session = await getServerSession(authOptions);
-...
+        const data = await request.json();
+
+        if (!session || session.user.role !== 'ADMIN') {
+            return NextResponse.json({ error: 'Non autorisé' }, { status: 403 });
+        }
+
         const category = await prisma.category.update({
             where: { id },
             data: {
@@ -68,12 +73,9 @@ export async function PUT(
         });
 
         return NextResponse.json(category);
-    } catch (error) {
+    } catch (error: any) {
         console.error('Erreur mise à jour catégorie:', error);
-        return NextResponse.json(
-            { error: 'Erreur serveur' },
-            { status: 500 }
-        );
+        return NextResponse.json({ error: `Erreur serveur: ${error.message || 'Inconnue'}` }, { status: 500 });
     }
 }
 

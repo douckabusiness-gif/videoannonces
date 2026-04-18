@@ -47,9 +47,9 @@ export async function PATCH(
         });
 
         return NextResponse.json({ boost });
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error updating boost package:', error);
-        return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
+        return NextResponse.json({ error: `Erreur serveur: ${error.message || 'Inconnue'}` }, { status: 500 });
     }
 }
 
@@ -72,8 +72,8 @@ export async function DELETE(
         });
 
         return NextResponse.json({ success: true });
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error deleting boost package:', error);
-        return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
+        return NextResponse.json({ error: `Erreur serveur: ${error.message || 'Inconnue'}` }, { status: 500 });
     }
 }
