@@ -1,6 +1,5 @@
 # VideoBoutique — MySQL (import SQL) + Redis + Next.js
 # Démarrage : docker compose up --build -d
-# Réimporter le dump : docker compose down -v puis docker compose up --build -d
 # Mot de passe root MySQL : variable MYSQL_ROOT_PASSWORD (défaut videoboutique_root)
 
 services:
@@ -16,7 +15,6 @@ services:
       - "${MYSQL_PORT:-3306}:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./doucka2026_videoboutique.sql:/docker-entrypoint-initdb.d/01-import.sql:ro
       - ./docker/mysql-init/02-sitesettings-prisma-align.sql:/docker-entrypoint-initdb.d/02-sitesettings-prisma-align.sql:ro
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
