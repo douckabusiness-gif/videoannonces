@@ -19,6 +19,7 @@ async function createAdminUser() {
                 role: 'ADMIN',
                 isVendor: true,
                 premium: true,
+                verified: true,
             },
             create: {
                 phone: phone,
@@ -27,6 +28,7 @@ async function createAdminUser() {
                 role: 'ADMIN',
                 isVendor: true,
                 premium: true,
+                verified: true,
             }
         });
 
