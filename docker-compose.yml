@@ -1,27 +1,25 @@
-# VideoBoutique — MySQL (import SQL) + Redis + Next.js
+# AfriVideoAnnonce — PostgreSQL + Redis + Next.js
 # Démarrage : docker compose up --build -d
-# Mot de passe root MySQL : variable MYSQL_ROOT_PASSWORD (défaut videoboutique_root)
 
 services:
   db:
-    image: mariadb:11.4
-    container_name: videoboutique-mysql
+    image: postgres:16-alpine
+    container_name: videoboutique-postgres
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-videoboutique_root}
-      MYSQL_DATABASE: doucka2026_videoboutique
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-videoboutique_root}
+      POSTGRES_DB: doucka2026_videoboutique
     ports:
-      - "${MYSQL_PORT:-3306}:3306"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./docker/mysql-init/02-sitesettings-prisma-align.sql:/docker-entrypoint-initdb.d/02-sitesettings-prisma-align.sql:ro
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d doucka2026_videoboutique"]
       interval: 10s
       timeout: 5s
       retries: 15
-      start_period: 60s
+      start_period: 30s
 
   redis:
     image: redis:7-alpine
@@ -41,7 +39,7 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: mysql://root:${MYSQL_ROOT_PASSWORD:-videoboutique_root}@db:3306/doucka2026_videoboutique
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-videoboutique_root}@db:5432/doucka2026_videoboutique
       REDIS_URL: redis://redis:6379
       NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
       NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL:-http://localhost:3000}
@@ -54,4 +52,4 @@ services:
       - ./public/uploads:/app/public/uploads
 
 volumes:
-  mysql_data:
+  postgres_data:

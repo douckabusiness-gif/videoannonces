@@ -18,4 +18,7 @@ EXPOSE 3000
 ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0
 
-CMD ["npm", "start"]
+# Rendre le script exécutable
+RUN chmod +x /app/docker-entrypoint.sh
+
+CMD ["/app/docker-entrypoint.sh"]
