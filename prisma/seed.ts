@@ -318,6 +318,70 @@ async function main() {
     console.log(`   Email: techpro@demo.com | Mot de passe: demo123`);
     console.log(`   Email: fashion@demo.com | Mot de passe: demo123`);
     console.log(`   Email: autoplus@demo.com | Mot de passe: demo123`);
+    
+    // 4. Créer les catégories
+    console.log('📂 Création des catégories...');
+
+    const categories = [
+        { slug: 'electronics', name: 'Electronics', nameFr: 'Électronique', icon: '📱', order: 1 },
+        { slug: 'phones-tablets', name: 'Phones & Tablets', nameFr: 'Téléphones & Tablettes', icon: '🤳', order: 2 },
+        { slug: 'computers', name: 'Computers', nameFr: 'Ordinateurs', icon: '💻', order: 3 },
+        { slug: 'electronics-accessories', name: 'Accessories', nameFr: 'Accessoires', icon: '🔌', order: 4 },
+        { slug: 'tv-audio', name: 'TV & Audio', nameFr: 'TV & Audio', icon: '📺', order: 5 },
+        { slug: 'fashion', name: 'Fashion', nameFr: 'Mode', icon: '👕', order: 6 },
+        { slug: 'men-fashion', name: 'Men\'s Fashion', nameFr: 'Vêtements Homme', icon: '🤵', order: 7 },
+        { slug: 'women-fashion', name: 'Women\'s Fashion', nameFr: 'Vêtements Femme', icon: '👗', order: 8 },
+        { slug: 'shoes', name: 'Shoes', nameFr: 'Chaussures', icon: '👟', order: 9 },
+        { slug: 'watches-jewelry', name: 'Watches & Jewelry', nameFr: 'Montres & Bijoux', icon: '⌚', order: 10 },
+        { slug: 'vehicles', name: 'Vehicles', nameFr: 'Véhicules', icon: '🚗', order: 11 },
+        { slug: 'cars', name: 'Cars', nameFr: 'Voitures', icon: '🚘', order: 12 },
+        { slug: 'motorcycles', name: 'Motorcycles', nameFr: 'Motos', icon: '🏍️', order: 13 },
+        { slug: 'trucks', name: 'Trucks', nameFr: 'Camions', icon: '🚛', order: 14 },
+        { slug: 'auto-parts', name: 'Auto Parts', nameFr: 'Pièces Auto', icon: '⚙️', order: 15 },
+        { slug: 'real-estate', name: 'Real Estate', nameFr: 'Immobilier', icon: '🏠', order: 16 },
+        { slug: 'apartments', name: 'Apartments', nameFr: 'Appartements', icon: '🏢', order: 17 },
+        { slug: 'houses', name: 'Houses', nameFr: 'Maisons', icon: '🏡', order: 18 },
+        { slug: 'land', name: 'Land', nameFr: 'Terrains', icon: '🌍', order: 19 },
+        { slug: 'commercial-space', name: 'Commercial Space', nameFr: 'Bureaux & Commerces', icon: '🏪', order: 20 },
+        { slug: 'home', name: 'Home & Garden', nameFr: 'Maison & Jardin', icon: '🛋️', order: 21 },
+        { slug: 'furniture', name: 'Furniture', nameFr: 'Meubles', icon: '🛏️', order: 22 },
+        { slug: 'appliances', name: 'Appliances', nameFr: 'Électroménager', icon: '🧺', order: 23 },
+        { slug: 'decor', name: 'Decor', nameFr: 'Décoration', icon: '🖼️', order: 24 },
+        { slug: 'garden', name: 'Garden', nameFr: 'Jardin & Bricolage', icon: '⚒️', order: 25 },
+        { slug: 'services', name: 'Services', nameFr: 'Services', icon: '🛠️', order: 26 },
+        { slug: 'job-offers', name: 'Job Offers', nameFr: 'Emploi', icon: '💼', order: 27 },
+        { slug: 'freelance', name: 'Freelance', nameFr: 'Freelance & Freelancer', icon: '👨‍💻', order: 28 },
+        { slug: 'training', name: 'Training', nameFr: 'Cours & Formations', icon: '🎓', order: 29 },
+        { slug: 'events', name: 'Events', nameFr: 'Événements', icon: '🎉', order: 30 },
+        { slug: 'beauty-health', name: 'Beauty & Health', nameFr: 'Beauté & Santé', icon: '💄', order: 31 },
+        { slug: 'cosmetics', name: 'Cosmetics', nameFr: 'Cosmétiques', icon: '🧴', order: 32 },
+        { slug: 'spa-massage', name: 'Spa & Massage', nameFr: 'Bien-être', icon: '💆', order: 33 },
+        { slug: 'sports', name: 'Sports', nameFr: 'Sports & Loisirs', icon: '⚽', order: 34 },
+        { slug: 'books', name: 'Books', nameFr: 'Livres', icon: '📚', order: 35 },
+        { slug: 'art-collection', name: 'Art & Collection', nameFr: 'Art & Collection', icon: '🎨', order: 36 },
+        { slug: 'kids', name: 'Kids', nameFr: 'Enfants & Bébés', icon: '👶', order: 37 },
+        { slug: 'toys', name: 'Toys', nameFr: 'Jouets', icon: '🧸', order: 38 },
+        { slug: 'pets', name: 'Pets', nameFr: 'Animaux', icon: '🐾', order: 39 },
+        { slug: 'food', name: 'Food', nameFr: 'Alimentation', icon: '🍎', order: 40 },
+        { slug: 'restaurants', name: 'Restaurants', nameFr: 'Restos & Cafés', icon: '🍴', order: 41 },
+        { slug: 'travel', name: 'Travel', nameFr: 'Voyages & Tourisme', icon: '✈️', order: 42 },
+        { slug: 'agriculture', name: 'Agriculture', nameFr: 'Agriculture', icon: '🚜', order: 43 },
+        { slug: 'industry', name: 'Industry', nameFr: 'Industrie', icon: '🏗️', order: 44 },
+        { slug: 'finance', name: 'Finance', nameFr: 'Finance & Assurances', icon: '💰', order: 45 },
+        { slug: 'legal', name: 'Legal', nameFr: 'Juridique', icon: '⚖️', order: 46 },
+    ];
+
+    for (const category of categories) {
+        await prisma.category.upsert({
+            where: { slug: category.slug },
+            update: category,
+            create: category,
+        });
+    }
+
+    console.log('✅ Catégories créées');
+
+    // 5. Création des méthodes de paiement...
     console.log('💰 Création des méthodes de paiement...');
 
     const paymentMethods = [
