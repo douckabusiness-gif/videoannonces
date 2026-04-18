@@ -7,7 +7,7 @@ export const listingSchema = z.object({
     price: z.number().min(0, 'Le prix doit être positif'),
     category: z.string().min(1, 'La catégorie est requise'),
     location: z.string().min(1, 'La ville est requise'),
-    quartier: z.string().min(1, 'Le quartier est requis'),
+    quartier: z.string().optional(), // 🟢 Rendu optionnel pour éviter le blocage
     videoUrl: z.string().min(1, 'La vidéo est requise'),
     thumbnailUrl: z.string().min(1, 'La miniature est requise'),
     duration: z.number().optional(),

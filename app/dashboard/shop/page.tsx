@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { useTranslation } from '@/contexts/I18nContext';
 import Script from 'next/script';
 import { getFacebookAppId, getFacebookPages, saveFacebookPage, unlinkFacebookPage } from './actions';
+import { getShopUrl } from '@/lib/subdomain';
+
 
 declare global {
     interface Window {
@@ -597,7 +599,9 @@ export default function ShopPage() {
                                                 </div>
                                                 <p className="text-sm text-gray-500 mt-2">
                                                     {t('shop.accessibleAt')}{' '}
-                                                    <strong className="text-orange-600">{subdomain || 'monshop'}.localhost:3000</strong>
+                                                    <strong className="text-orange-600">
+                                                        {getShopUrl(subdomain || 'monshop').replace(/^https?:\/\//, '')}
+                                                    </strong>
                                                 </p>
 
                                                 {available === true && (
@@ -633,12 +637,12 @@ export default function ShopPage() {
                                                     <p className="text-sm text-green-700">
                                                         {t('shop.accessibleAt')}{' '}
                                                         <a
-                                                            href={`http://${session?.user?.subdomain}.localhost:3000`}
+                                                            href={getShopUrl(session?.user?.subdomain as string)}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
                                                             className="font-bold underline hover:text-green-900"
                                                         >
-                                                            {session?.user?.subdomain}.localhost:3000
+                                                            {getShopUrl(session?.user?.subdomain as string).replace(/^https?:\/\//, '')}
                                                         </a>
                                                     </p>
                                                 </div>
