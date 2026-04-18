@@ -254,9 +254,9 @@ export default async function ListingDetailPage({ params, searchParams }: Listin
                                 <div className="w-1 h-6 bg-gradient-to-b from-orange-500 to-orange-600 rounded-full"></div>
                                 Vendeur
                             </h3>
-                            <div className="flex items-center gap-4 mb-6">
+                            <Link href={`/shop/${listing.user.id}`} className="flex items-center gap-4 mb-6 group/vendor hover:bg-orange-50 p-2 -m-2 rounded-2xl transition-colors">
                                 <div className="relative">
-                                    <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl flex items-center justify-center overflow-hidden ring-4 ring-orange-500/20 shadow-lg">
+                                    <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl flex items-center justify-center overflow-hidden ring-4 ring-orange-500/20 shadow-lg group-hover/vendor:ring-orange-500/40 transition-all">
                                         {listing.user.avatar ? (
                                             <Image src={listing.user.avatar} alt={listing.user.name} width={64} height={64} className="object-cover" />
                                         ) : (
@@ -272,7 +272,9 @@ export default async function ListingDetailPage({ params, searchParams }: Listin
                                     </div>
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-lg font-bold text-gray-900">{listing.user.name}</p>
+                                    <p className="text-lg font-bold text-gray-900 group-hover/vendor:text-orange-600 transition-colors uppercase">
+                                        {listing.user.name}
+                                    </p>
                                     <div className="flex items-center gap-2 mt-1">
                                         <div className="flex items-center gap-0.5">
                                             {[...Array(5)].map((_, i) => (
@@ -288,8 +290,9 @@ export default async function ListingDetailPage({ params, searchParams }: Listin
                                         </div>
                                         <span className="text-sm font-bold text-gray-700">({listing.user.rating.toFixed(1)})</span>
                                     </div>
+                                    <div className="text-xs text-orange-600 font-bold mt-1 group-hover/vendor:underline">Voir le profil →</div>
                                 </div>
-                            </div>
+                            </Link>
 
                             {/* Bouton Contact WhatsApp Protégé */}
                             <ContactWhatsAppButton
