@@ -148,31 +148,7 @@ export default function HomeLayoutModern({ colors, siteSettings: initialSiteSett
             case 'shops':
                 return null;
             case 'categories':
-                return (
-                    <section key={section.id} className="py-12 bg-white">
-                        <div className="container mx-auto px-4">
-                            <h2 className="text-2xl font-bold mb-8 text-gray-900 flex items-center gap-3">
-                                <span>📂</span> {t('home.hero.allCategories')}
-                            </h2>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                                {dynamicCategories.map((cat: any) => (
-                                    <Link
-                                        key={cat.id}
-                                        href={`/listings?category=${cat.slug}`}
-                                        className="group bg-orange-50 hover:bg-orange-100 p-6 rounded-2xl transition-all duration-300 flex flex-col items-center text-center gap-3 border border-orange-100 hover:border-orange-200"
-                                    >
-                                        <span className="text-4xl group-hover:scale-110 transition-transform duration-300">
-                                            {cat.icon}
-                                        </span>
-                                        <span className="font-bold text-gray-800 text-sm">
-                                            {cat.nameFr}
-                                        </span>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-                );
+                return null;
             case 'recent':
                 // Ne pas afficher la section si aucune annonce
                 if (!loading && listings.length === 0) {
