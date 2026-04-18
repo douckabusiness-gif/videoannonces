@@ -130,8 +130,8 @@ class EmailService {
                     <!-- Header -->
                     <tr>
                         <td style="background: linear-gradient(135deg, #FF6B00 0%, #FF8533 100%); padding: 40px 30px; text-align: center;">
-                            ${logoPath ? \`<img src="cid:logo" alt="\${siteName}" style="max-height: 60px; margin-bottom: 20px;">\` : ''}
-                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">\${siteName}</h1>
+                            ${logoPath ? `<img src="cid:logo" alt="${siteName}" style="max-height: 60px; margin-bottom: 20px;">` : ''}
+                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">${siteName}</h1>
                             <p style="margin: 10px 0 0 0; color: #ffffff; font-size: 14px; opacity: 0.9;">Vérification de votre compte</p>
                         </td>
                     </tr>
@@ -139,9 +139,9 @@ class EmailService {
                     <!-- Content -->
                     <tr>
                         <td style="padding: 40px 30px;">
-                            <h2 style="margin: 0 0 20px 0; color: #1a1a1a; font-size: 24px;">Bonjour \${name} ! 👋</h2>
+                            <h2 style="margin: 0 0 20px 0; color: #1a1a1a; font-size: 24px;">Bonjour ${name} ! 👋</h2>
                             <p style="margin: 0 0 20px 0; color: #4a5568; font-size: 16px; line-height: 1.6;">
-                                Bienvenue sur <strong>\${siteName}</strong> ! Pour activer votre compte vendeur, veuillez utiliser le code de vérification ci-dessous :
+                                Bienvenue sur <strong>${siteName}</strong> ! Pour activer votre compte vendeur, veuillez utiliser le code de vérification ci-dessous :
                             </p>
                             
                             <!-- Code Box -->
@@ -150,7 +150,7 @@ class EmailService {
                                     <td align="center">
                                         <div style="background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%); border: 2px solid #FF6B00; border-radius: 12px; padding: 30px; display: inline-block;">
                                             <p style="margin: 0 0 10px 0; color: #718096; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Code de vérification</p>
-                                            <p style="margin: 0; color: #FF6B00; font-size: 42px; font-weight: bold; letter-spacing: 8px; font-family: 'Courier New', monospace;">\${code}</p>
+                                            <p style="margin: 0; color: #FF6B00; font-size: 42px; font-weight: bold; letter-spacing: 8px; font-family: 'Courier New', monospace;">${code}</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -170,8 +170,8 @@ class EmailService {
                     <!-- Footer -->
                     <tr>
                         <td style="background-color: #f7fafc; padding: 30px; text-align: center; border-top: 1px solid #e2e8f0;">
-                            <p style="margin: 0 0 10px 0; color: #718096; font-size: 14px; font-weight: 600;">\${siteName}</p>
-                            <p style="margin: 0; color: #a0aec0; font-size: 12px;">\${siteSlogan}</p>
+                            <p style="margin: 0 0 10px 0; color: #718096; font-size: 14px; font-weight: 600;">${siteName}</p>
+                            <p style="margin: 0; color: #a0aec0; font-size: 12px;">${siteSlogan}</p>
                         </td>
                     </tr>
                 </table>
@@ -192,7 +192,7 @@ class EmailService {
 
         try {
             await transporter.sendMail(mailOptions);
-            console.log(\`✅ Email de vérification envoyé à \${email}\`);
+            console.log(`✅ Email de vérification envoyé à ${email}`);
             return true;
         } catch (error) {
             console.error('❌ Erreur envoi email:', error);
@@ -206,18 +206,18 @@ class EmailService {
         const transporter = await this.getTransporter();
 
         if (!transporter) {
-            console.log(\`📧 Email de bienvenue pour \${email} (SMTP non configuré)\`);
+            console.log(`📧 Email de bienvenue pour ${email} (SMTP non configuré)`);
             return false;
         }
 
         // Configuration de l'expéditeur (Priorité DB > ENV > Default)
         let from = '';
         if (dbConfig) {
-            from = \`"\${dbConfig.fromName}" <\${dbConfig.fromEmail}>\`;
+            from = `"${dbConfig.fromName}" <${dbConfig.fromEmail}>`;
         } else if (process.env.SMTP_FROM) {
             from = process.env.SMTP_FROM;
         } else {
-            from = \`"VideoAnnonces-CI" <\${process.env.SMTP_USER}>\`;
+            from = `"VideoAnnonces-CI" <${process.env.SMTP_USER}>`;
         }
 
         const siteUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
@@ -230,8 +230,8 @@ class EmailService {
         const mailOptions: any = {
             from: from,
             to: email,
-            subject: \`🎉 Bienvenue sur \${siteName} !\`,
-            html: \`
+            subject: `🎉 Bienvenue sur ${siteName} !`,
+            html: `
 <!DOCTYPE html>
 <html>
 <head>
@@ -240,11 +240,11 @@ class EmailService {
 <body style="margin: 0; padding: 20px; font-family: Arial, sans-serif; background-color: #f5f5f5;">
     <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; padding: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
         <div style="text-align: center; margin-bottom: 30px;">
-            \${logoPath ? \`<img src="cid:logo" alt="\${siteName}" style="max-height: 80px;">\` : ''}
-            <h1 style="color: #FF6B00; margin-top: 20px;">Bienvenue \${name} ! 🎉</h1>
+            ${logoPath ? `<img src="cid:logo" alt="${siteName}" style="max-height: 80px;">` : ''}
+            <h1 style="color: #FF6B00; margin-top: 20px;">Bienvenue ${name} ! 🎉</h1>
         </div>
         <p style="font-size: 16px; line-height: 1.6; color: #333;">
-            Votre compte a été vérifié avec succès. Vous pouvez maintenant profiter de toutes les fonctionnalités de <strong>\${siteName}</strong> :
+            Votre compte a été vérifié avec succès. Vous pouvez maintenant profiter de toutes les fonctionnalités de <strong>${siteName}</strong> :
         </p>
         <ul style="font-size: 15px; line-height: 1.8; color: #555;">
             <li>📹 Publier des annonces vidéo</li>
@@ -253,15 +253,15 @@ class EmailService {
             <li>🏪 Créer votre boutique personnalisée</li>
         </ul>
         <p style="text-align: center; margin-top: 30px;">
-            <a href="\${siteUrl}/dashboard" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #FF6B00, #FF8533); color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Accéder à mon tableau de bord</a>
+            <a href="${siteUrl}/dashboard" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #FF6B00, #FF8533); color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Accéder à mon tableau de bord</a>
         </p>
         <p style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 13px; color: #999; text-align: center;">
-            \${siteName} - \${settings?.siteSlogan || 'Votre marketplace vidéo en Côte d\'Ivoire'}
+            ${siteName} - ${settings?.siteSlogan || 'Votre marketplace vidéo en Côte d\'Ivoire'}
         </p>
     </div>
 </body>
 </html>
-            \`,
+            `,
             attachments: absoluteLogoPath ? [
                 {
                     filename: 'logo.png',
@@ -273,7 +273,7 @@ class EmailService {
 
         try {
             await transporter.sendMail(mailOptions);
-            console.log(\`✅ Email de bienvenue envoyé à \${email}\`);
+            console.log(`✅ Email de bienvenue envoyé à ${email}`);
             return true;
         } catch (error) {
             console.error('❌ Erreur envoi email bienvenue:', error);
