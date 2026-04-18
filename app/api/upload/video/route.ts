@@ -12,6 +12,8 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+export const maxDuration = 300; // 5 minutes max for large video uploads
+
 // Fonction pour uploader vers Cloudinary
 async function uploadToCloudinary(buffer: Buffer): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -84,7 +86,19 @@ export async function POST(request: NextRequest) {
         const { searchParams } = new URL(request.url);
         const forceLocal = searchParams.get('storage') === 'local';
 
-        const formData = await request.formData();
+        let formData: FormData;
+        try {
+            formData = await request.formData();
+        } catch (parseError: any) {
+            console.error('❌ Erreur parsing FormData (Probablement dépassement de limite de taille):', parseError);
+            return NextResponse.json(
+                { 
+                    error: 'Échec de la lecture du fichier. Le fichier est peut-être trop volumineux pour le serveur.',
+                    details: parseError.message 
+                },
+                { status: 500 }
+            );
+        }
         const videoFile = formData.get('video') as File;
 
         console.log('📦 FormData reçue:', {
