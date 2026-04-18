@@ -575,7 +575,7 @@
         },
         "cosmic": {
             "hero": {
-                "title": "VIDEOBOUTIQUE",
+                "title": "AfriVideoAnnonce",
                 "subtitle": "The Benchmark Marketplace"
             },
             "search": {
@@ -583,13 +583,13 @@
             },
             "cta": {
                 "ready": "Ready to Sell? 🚀",
-                "join": "Join thousands of sellers on VideoBoutique",
+                "join": "Join thousands of sellers on AfriVideoAnnonce",
                 "button": "Create a Listing →"
             }
         },
         "nebula": {
             "hero": {
-                "title": "VIDEOBOUTIQUE",
+                "title": "AfriVideoAnnonce",
                 "subtitle": "Your Premium Marketplace"
             },
             "search": {
@@ -597,7 +597,7 @@
             },
             "cta": {
                 "ready": "Ready to Sell? 🚀",
-                "join": "Join thousands of sellers on VideoBoutique",
+                "join": "Join thousands of sellers on AfriVideoAnnonce",
                 "button": "Create a Listing →"
             }
         },
@@ -617,7 +617,7 @@
             "quickLinks": "Quick Links",
             "support": "Support",
             "followUs": "Follow Us",
-            "rights": "© 2025 VideoBoutique. All rights reserved.",
+            "rights": "© 2025 AfriVideoAnnonce. All rights reserved.",
             "helpCenter": "Help Center",
             "contact": "Contact",
             "terms": "Terms",

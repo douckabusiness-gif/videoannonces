@@ -199,11 +199,11 @@ export async function PUT(request: NextRequest) {
         await transporter.sendMail({
             from: `${config.fromName} <${config.fromEmail}>`,
             to: testEmail,
-            subject: 'Test de configuration email - VideoBoutique',
+            subject: 'Test de configuration email - AfriVideoAnnonce',
             html: `
                 <h1>Test réussi !</h1>
                 <p>Votre configuration email fonctionne correctement.</p>
-                <p>Cet email a été envoyé depuis le tableau de bord admin de VideoBoutique.</p>
+                <p>Cet email a été envoyé depuis le tableau de bord admin d'AfriVideoAnnonce.</p>
             `,
         });
 

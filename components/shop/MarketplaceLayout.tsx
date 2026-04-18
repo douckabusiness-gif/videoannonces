@@ -439,7 +439,7 @@ export default function MarketplaceLayout({ shop, listings }: MarketplaceLayoutP
                         <div className="flex items-center gap-1 opacity-70 hover:opacity-100 transition">
                             <span>Propulsé par</span>
                             {siteSettings.logo ? (
-                                <img src={siteSettings.logo} alt="VideoBoutique" className="h-10 w-auto object-contain" />
+                                <img src={siteSettings.logo} alt="VideoBoutique" style={{ height: '48px', maxWidth: '180px', width: 'auto', objectFit: 'contain' }} />
                             ) : (
                                 <span className="font-bold text-orange-500">VideoBoutique</span>
                             )}

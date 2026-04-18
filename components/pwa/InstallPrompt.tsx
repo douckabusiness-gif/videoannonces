@@ -110,7 +110,7 @@ export default function InstallPrompt() {
                         {/* Logo Dynamique */}
                         <div className="flex-shrink-0 w-14 h-14 bg-orange-50 rounded-2xl p-2.5 shadow-sm border border-orange-100">
                             <img
-                                src={siteSettings?.logo || "/icon-192.png"}
+                                src={siteSettings?.pwaIcon || "/api/pwa-icon?size=96"}
                                 alt="Logo"
                                 className="w-full h-full object-contain"
                             />
@@ -154,7 +154,7 @@ export default function InstallPrompt() {
                 <div className="flex items-center gap-4 mb-5">
                     <div className="w-16 h-16 bg-white rounded-2xl p-3 shadow-lg flex-shrink-0">
                         <img
-                            src={siteSettings?.logo || "/icon-192.png"}
+                            src={siteSettings?.pwaIcon || "/api/pwa-icon?size=96"}
                             alt="Logo"
                             className="w-full h-full object-contain"
                         />

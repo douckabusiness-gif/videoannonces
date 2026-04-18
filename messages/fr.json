@@ -608,7 +608,7 @@
         },
         "cosmic": {
             "hero": {
-                "title": "VIDEOBOUTIQUE",
+                "title": "AfriVideoAnnonce",
                 "subtitle": "La Marketplace de Référence"
             },
             "search": {
@@ -616,13 +616,13 @@
             },
             "cta": {
                 "ready": "Prêt à Vendre ? 🚀",
-                "join": "Rejoignez des milliers de vendeurs sur VideoBoutique",
+                "join": "Rejoignez des milliers de vendeurs sur AfriVideoAnnonce",
                 "button": "Créer une Annonce →"
             }
         },
         "nebula": {
             "hero": {
-                "title": "VIDEOBOUTIQUE",
+                "title": "AfriVideoAnnonce",
                 "subtitle": "Votre Marketplace Premium"
             },
             "search": {
@@ -630,7 +630,7 @@
             },
             "cta": {
                 "ready": "Prêt à Vendre ? 🚀",
-                "join": "Rejoignez des milliers de vendeurs sur VideoBoutique",
+                "join": "Rejoignez des milliers de vendeurs sur AfriVideoAnnonce",
                 "button": "Créer une Annonce →"
             }
         },
@@ -650,7 +650,7 @@
             "quickLinks": "Liens rapides",
             "support": "Support",
             "followUs": "Suivez-nous",
-            "rights": "© 2025 VideoBoutique. Tous droits réservés.",
+            "rights": "© 2025 AfriVideoAnnonce. Tous droits réservés.",
             "helpCenter": "Centre d'aide",
             "contact": "Contact",
             "terms": "Conditions",

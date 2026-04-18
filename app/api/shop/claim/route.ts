@@ -15,8 +15,9 @@ export async function POST(request: NextRequest) {
 
         // Les admins peuvent toujours réclamer un domaine, même en mode solo
         const isAdmin = session.user.role === 'ADMIN';
+        const isSolo = await isSoloBusinessMode();
 
-        if (!isAdmin && isSoloBusinessMode()) {
+        if (!isAdmin && isSolo) {
             return NextResponse.json(
                 {
                     error:

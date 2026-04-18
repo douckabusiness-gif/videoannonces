@@ -17,17 +17,33 @@ const inter = Inter({
 */
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await prisma.siteSettings.findFirst();
-  const siteName = settings?.siteName || "VideoAnnonces-CI";
-  const description = settings?.siteDescription || "La première plateforme de petites annonces 100% vidéo en Côte d'Ivoire.";
-  const icon = settings?.favicon || "/icon.png";
+  let settings = null;
+  try {
+    settings = await prisma.siteSettings.findFirst();
+  } catch {
+    // Build Docker / CI sans DB : valeurs par défaut utilisées
+  }
+
+  const siteName = settings?.siteName || "AfriVideoAnnonce";
+  const description = settings?.description || "Petites annonces vidéo en Côte d'Ivoire";
+  const favicon = settings?.favicon || "/api/pwa-icon?size=32";
 
   return {
     title: `${siteName} - Petites Annonces Vidéo en Côte d'Ivoire`,
     description: description,
+    manifest: "/manifest.webmanifest",
     icons: {
-      icon: icon,
-      apple: icon,
+      icon: [
+        { url: favicon, type: "image/svg+xml" },
+        { url: "/api/pwa-icon?size=16", sizes: "16x16", type: "image/svg+xml" },
+        { url: "/api/pwa-icon?size=32", sizes: "32x32", type: "image/svg+xml" },
+        { url: "/api/pwa-icon?size=96", sizes: "96x96", type: "image/svg+xml" },
+      ],
+      apple: [
+        { url: "/api/pwa-icon?size=120", sizes: "120x120" },
+        { url: "/api/pwa-icon?size=152", sizes: "152x152" },
+        { url: "/api/pwa-icon?size=180", sizes: "180x180" },
+      ],
     },
     appleWebApp: {
       capable: true,

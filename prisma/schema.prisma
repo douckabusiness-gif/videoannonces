@@ -38,6 +38,13 @@ model User {
   shopTheme    String  @default("default")
   socialLinks  Json?
 
+  // Intégration Facebook Boutique
+  fbUserId          String?
+  fbAccessToken     String? @db.Text
+  fbPageId          String?
+  fbPageName        String?
+  fbPageAccessToken String? @db.Text
+
   // Nouvelles fonctionnalités boutique premium
   videoUrl       String? // Vidéo de présentation boutique
   whatsappNumber String? // Numéro WhatsApp pour contact
@@ -511,6 +518,11 @@ model SiteSettings {
   socialYouTube   String?
   socialTikTok    String?
 
+  // Intégration Facebook (Login & Marketing API)
+  facebookAppId        String?
+  facebookAppSecret    String?
+  facebookLoginEnabled Boolean @default(false)
+
   // Paramètres additionnels
   maintenanceMode    Boolean @default(false)
   maintenanceMessage String? @db.Text
@@ -699,7 +711,7 @@ model Ad {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([position, isActive])
+  @@index([position, isActive], map: "idx_ad_pos_isact")
 
   @@map("ad")
 }
@@ -827,7 +839,7 @@ model AdminLog {
   createdAt DateTime @default(now())
 
   @@index([adminId])
-  @@index([action])
+  @@index([action], map: "idx_adminlog_action")
 
   @@map("adminlog")
 }

@@ -28,7 +28,7 @@ export default function Footer() {
                                 <img
                                     src={siteSettings.logo}
                                     alt={siteSettings.siteName}
-                                    className="max-h-[200px] w-auto object-contain"
+                                    style={{ height: '64px', maxWidth: '250px', width: 'auto', objectFit: 'contain' }}
                                 />
                             ) : (
                                 <div className="flex items-center gap-2">
@@ -42,7 +42,7 @@ export default function Footer() {
                                         className="text-xl font-bold bg-clip-text text-transparent"
                                         style={{ backgroundImage: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})` }}
                                     >
-                                        {siteSettings.siteName || 'VideoBoutique'}
+                                        {siteSettings.siteName || 'AfriVideoAnnonce'}
                                     </span>
                                 </div>
                             )}

@@ -453,7 +453,7 @@ export default function MobileFirstLayout({ shop, listings, reviews }: MobileFir
                     <div className="flex items-center justify-center gap-2 mb-4 opacity-50">
                         <span className="text-xs">Powered by</span>
                         {siteSettings.logo ? (
-                            <img src={siteSettings.logo} alt="VideoBoutique" className="h-8 w-auto object-contain" />
+                            <img src={siteSettings.logo} alt="VideoBoutique" style={{ height: '48px', maxWidth: '160px', width: 'auto', objectFit: 'contain', opacity: 0.8 }} />
                         ) : (
                             <span className="font-bold text-orange-500">VideoBoutique</span>
                         )}

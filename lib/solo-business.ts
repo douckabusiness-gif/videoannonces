@@ -1,12 +1,17 @@
 /**
  * Seul le compte autorisé (ou les admins) peut publier des annonces.
  */
-import { getSoloModeEnabled } from './platform-flags';
+import { PLATFORM_SOLO_MODE } from './platform-flags';
+import { prisma } from './prisma';
 
 export async function isSoloBusinessMode(): Promise<boolean> {
-    // On prioritise la DB, mais on garde le fallback env si besoin d'overrider physiquement
-    const dbValue = await getSoloModeEnabled();
-    if (dbValue) return true;
+    // On prioritise la DB explicitement, ce qui permet de désactiver le mode même si env à true
+    const row = await prisma.setting.findUnique({
+        where: { key: PLATFORM_SOLO_MODE },
+    });
+    if (row) {
+        return row.value === 'true' || row.value === '1';
+    }
 
     const v =
         process.env.SOLO_BUSINESS_MODE ?? process.env.NEXT_PUBLIC_SOLO_BUSINESS_MODE;

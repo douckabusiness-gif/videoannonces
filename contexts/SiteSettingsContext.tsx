@@ -7,6 +7,8 @@ interface SiteSettings {
     siteSlogan: string | null;
     siteDescription: string | null;
     logo: string | null;
+    favicon: string | null;
+    pwaIcon: string | null;
     primaryColor: string;
     secondaryColor: string;
     accentColor: string;
@@ -35,6 +37,8 @@ const defaultSettings: SiteSettings = {
     siteSlogan: null,
     siteDescription: null,
     logo: null,
+    favicon: null,
+    pwaIcon: null,
     primaryColor: '#FF6B35',
     secondaryColor: '#F7931E',
     accentColor: '#FDC830',
@@ -72,6 +76,8 @@ export function SiteSettingsProvider({ children }: { children: ReactNode }) {
                     siteSlogan: data.siteSlogan,
                     siteDescription: data.siteDescription,
                     logo: data.logo,
+                    favicon: data.favicon || null,
+                    pwaIcon: data.pwaIcon || null,
                     primaryColor: data.primaryColor || '#FF6B35',
                     secondaryColor: data.secondaryColor || '#F7931E',
                     accentColor: data.accentColor || '#FDC830',

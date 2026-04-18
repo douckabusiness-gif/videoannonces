@@ -69,14 +69,15 @@ export default function MainHeader({ siteSettings: propSettings }: MainHeaderPro
     return (
         <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-xl shadow-lg border-b border-gray-200/50' : 'border-b border-gray-100'}`} style={{ backgroundColor: isScrolled ? `${headerColor}E6` : headerColor }}>
             <div className="container mx-auto px-4">
-                <div className="flex items-center justify-between min-h-[80px] py-4">
+                <div className="flex items-center justify-between min-h-[100px] py-2">
                     {/* Logo Area */}
                     <Link href="/" className="flex items-center gap-3 group">
                         {siteSettings?.logo ? (
                             <img
                                 src={siteSettings.logo}
                                 alt={siteSettings.siteName}
-                                className="max-h-[200px] max-w-[600px] w-auto object-contain group-hover:scale-105 transition-transform"
+                                style={{ height: '80px', maxWidth: '300px', width: 'auto', objectFit: 'contain' }}
+                                className="group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
                             />
                         ) : (
                             <div className="flex items-center gap-2">

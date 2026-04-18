@@ -5,6 +5,15 @@ import { useSession } from 'next-auth/react';
 import AutomationTab from '@/components/dashboard/AutomationTab';
 import Link from 'next/link';
 import { useTranslation } from '@/contexts/I18nContext';
+import Script from 'next/script';
+import { getFacebookAppId, getFacebookPages, saveFacebookPage, unlinkFacebookPage } from './actions';
+
+declare global {
+    interface Window {
+        FB: any;
+        fbAsyncInit: any;
+    }
+}
 
 export default function ShopPage() {
     const { t } = useTranslation();
@@ -34,6 +43,13 @@ export default function ShopPage() {
     const [instagram, setInstagram] = useState('');
     const [youtube, setYoutube] = useState('');
     const [tiktok, setTiktok] = useState('');
+    // Phase 3 - Facebook Integration
+    const [fbAppId, setFbAppId] = useState<string | null>(null);
+    const [isFbSdkLoaded, setIsFbSdkLoaded] = useState(false);
+    const [isCheckingFb, setIsCheckingFb] = useState(false);
+    const [fbPagesOptions, setFbPagesOptions] = useState<any[]>([]);
+    const [showFbModal, setShowFbModal] = useState(false);
+    const [linkedFbPage, setLinkedFbPage] = useState<{ id: string, name: string } | null>(null);
 
     // Badges de confiance
     const [selectedBadges, setSelectedBadges] = useState<string[]>([]);
@@ -98,6 +114,111 @@ export default function ShopPage() {
             }
         }
     }, [session]);
+
+    // Initialisation Facebook SDK
+    useEffect(() => {
+        getFacebookAppId().then(res => {
+            if (res.appId) {
+                setFbAppId(res.appId);
+            }
+            if (res.linkedPage) {
+                setLinkedFbPage(res.linkedPage);
+            }
+        });
+    }, []);
+
+    const initFacebookSdk = () => {
+        if (!fbAppId) return;
+
+        if (window.FB) {
+            // Le SDK est déjà chargé par Next.js <Script>
+            window.FB.init({
+                appId      : fbAppId,
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v19.0'
+            });
+            setIsFbSdkLoaded(true);
+        } else {
+            // Sécurité au cas où, définir fbAsyncInit
+            window.fbAsyncInit = function() {
+                window.FB.init({
+                    appId      : fbAppId,
+                    cookie     : true,
+                    xfbml      : true,
+                    version    : 'v19.0'
+                });
+                setIsFbSdkLoaded(true);
+            };
+        }
+    };
+
+    const handleConnectFacebook = () => {
+        if (!window.FB) {
+            alert("Le SDK Facebook n'est pas encore prêt. Veuillez réessayer.");
+            return;
+        }
+
+        setIsCheckingFb(true);
+
+        window.FB.login(function(response: any) {
+            if (response.authResponse) {
+                const shortLivedToken = response.authResponse.accessToken;
+                // Envoyer au backend pour échange
+                getFacebookPages(shortLivedToken).then(res => {
+                    if (res.success && res.pages) {
+                        setFbPagesOptions(res.pages.map((p: any) => ({
+                            ...p,
+                            userAccessToken: res.userAccessToken
+                        })));
+                        setShowFbModal(true);
+                    } else {
+                        alert("Erreur lors de la récupération de vos pages: " + (res.error || 'Erreur inconnue'));
+                    }
+                }).finally(() => {
+                    setIsCheckingFb(false);
+                });
+            } else {
+                setIsCheckingFb(false);
+                console.log('Utilisateur a annulé la connexion ou n\'a pas autorisé l\'application.');
+            }
+        }, { scope: 'pages_show_list,pages_read_engagement,pages_manage_metadata' });
+    };
+
+    const handleSelectFbPage = async (page: any) => {
+        setIsCheckingFb(true);
+        const res = await saveFacebookPage({
+            pageId: page.id,
+            pageName: page.name,
+            pageAccessToken: page.access_token,
+            userAccessToken: page.userAccessToken,
+        });
+
+        if (res.success) {
+            setLinkedFbPage({ id: page.id, name: page.name });
+            setFacebookPage(page.name); // update manual state just in case
+            setShowFbModal(false);
+            alert("✅ Page Facebook connectée avec succès !");
+            await update();
+        } else {
+            alert("❌ Erreur lors de la sauvegarde: " + res.error);
+        }
+        setIsCheckingFb(false);
+    };
+
+    const handleUnlinkFbPage = async () => {
+        if (confirm("Voulez-vous vraiment déconnecter votre page Facebook ?")) {
+            setIsCheckingFb(true);
+            const res = await unlinkFacebookPage();
+            if (res.success) {
+                setLinkedFbPage(null);
+                setFacebookPage('');
+                alert("Page déconnectée.");
+                await update();
+            }
+            setIsCheckingFb(false);
+        }
+    };
 
     const checkAvailability = async () => {
         if (!subdomain || subdomain.length < 3) {
@@ -1116,16 +1237,57 @@ export default function ShopPage() {
                                 </div>
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                                            🔵 Facebook Page (ID ou nom)
+                                        <label className="block text-sm font-medium text-gray-700 mb-2 font-bold">
+                                            🔵 Connexion Facebook
                                         </label>
-                                        <input
-                                            type="text"
-                                            value={facebookPage}
-                                            onChange={(e) => setFacebookPage(e.target.value)}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
-                                            placeholder="votrepagefacebook ou 123456789"
-                                        />
+                                        
+                                        {fbAppId && (
+                                            <Script
+                                                src="https://connect.facebook.net/fr_FR/sdk.js"
+                                                strategy="lazyOnload"
+                                                onLoad={initFacebookSdk}
+                                            />
+                                        )}
+
+                                        {!linkedFbPage ? (
+                                            <div className="flex flex-col gap-3">
+                                                <button
+                                                    onClick={handleConnectFacebook}
+                                                    disabled={!fbAppId || isCheckingFb}
+                                                    className="w-full md:w-auto inline-flex justify-center items-center gap-2 px-6 py-3 bg-[#1877F2] text-white rounded-xl hover:bg-[#166FE5] transition font-bold shadow-md disabled:opacity-60"
+                                                >
+                                                    {isCheckingFb ? (
+                                                        <span className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
+                                                    ) : (
+                                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                                    )}
+                                                    {fbAppId ? "Connecter ma Page Facebook" : "Non configuré par l'admin"}
+                                                </button>
+                                                {!fbAppId && <p className="text-xs text-red-500">L'administrateur doit configurer l'App ID Facebook dans les paramètres globaux.</p>}
+                                                <p className="text-xs text-gray-500">
+                                                    Connectez votre compte pour récupérer automatiquement la page de votre boutique. L'ancienne méthode manuelle (nom de page: <span className="font-semibold text-gray-700">{facebookPage || 'aucun'}</span>) sera remplacée.
+                                                </p>
+                                            </div>
+                                        ) : (
+                                            <div className="flex items-center justify-between p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm font-semibold text-blue-900">Page connectée</p>
+                                                        <p className="text-xs text-blue-700">{linkedFbPage.name}</p>
+                                                    </div>
+                                                </div>
+                                                <button
+                                                    onClick={handleUnlinkFbPage}
+                                                    disabled={isCheckingFb}
+                                                    className="px-4 py-2 bg-white text-red-600 border border-red-200 rounded-lg text-sm font-bold shadow-sm hover:bg-red-50 disabled:opacity-50"
+                                                >
+                                                    Déconnecter
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1220,6 +1382,66 @@ export default function ShopPage() {
 
             </div>
 
+            {/* Modal de sélection Facebook */}
+            {showFbModal && (
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+                    <div className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+                        <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-[#1877F2] to-blue-600 text-white flex justify-between items-center">
+                            <h3 className="font-bold text-xl flex items-center gap-2">
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                Sélectionnez votre Page
+                            </h3>
+                            <button onClick={() => setShowFbModal(false)} className="bg-white/20 hover:bg-white/30 rounded-full p-2 transition">
+                                ❌
+                            </button>
+                        </div>
+                        <div className="p-6 overflow-y-auto bg-gray-50 flex-1">
+                            {fbPagesOptions.length > 0 ? (
+                                <div className="space-y-3">
+                                    <p className="text-sm text-gray-600 mb-4">Voici les pages que vous gérez. Laquelle correspond à cette boutique ?</p>
+                                    {fbPagesOptions.map(page => (
+                                        <button 
+                                            key={page.id}
+                                            disabled={isCheckingFb}
+                                            onClick={() => handleSelectFbPage(page)}
+                                            className="w-full bg-white p-4 rounded-xl border border-gray-200 hover:border-[#1877F2] hover:shadow-md transition text-left flex items-center gap-4 disabled:opacity-60 group"
+                                        >
+                                            <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-500 font-bold text-xl group-hover:bg-[#1877F2] group-hover:text-white transition">
+                                                {page.name.charAt(0)}
+                                            </div>
+                                            <div className="flex-1">
+                                                <p className="font-bold text-gray-900 group-hover:text-[#1877F2] transition">{page.name}</p>
+                                                <p className="text-xs text-gray-500">ID: {page.id}</p>
+                                            </div>
+                                            <div className="text-[#1877F2] opacity-0 group-hover:opacity-100 transition">
+                                                Utiliser →
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="text-center py-8">
+                                    <div className="text-4xl mb-4">📭</div>
+                                    <h4 className="font-bold text-gray-900 mb-2">Aucune page trouvée</h4>
+                                    <p className="text-sm text-gray-600 text-left">
+                                        Votre compte ne semble gérer aucune page Facebook active, ou vous n'avez pas accordé les permissions nécessaires ("pages_show_list").
+                                        <br/><br/>
+                                        Si vous venez de créer la page, veuillez réessayer ou vérifier vos droits administrateur sur Facebook.
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                        <div className="p-4 bg-white border-t border-gray-100 text-center">
+                            <button 
+                                onClick={() => setShowFbModal(false)}
+                                className="px-6 py-2 text-gray-600 hover:bg-gray-100 rounded-lg font-semibold transition"
+                            >
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
         </div >
     );
