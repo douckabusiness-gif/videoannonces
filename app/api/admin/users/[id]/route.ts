@@ -43,16 +43,17 @@ async function logAdminAction(adminId: string, action: string, targetType?: stri
 // GET - Get specific user details
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await props.params;
         const accessCheck = await checkAdminAccess();
         if ('error' in accessCheck) {
             return NextResponse.json({ error: accessCheck.error }, { status: accessCheck.status });
         }
 
         const user = await prisma.user.findUnique({
-            where: { id: params.id },
+            where: { id },
             include: {
                 _count: {
                     select: {
@@ -75,18 +76,19 @@ export async function GET(
 
         return NextResponse.json({ user });
 
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error fetching user:', error);
-        return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
+        return NextResponse.json({ error: `Erreur serveur: ${error.message || 'Inconnue'}` }, { status: 500 });
     }
 }
 
 // PATCH - Update user (role, suspend, etc.)
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await props.params;
         const accessCheck = await checkAdminAccess();
         if ('error' in accessCheck) {
             return NextResponse.json({ error: accessCheck.error }, { status: accessCheck.status });
@@ -140,27 +142,28 @@ export async function PATCH(
         }
 
         const user = await prisma.user.update({
-            where: { id: params.id },
+            where: { id },
             data: updateData
         });
 
         // Log admin action
-        await logAdminAction(accessCheck.adminId, action, 'user', params.id, body, request);
+        await logAdminAction(accessCheck.adminId, action, 'user', id, body, request);
 
         return NextResponse.json({ user, message: 'Utilisateur mis à jour avec succès' });
 
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error updating user:', error);
-        return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
+        return NextResponse.json({ error: `Erreur serveur: ${error.message || 'Inconnue'}` }, { status: 500 });
     }
 }
 
 // DELETE - Delete user
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await props.params;
         const accessCheck = await checkAdminAccess();
         if ('error' in accessCheck) {
             return NextResponse.json({ error: accessCheck.error }, { status: accessCheck.status });
@@ -168,7 +171,7 @@ export async function DELETE(
 
         // Check if user exists
         const user = await prisma.user.findUnique({
-            where: { id: params.id }
+            where: { id }
         });
 
         if (!user) {
@@ -182,16 +185,19 @@ export async function DELETE(
 
         // Delete user and related data (cascade)
         await prisma.user.delete({
-            where: { id: params.id }
+            where: { id }
         });
 
         // Log admin action
-        await logAdminAction(accessCheck.adminId, 'user_deleted', 'user', params.id, { userName: user.name }, request);
+        await logAdminAction(accessCheck.adminId, 'user_deleted', 'user', id, { userName: user.name }, request);
 
         return NextResponse.json({ message: 'Utilisateur supprimé avec succès' });
 
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error deleting user:', error);
-        return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
+        return NextResponse.json({ 
+            error: `Erreur serveur: ${error.message || 'Inconnue'}`,
+            details: error.code || undefined
+        }, { status: 500 });
     }
 }

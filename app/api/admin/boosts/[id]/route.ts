@@ -20,9 +20,10 @@ async function checkAdminAccess(session: any) {
 // PATCH - Modifier un package de boost
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await props.params;
         const session = await getServerSession(authOptions);
         const isAdmin = await checkAdminAccess(session);
 
@@ -34,7 +35,7 @@ export async function PATCH(
         const { name, description, price, duration, features, active } = body;
 
         const boost = await prisma.boostPackage.update({
-            where: { id: params.id },
+            where: { id },
             data: {
                 name,
                 description,
@@ -55,9 +56,10 @@ export async function PATCH(
 // DELETE - Supprimer un package de boost
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await props.params;
         const session = await getServerSession(authOptions);
         const isAdmin = await checkAdminAccess(session);
 
@@ -66,7 +68,7 @@ export async function DELETE(
         }
 
         await prisma.boostPackage.delete({
-            where: { id: params.id }
+            where: { id }
         });
 
         return NextResponse.json({ success: true });

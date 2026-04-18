@@ -186,6 +186,8 @@ model Listing {
 
   messages  Message[]
   favorites Favorite[]
+  payments  Payment[]
+  conversations Conversation[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -201,6 +203,7 @@ model Listing {
 model Conversation {
   id            String    @id @default(cuid())
   listingId     String?
+  listing       Listing?  @relation(fields: [listingId], references: [id], onDelete: Cascade)
   buyerId       String
   sellerId      String
   buyer         User      @relation("BuyerConversations", fields: [buyerId], references: [id], onDelete: Cascade)
@@ -298,6 +301,8 @@ model Payment {
   id            String  @id @default(cuid())
   userId        String
   user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listingId     String?
+  listing       Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
   amount        Int // En FCFA
   currency      String  @default("XOF")
   status        String  @default("pending") // pending, completed, failed, refunded, rejected

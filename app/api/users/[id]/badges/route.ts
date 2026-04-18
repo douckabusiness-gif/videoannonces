@@ -4,11 +4,12 @@ import { prisma } from '@/lib/prisma';
 // GET - Récupérer les badges d'un utilisateur
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await props.params;
         const userBadges = await prisma.userBadge.findMany({
-            where: { userId: params.id },
+            where: { userId: id },
             include: { badge: true },
             orderBy: { awardedAt: 'desc' },
         });

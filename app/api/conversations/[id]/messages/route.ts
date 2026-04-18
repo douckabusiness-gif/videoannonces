@@ -5,16 +5,17 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await props.params;
         const session = await getServerSession(authOptions);
 
         if (!session?.user) {
             return NextResponse.json({ error: 'Non authentifié' }, { status: 401 });
         }
 
-        const conversationId = params.id;
+        const conversationId = id;
 
         // Vérifier que l'utilisateur fait partie de la conversation
         const conversation = await prisma.conversation.findUnique({

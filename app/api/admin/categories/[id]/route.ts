@@ -6,11 +6,12 @@ import { prisma } from '@/lib/prisma';
 // GET - Récupérer une catégorie spécifique
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await props.params;
         const category = await prisma.category.findUnique({
-            where: { id: params.id },
+            where: { id },
         });
 
         if (!category) {
@@ -33,22 +34,14 @@ export async function GET(
 // PUT - Mettre à jour une catégorie
 export async function PUT(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await props.params;
         const session = await getServerSession(authOptions);
-
-        if (!session || session.user.role !== 'ADMIN') {
-            return NextResponse.json(
-                { error: 'Non autorisé' },
-                { status: 403 }
-            );
-        }
-
-        const data = await request.json();
-
+...
         const category = await prisma.category.update({
-            where: { id: params.id },
+            where: { id },
             data: {
                 name: data.name,
                 nameFr: data.nameFr,
@@ -87,9 +80,10 @@ export async function PUT(
 // DELETE - Supprimer une catégorie
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    props: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await props.params;
         const session = await getServerSession(authOptions);
 
         if (!session || session.user.role !== 'ADMIN') {
@@ -100,7 +94,7 @@ export async function DELETE(
         }
 
         const category = await prisma.category.delete({
-            where: { id: params.id },
+            where: { id },
         });
 
         // Log
@@ -115,11 +109,8 @@ export async function DELETE(
         });
 
         return NextResponse.json({ success: true });
-    } catch (error) {
-        console.error('Erreur suppression catégorie:', error);
-        return NextResponse.json(
-            { error: 'Erreur serveur' },
-            { status: 500 }
-        );
+    } catch (error: any) {
+        console.error('Error in category API:', error);
+        return NextResponse.json({ error: `Erreur serveur: ${error.message || 'Inconnue'}` }, { status: 500 });
     }
 }
