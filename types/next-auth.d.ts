@@ -10,6 +10,9 @@ declare module 'next-auth' {
         isVendor: boolean;
         /** Mode vitrine solo : false si seuls certains comptes peuvent publier */
         canPublishListings?: boolean;
+        premiumTier?: string | null;
+        aiReplyEnabled?: boolean;
+        avatar?: string | null;
     }
 
     interface Session {
@@ -37,6 +40,9 @@ declare module 'next-auth' {
             customColors?: any;
             logoUrl?: string | null;
             businessHours?: any;
+            premiumTier?: string | null;
+            aiReplyEnabled?: boolean;
+            avatar?: string | null;
         };
     }
 }
@@ -63,5 +69,8 @@ declare module 'next-auth/jwt' {
         customColors?: any;
         logoUrl?: string | null;
         businessHours?: any;
+        premiumTier?: string | null;
+        aiReplyEnabled?: boolean;
+        avatar?: string | null;
     }
 }

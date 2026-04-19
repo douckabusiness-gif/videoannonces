@@ -4,7 +4,13 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import CosmicBackground from '@/components/dashboard/CosmicBackground';
+import PremiumDashboardHome from '@/components/dashboard/PremiumDashboardHome';
 import { useTranslation } from '@/contexts/I18nContext';
+
+// Détecte si l'utilisateur est un vendeur abonné premium
+function isPremiumVendor(user: any): boolean {
+    return !!(user?.premium && user?.premiumTier && user?.premiumTier !== 'FREE');
+}
 
 interface Stats {
     totalListings: number;
@@ -27,11 +33,6 @@ export default function DashboardPage() {
     const [mounted, setMounted] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        setMounted(true);
-        fetchRealStats();
-    }, []);
-
     const fetchRealStats = async () => {
         try {
             const response = await fetch('/api/dashboard/stats');
@@ -51,6 +52,18 @@ export default function DashboardPage() {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        setMounted(true);
+        fetchRealStats();
+    }, []);
+
+    // ─── Page d'accueil exclusive pour vendeurs premium ───
+    if (session && isPremiumVendor(session.user)) {
+        return <PremiumDashboardHome />;
+    }
+
+
 
     const statCards = [
         {

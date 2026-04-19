@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 interface SubscriptionPlan {
@@ -29,6 +29,8 @@ interface PaymentMessage {
 
 export default function SubscriptionCheckoutPage() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const planSlugFromUrl = searchParams.get('plan') || 'premium';
     const { data: session } = useSession();
 
     const [plan, setPlan] = useState<SubscriptionPlan | null>(null);
@@ -61,8 +63,10 @@ export default function SubscriptionCheckoutPage() {
 
             if (planRes.ok) {
                 const data = await planRes.json();
-                const proPlan = data.plans.find((p: any) => p.slug === 'pro');
-                setPlan(proPlan);
+                const currentPlan = data.plans.find((p: any) => p.slug === planSlugFromUrl);
+                // Si le plan spécifié n'est pas trouvé, on essaie de trouver le plan premium par défaut
+                const fallbackPlan = data.plans.find((p: any) => p.slug === 'premium');
+                setPlan(currentPlan || fallbackPlan);
             }
 
             if (methodsRes.ok) {
@@ -148,7 +152,7 @@ export default function SubscriptionCheckoutPage() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    planId: 'pro',
+                    planId: plan.slug,
                     paymentMethodId: selectedMethodId,
                     transactionId,
                     phoneNumber,

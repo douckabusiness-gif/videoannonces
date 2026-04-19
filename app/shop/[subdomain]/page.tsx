@@ -8,6 +8,7 @@ import ShopAnimations from '@/components/shop/ShopAnimations';
 import FeaturedReviews from '@/components/shop/FeaturedReviews';
 import MarketplaceLayout from '@/components/shop/MarketplaceLayout';
 import MobileFirstLayout from '@/components/shop/MobileFirstLayout';
+import LuxuryShopLayout from '@/components/shop/LuxuryShopLayout';
 
 // Feature flag: Set to true to use new Marketplace layout
 const USE_MARKETPLACE_LAYOUT = true;
@@ -50,6 +51,7 @@ async function getShopData(subdomain: string) {
             backgroundUrl: true,
             businessHours: true,
             shopLayout: true,
+            premiumTier: true,
         },
     });
 
@@ -135,6 +137,11 @@ export default async function ShopPage({ params }: ShopPageProps) {
 
     const { shop, listings, reviews } = data;
 
+    // Auto-switch to Luxury for Premium/Pro tiers unless they chose Mobile-first
+    if ((shop.premiumTier === 'premium' || shop.premiumTier === 'pro') && shop.shopLayout !== 'mobile-first') {
+        return <LuxuryShopLayout shop={shop as any} listings={listings} />;
+    }
+
     // Use Layout based on shop preference
     if (shop.shopLayout === 'marketplace') {
         return <MarketplaceLayout shop={shop} listings={listings} />;
@@ -142,16 +149,6 @@ export default async function ShopPage({ params }: ShopPageProps) {
 
     if (shop.shopLayout === 'mobile-first') {
         return <MobileFirstLayout shop={shop} listings={listings} reviews={reviews} />;
-    }
-
-    if (shop.shopLayout === 'ecommerce') {
-        // Assuming EcommerceLayout is still imported or available, otherwise fallback
-        // Note: If EcommerceLayout was removed, you might need to re-import it or use Marketplace as fallback
-        // For now, let's assume Marketplace is the default if 'ecommerce' or other unknown value is set,
-        // UNLESS EcommerceLayout is explicitly desired. 
-        // Given the context, I will default to Marketplace if not specified, 
-        // but if they explicitly chose 'mobile-first', it works.
-        return <MarketplaceLayout shop={shop} listings={listings} />;
     }
 
     // Default Fallback
