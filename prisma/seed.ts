@@ -9,6 +9,61 @@ async function main() {
     // Hash du mot de passe pour tous les comptes démo
     const hashedPassword = await bcrypt.hash('demo123', 10);
 
+    // 0. Créer les plans d'abonnement
+    console.log("💎 Création des plans d'abonnement...");
+    
+    const plans = [
+        {
+            name: 'Gratuit',
+            slug: 'free',
+            description: 'Pour débuter votre activité',
+            price: 0,
+            duration: 30, // jours
+            features: [
+                '5 annonces vidéo',
+                'Vidéos de 60 secondes max',
+                'Statistiques basiques',
+                'Support standard'
+            ],
+            maxListings: 5,
+            videoLimit: 60,
+            allowCustomDomain: false,
+            allowLuxuryTheme: false,
+            aiAssistant: false,
+        },
+        {
+            name: 'Boutique Premium',
+            slug: 'premium',
+            description: 'L\'expérience ultime pour booster vos ventes',
+            price: 25000,
+            duration: 30, // jours
+            features: [
+                'Annonces vidéo illimitées',
+                'Vidéos de 2 minutes max',
+                'Nom de domaine personnalisé',
+                'Interface Luxury Elite (Design Premium)',
+                'Tableau de bord Business intelligent',
+                'Assistant IA pour vos annonces',
+                'Support VIP 24h/24'
+            ],
+            maxListings: 9999,
+            videoLimit: 120,
+            allowCustomDomain: true,
+            allowLuxuryTheme: true,
+            aiAssistant: true,
+        }
+    ];
+
+    for (const plan of plans) {
+        await prisma.subscriptionPlan.upsert({
+            where: { slug: plan.slug },
+            update: plan,
+            create: plan,
+        });
+    }
+
+    console.log('✅ Plans d\'abonnement créés');
+
     // 1. Créer des utilisateurs démo
     console.log('👤 Création des utilisateurs...');
 
