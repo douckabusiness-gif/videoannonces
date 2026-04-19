@@ -357,6 +357,37 @@
             "saving": "Guardando...",
             "success": "¡Configuración guardada con éxito!",
             "error": "Error al guardar"
+        },
+        "features": {
+            "title": "Gestión de funciones",
+            "subtitle": "Active o desactive les fonctionnalités principales de la plataforma",
+            "registration": {
+                "title": "Registros públicos",
+                "description": "Permitir a los nuevos visitantes crear una cuenta desde la página de registro.",
+                "enabled": "Registros abiertos",
+                "disabled": "Registros cerrados"
+            },
+            "defaultVendor": {
+                "title": "Estado de vendedor por defecto",
+                "description": "Los nuevos usuarios reciben automáticamente el estado de vendedor tras el registro.",
+                "enabled": "Vendedor por defecto",
+                "disabled": "Cliente por defecto (Vendedor manual)"
+            },
+            "save": "Guardar cambios",
+            "success": "Funciones actualizadas correctamente",
+            "error": "Error durante la actualización",
+            "soloMode": {
+                "title": "Modo Solo (Escaparate exclusivo)",
+                "description": "Desactiva la publicación para todos los usuarios excepto el administrador.",
+                "enabled": "Modo Solo Activo",
+                "disabled": "Modo Marketplace (Abierto)"
+            },
+            "shops": {
+                "title": "Sistema de Tiendas",
+                "description": "Activar o desactivar las funciones de tienda (Premium, Suscripciones, SEO).",
+                "enabled": "Sistema Activado",
+                "disabled": "Sistema Desactivado"
+            }
         }
     },
     "sidebar": {

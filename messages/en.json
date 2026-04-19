@@ -357,6 +357,37 @@
             "saving": "Saving...",
             "success": "Settings saved successfully!",
             "error": "Error while saving"
+        },
+        "features": {
+            "title": "Features Management",
+            "subtitle": "Enable or disable the main features of the platform",
+            "registration": {
+                "title": "Public Registrations",
+                "description": "Allow new visitors to create an account from the registration page.",
+                "enabled": "Registrations Open",
+                "disabled": "Registrations Closed"
+            },
+            "defaultVendor": {
+                "title": "Default Vendor Status",
+                "description": "New users automatically receive vendor status upon registration.",
+                "enabled": "Vendor by Default",
+                "disabled": "Client by Default (Manual Vendor)"
+            },
+            "save": "Save changes",
+            "success": "Features updated successfully!",
+            "error": "Error during update",
+            "soloMode": {
+                "title": "Solo Mode (Exclusive Showcase)",
+                "description": "Disables publishing for all users except the administrator.",
+                "enabled": "Solo Mode Active",
+                "disabled": "Marketplace Mode (Open)"
+            },
+            "shops": {
+                "title": "Shop System",
+                "description": "Enable or disable shop functions (Premium, Subscriptions, SEO).",
+                "enabled": "System Enabled",
+                "disabled": "System Disabled"
+            }
         }
     },
     "live": {

@@ -6,6 +6,7 @@ import { useTranslation } from '@/contexts/I18nContext';
 import HomeBanner from '../HomeBanner';
 import AdBanner from '../AdBanner';
 import UrgentListingsSection from '../home/UrgentListingsSection';
+import PremiumShopsSection from '../home/PremiumShopsSection';
 
 interface LayoutProps {
     colors: any;
@@ -146,7 +147,10 @@ export default function HomeLayoutModern({ colors, siteSettings: initialSiteSett
                     <UrgentListingsSection key={section.id} />
                 );
             case 'shops':
-                return null;
+                if (siteSettings?.shopsEnabled === false) return null;
+                return (
+                    <PremiumShopsSection key={section.id} />
+                );
             case 'categories':
                 return null;
             case 'recent':

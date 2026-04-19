@@ -30,6 +30,7 @@ export default function Sidebar({ className = '', onNavigate, isVendor, userName
     const isSpecialPublisher = session?.user?.canPublishListings === true;
     
     // Vendor Nav logic
+    const shopsEnabled = siteSettings?.shopsEnabled !== false; // Default to true
     const canShowVendorNav = isVendor || isAdmin || isSpecialPublisher;
 
     const allMenuItems = [
@@ -97,7 +98,8 @@ export default function Sidebar({ className = '', onNavigate, isVendor, userName
                 </svg>
             ),
             gradient: 'from-cyan-400 to-blue-600',
-            vendorOnly: true
+            vendorOnly: true,
+            shopRelated: true
         },
         {
             name: t('dashboard.menu.shop'),
@@ -108,7 +110,8 @@ export default function Sidebar({ className = '', onNavigate, isVendor, userName
                 </svg>
             ),
             gradient: 'from-pink-400 to-rose-600',
-            vendorOnly: true
+            vendorOnly: true,
+            shopRelated: true
         },
         {
             name: t('dashboard.menu.subscription'),
@@ -119,7 +122,8 @@ export default function Sidebar({ className = '', onNavigate, isVendor, userName
                 </svg>
             ),
             gradient: 'from-brand-primary to-brand-secondary',
-            vendorOnly: true
+            vendorOnly: true,
+            shopRelated: true
         },
         {
             name: t('dashboard.menu.settings'),
@@ -142,7 +146,8 @@ export default function Sidebar({ className = '', onNavigate, isVendor, userName
                 </svg>
             ),
             gradient: 'from-purple-500 to-blue-500',
-            vendorOnly: true
+            vendorOnly: true,
+            shopRelated: true
         },
 
         {
@@ -159,6 +164,11 @@ export default function Sidebar({ className = '', onNavigate, isVendor, userName
     ];
 
     const menuItems = allMenuItems.filter(item => {
+        // @ts-ignore
+        if (item.shopRelated && !shopsEnabled) {
+            return false;
+        }
+
         // Filtrage Admin
         // @ts-ignore
         if (item.adminOnly) {

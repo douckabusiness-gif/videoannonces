@@ -6,9 +6,11 @@ import {
     getPublicRegistrationEnabled,
     getSignupDefaultVendor,
     getSoloModeEnabled,
+    getShopsEnabled,
     PLATFORM_PUBLIC_REGISTRATION,
     PLATFORM_SIGNUP_DEFAULT_VENDOR,
     PLATFORM_SOLO_MODE,
+    PLATFORM_SHOPS_ENABLED,
     setPlatformBooleanFlag,
 } from '@/lib/platform-flags';
 
@@ -32,15 +34,17 @@ export async function GET() {
     if ('error' in access) {
         return NextResponse.json({ error: access.error }, { status: access.status });
     }
-    const [publicRegistrationEnabled, signupDefaultVendor, soloModeEnabled] = await Promise.all([
+    const [publicRegistrationEnabled, signupDefaultVendor, soloModeEnabled, shopsEnabled] = await Promise.all([
         getPublicRegistrationEnabled(),
         getSignupDefaultVendor(),
         getSoloModeEnabled(),
+        getShopsEnabled(),
     ]);
     return NextResponse.json({
         publicRegistrationEnabled,
         signupDefaultVendor,
         soloModeEnabled,
+        shopsEnabled,
     });
 }
 
@@ -51,10 +55,11 @@ export async function PATCH(request: NextRequest) {
     }
 
     const body = await request.json().catch(() => ({}));
-    const { publicRegistrationEnabled, signupDefaultVendor, soloModeEnabled } = body as {
+    const { publicRegistrationEnabled, signupDefaultVendor, soloModeEnabled, shopsEnabled } = body as {
         publicRegistrationEnabled?: boolean;
         signupDefaultVendor?: boolean;
         soloModeEnabled?: boolean;
+        shopsEnabled?: boolean;
     };
 
     if (typeof publicRegistrationEnabled === 'boolean') {
@@ -78,11 +83,19 @@ export async function PATCH(request: NextRequest) {
             'Mode Solo : Seul l’administrateur peut publier des annonces'
         );
     }
+    if (typeof shopsEnabled === 'boolean') {
+        await setPlatformBooleanFlag(
+            PLATFORM_SHOPS_ENABLED,
+            shopsEnabled,
+            'Activer le système de boutiques (Boutiques Premium, Abonnements, SEO)'
+        );
+    }
 
-    const [nextReg, nextVendor, nextSolo] = await Promise.all([
+    const [nextReg, nextVendor, nextSolo, nextShops] = await Promise.all([
         getPublicRegistrationEnabled(),
         getSignupDefaultVendor(),
         getSoloModeEnabled(),
+        getShopsEnabled(),
     ]);
 
     try {
@@ -96,6 +109,7 @@ export async function PATCH(request: NextRequest) {
                     publicRegistrationEnabled: nextReg,
                     signupDefaultVendor: nextVendor,
                     soloModeEnabled: nextSolo,
+                    shopsEnabled: nextShops,
                 },
                 ipAddress:
                     request.headers.get('x-forwarded-for') ||
@@ -111,5 +125,6 @@ export async function PATCH(request: NextRequest) {
         publicRegistrationEnabled: nextReg,
         signupDefaultVendor: nextVendor,
         soloModeEnabled: nextSolo,
+        shopsEnabled: nextShops,
     });
 }

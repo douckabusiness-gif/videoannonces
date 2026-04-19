@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getShopsEnabled, PLATFORM_SHOPS_ENABLED } from '@/lib/platform-flags';
 
 /**
  * GET - Récupérer les paramètres publics du site
@@ -20,9 +21,12 @@ export async function GET() {
             });
         }
 
-        const soloModeSetting = await prisma.setting.findUnique({
-            where: { key: 'PLATFORM_SOLO_MODE' }
-        });
+        const [soloModeSetting, shopsEnabled] = await Promise.all([
+            prisma.setting.findUnique({
+                where: { key: 'PLATFORM_SOLO_MODE' }
+            }),
+            getShopsEnabled()
+        ]);
 
         const isSoloMode = soloModeSetting?.value === 'true';
 
@@ -64,6 +68,7 @@ export async function GET() {
             shopsTextColor: settings?.shopsTextColor,
             recentTextColor: settings?.recentTextColor,
             soloMode: isSoloMode,
+            shopsEnabled: shopsEnabled,
         });
     } catch (error) {
         console.error('Erreur récupération paramètres site:', error);

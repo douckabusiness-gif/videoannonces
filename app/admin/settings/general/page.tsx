@@ -19,9 +19,11 @@ export default function GeneralSettingsPage() {
     const [platform, setPlatform] = useState<{
         publicRegistrationEnabled: boolean;
         signupDefaultVendor: boolean;
+        shopsEnabled: boolean;
     }>({
         publicRegistrationEnabled: true,
         signupDefaultVendor: true,
+        shopsEnabled: true,
     });
     const [platformSaving, setPlatformSaving] = useState(false);
     const [platformLoadState, setPlatformLoadState] = useState<'idle' | 'loading' | 'error'>('idle');
@@ -86,6 +88,7 @@ export default function GeneralSettingsPage() {
                 setPlatform({
                     publicRegistrationEnabled: data.publicRegistrationEnabled,
                     signupDefaultVendor: Boolean(data.signupDefaultVendor),
+                    shopsEnabled: data.shopsEnabled ?? true,
                 });
                 setPlatformLoadState('idle');
                 return;
@@ -106,6 +109,7 @@ export default function GeneralSettingsPage() {
     const patchPlatform = async (partial: {
         publicRegistrationEnabled?: boolean;
         signupDefaultVendor?: boolean;
+        shopsEnabled?: boolean;
     }) => {
         setPlatformSaving(true);
         try {
@@ -708,6 +712,46 @@ export default function GeneralSettingsPage() {
                                                             {platform.signupDefaultVendor
                                                                 ? 'nouveaux = vendeur'
                                                                 : 'nouveaux = client'}
+                                                        </span>
+                                                    </p>
+                                                </div>
+
+                                                <div className="rounded-xl border-2 border-gray-100 bg-slate-50 p-4 space-y-3">
+                                                    <p className="font-bold text-gray-900">③ Système de Boutiques</p>
+                                                    <p className="text-xs text-gray-600 leading-relaxed">
+                                                        Activer ou désactiver complètement les fonctions de boutiques
+                                                        (Boutiques Premium, Abonnements, SEO).
+                                                    </p>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        <button
+                                                            type="button"
+                                                            disabled={platformSaving || platform.shopsEnabled}
+                                                            onClick={() => patchPlatform({ shopsEnabled: true })}
+                                                            className="px-3 py-2 rounded-lg text-sm font-bold bg-emerald-600 text-white hover:bg-emerald-500 disabled:opacity-40"
+                                                        >
+                                                            Activer
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            disabled={platformSaving || !platform.shopsEnabled}
+                                                            onClick={() => patchPlatform({ shopsEnabled: false })}
+                                                            className="px-3 py-2 rounded-lg text-sm font-bold bg-rose-600 text-white hover:bg-rose-500 disabled:opacity-40"
+                                                        >
+                                                            Désactiver
+                                                        </button>
+                                                    </div>
+                                                    <p className="text-xs font-semibold text-gray-500">
+                                                        État :{' '}
+                                                        <span
+                                                            className={
+                                                                platform.shopsEnabled
+                                                                    ? 'text-emerald-700'
+                                                                    : 'text-rose-700'
+                                                            }
+                                                        >
+                                                            {platform.shopsEnabled
+                                                                ? 'activé'
+                                                                : 'désactivé'}
                                                         </span>
                                                     </p>
                                                 </div>

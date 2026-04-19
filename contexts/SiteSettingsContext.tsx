@@ -24,6 +24,7 @@ interface SiteSettings {
     shopsTextColor: string;
     recentTextColor: string;
     soloMode?: boolean;
+    shopsEnabled?: boolean;
 }
 
 interface SiteSettingsContextType {
@@ -54,6 +55,7 @@ const defaultSettings: SiteSettings = {
     shopsTextColor: '#000000',
     recentTextColor: '#000000',
     soloMode: false,
+    shopsEnabled: true,
 };
 
 const SiteSettingsContext = createContext<SiteSettingsContextType>({
@@ -93,6 +95,7 @@ export function SiteSettingsProvider({ children }: { children: ReactNode }) {
                     shopsTextColor: data.shopsTextColor || '#000000',
                     recentTextColor: data.recentTextColor || '#000000',
                     soloMode: data.soloMode || false,
+                    shopsEnabled: data.shopsEnabled ?? true,
                 });
             }
         } catch (error) {

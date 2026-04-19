@@ -387,6 +387,12 @@
                 "description": "Désactive la publication pour tous les utilisateurs sauf l’administrateur.",
                 "enabled": "Mode Solo Actif",
                 "disabled": "Mode Marketplace (Ouvert)"
+            },
+            "shops": {
+                "title": "Système de Boutiques",
+                "description": "Activer ou désactiver les fonctions de boutique (Premium, Abonnements, SEO).",
+                "enabled": "Système Activé",
+                "disabled": "Système Désactivé"
             }
         }
     },

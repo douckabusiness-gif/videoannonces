@@ -11,6 +11,7 @@ export default function AdminFeaturesPage() {
         publicRegistrationEnabled: false,
         signupDefaultVendor: false,
         soloModeEnabled: false,
+        shopsEnabled: false,
     });
     const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
@@ -22,6 +23,7 @@ export default function AdminFeaturesPage() {
                     publicRegistrationEnabled: data.publicRegistrationEnabled ?? false,
                     signupDefaultVendor: data.signupDefaultVendor ?? false,
                     soloModeEnabled: data.soloModeEnabled ?? false,
+                    shopsEnabled: data.shopsEnabled ?? false,
                 });
                 setLoading(false);
             })
@@ -210,6 +212,44 @@ export default function AdminFeaturesPage() {
                             <span
                                 className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
                                     settings.soloModeEnabled ? 'translate-x-6' : 'translate-x-1'
+                                } shadow-sm`}
+                            />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Boutique System Card */}
+                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6 flex flex-col justify-between">
+                    <div className="space-y-4">
+                        <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center">
+                            <svg className="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-bold text-gray-900">{t('admin.features.shops.title')}</h3>
+                            <p className="text-sm text-gray-500 mt-1">
+                                {t('admin.features.shops.description')}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-gray-50 flex items-center justify-between">
+                        <div className="flex flex-col">
+                            <span className={`text-xs font-bold uppercase tracking-wider ${settings.shopsEnabled ? 'text-indigo-600' : 'text-gray-400'}`}>
+                                {settings.shopsEnabled ? t('admin.features.shops.enabled') : t('admin.features.shops.disabled')}
+                            </span>
+                        </div>
+                        <button
+                            onClick={() => handleToggle('shopsEnabled')}
+                            disabled={saving}
+                            className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors focus:outline-none ${
+                                settings.shopsEnabled ? 'bg-red-600' : 'bg-gray-200'
+                            }`}
+                        >
+                            <span
+                                className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
+                                    settings.shopsEnabled ? 'translate-x-6' : 'translate-x-1'
                                 } shadow-sm`}
                             />
                         </button>

@@ -6,6 +6,8 @@ export const PLATFORM_PUBLIC_REGISTRATION = 'platform.public_registration_enable
 export const PLATFORM_SIGNUP_DEFAULT_VENDOR = 'platform.signup_default_vendor';
 /** Mode Solo : Seul l'admin peut publier */
 export const PLATFORM_SOLO_MODE = 'platform.solo_mode_enabled';
+/** Boutiques activées */
+export const PLATFORM_SHOPS_ENABLED = 'platform.shops_enabled';
 
 export async function getPublicRegistrationEnabled(): Promise<boolean> {
     const row = await prisma.setting.findUnique({
@@ -28,6 +30,14 @@ export async function getSoloModeEnabled(): Promise<boolean> {
         where: { key: PLATFORM_SOLO_MODE },
     });
     if (!row) return false;
+    return row.value === 'true' || row.value === '1';
+}
+
+export async function getShopsEnabled(): Promise<boolean> {
+    const row = await prisma.setting.findUnique({
+        where: { key: PLATFORM_SHOPS_ENABLED },
+    });
+    if (!row) return true;
     return row.value === 'true' || row.value === '1';
 }
 
