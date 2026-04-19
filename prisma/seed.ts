@@ -6,12 +6,11 @@ const prisma = new PrismaClient();
 async function main() {
     console.log('🌱 Début du seeding...');
 
-    // Hash du mot de passe pour tous les comptes démo
     const hashedPassword = await bcrypt.hash('demo123', 10);
 
-    // 0. Créer les plans d'abonnement
+    // 0. Plans d'abonnement
     console.log("💎 Création des plans d'abonnement...");
-    
+
     const plans = [
         {
             name: 'Gratuit',
@@ -35,7 +34,7 @@ async function main() {
         {
             name: 'Boutique Premium',
             slug: 'premium',
-            description: 'L\'expérience ultime pour booster vos ventes',
+            description: "L'expérience ultime pour booster vos ventes",
             price: 25000,
             features: [
                 'Annonces vidéo illimitées',
@@ -47,7 +46,7 @@ async function main() {
                 'Support VIP 24h/24'
             ],
             maxListings: 9999,
-            maxVideoDuration: 120, // 2 minutes
+            maxVideoDuration: 120,
             allowSubdomain: true,
             allowCustomDomain: true,
             allowLiveStreaming: true,
@@ -65,15 +64,35 @@ async function main() {
             create: plan,
         });
     }
+    console.log("✅ Plans d'abonnement créés");
 
-    console.log('✅ Plans d\'abonnement créés');
-
-    // 1. Créer des utilisateurs démo
+    // 1. Utilisateurs démo
     console.log('👤 Création des utilisateurs...');
+
+    // Votre compte Admin
+    await prisma.user.upsert({
+        where: { phone: '0709194318' },
+        update: { 
+            role: 'ADMIN', 
+            verified: true,
+            password: hashedPassword 
+        },
+        create: {
+            phone: '0709194318',
+            name: 'Administrateur',
+            email: 'admin@afrivideoannonce.com',
+            password: hashedPassword,
+            verified: true,
+            role: 'ADMIN',
+        },
+    });
 
     const demoUser = await prisma.user.upsert({
         where: { phone: '+2250700000001' },
-        update: {},
+        update: {
+            password: hashedPassword,
+            verified: true
+        },
         create: {
             phone: '+2250700000001',
             name: 'Jean Kouassi',
@@ -91,7 +110,10 @@ async function main() {
 
     const premiumUser1 = await prisma.user.upsert({
         where: { phone: '+2250700000002' },
-        update: {},
+        update: {
+            password: hashedPassword,
+            verified: true
+        },
         create: {
             phone: '+2250700000002',
             name: 'Boutique TechPro',
@@ -99,9 +121,10 @@ async function main() {
             password: hashedPassword,
             verified: true,
             premium: true,
-            isPremium: true, // Pour la section Boutiques Premium
+            isPremium: true,
+            premiumTier: 'premium',
             subdomain: 'techpro',
-            bio: '🏆 Spécialiste en électronique et gadgets high-tech. Livraison rapide partout en Côte d\'Ivoire.',
+            bio: "🏆 Spécialiste en électronique et gadgets high-tech. Livraison rapide partout en Côte d'Ivoire.",
             rating: 4.8,
             totalRatings: 156,
             totalSales: 450,
@@ -110,7 +133,10 @@ async function main() {
 
     const premiumUser2 = await prisma.user.upsert({
         where: { phone: '+2250700000003' },
-        update: {},
+        update: {
+            password: hashedPassword,
+            verified: true
+        },
         create: {
             phone: '+2250700000003',
             name: 'Fashion Store CI',
@@ -118,7 +144,8 @@ async function main() {
             password: hashedPassword,
             verified: true,
             premium: true,
-            isPremium: true, // Pour la section Boutiques Premium
+            isPremium: true,
+            premiumTier: 'premium',
             subdomain: 'fashion-ci',
             bio: '👗 Mode et accessoires tendance. Collection exclusive importée.',
             rating: 4.7,
@@ -137,9 +164,10 @@ async function main() {
             password: hashedPassword,
             verified: true,
             premium: true,
-            isPremium: true, // Pour la section Boutiques Premium
+            isPremium: true,
+            premiumTier: 'premium',
             subdomain: 'autoplus',
-            bio: '🚗 Vente de véhicules d\'occasion vérifiés. Garantie et financement disponibles.',
+            bio: "🚗 Vente de véhicules d'occasion vérifiés. Garantie et financement disponibles.",
             rating: 4.9,
             totalRatings: 203,
             totalSales: 89,
@@ -148,7 +176,7 @@ async function main() {
 
     console.log('✅ Utilisateurs créés');
 
-    // 2. Créer des annonces urgentes
+    // 2. Annonces urgentes
     console.log('⚡ Création des annonces urgentes...');
 
     const urgentListings = [
@@ -185,7 +213,7 @@ async function main() {
         {
             userId: premiumUser2.id,
             title: 'Sac à Main Louis Vuitton - Urgent',
-            description: 'Sac à main Louis Vuitton authentique, modèle Neverfull MM. Certificat d\'authenticité inclus.',
+            description: "Sac à main Louis Vuitton authentique, modèle Neverfull MM. Certificat d'authenticité inclus.",
             price: 320000,
             category: 'fashion',
             videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
@@ -217,10 +245,9 @@ async function main() {
     for (const listing of urgentListings) {
         await prisma.listing.create({ data: listing });
     }
-
     console.log('✅ Annonces urgentes créées');
 
-    // 3. Créer des annonces normales
+    // 3. Annonces normales
     console.log('📦 Création des annonces normales...');
 
     const normalListings = [
@@ -332,7 +359,7 @@ async function main() {
         {
             userId: premiumUser1.id,
             title: 'Installation Caméras Surveillance',
-            description: 'Service professionnel d\'installation de caméras de surveillance. Devis gratuit.',
+            description: "Service professionnel d'installation de caméras de surveillance. Devis gratuit.",
             price: 50000,
             category: 'services',
             videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
@@ -364,21 +391,9 @@ async function main() {
     for (const listing of normalListings) {
         await prisma.listing.create({ data: listing });
     }
-
     console.log('✅ Annonces normales créées');
 
-    console.log('\n🎉 Seeding terminé avec succès !');
-    console.log('\n📋 Résumé :');
-    console.log(`   - 4 utilisateurs créés (1 normal, 3 premium)`);
-    console.log(`   - 4 annonces urgentes`);
-    console.log(`   - 6 annonces normales`);
-    console.log(`\n🔑 Identifiants de connexion :`);
-    console.log(`   Email: jean@demo.com | Mot de passe: demo123`);
-    console.log(`   Email: techpro@demo.com | Mot de passe: demo123`);
-    console.log(`   Email: fashion@demo.com | Mot de passe: demo123`);
-    console.log(`   Email: autoplus@demo.com | Mot de passe: demo123`);
-    
-    // 4. Créer les catégories
+    // 4. Catégories
     console.log('📂 Création des catégories...');
 
     const categories = [
@@ -388,8 +403,8 @@ async function main() {
         { slug: 'electronics-accessories', name: 'Accessories', nameFr: 'Accessoires', icon: '🔌', order: 4 },
         { slug: 'tv-audio', name: 'TV & Audio', nameFr: 'TV & Audio', icon: '📺', order: 5 },
         { slug: 'fashion', name: 'Fashion', nameFr: 'Mode', icon: '👕', order: 6 },
-        { slug: 'men-fashion', name: 'Men\'s Fashion', nameFr: 'Vêtements Homme', icon: '🤵', order: 7 },
-        { slug: 'women-fashion', name: 'Women\'s Fashion', nameFr: 'Vêtements Femme', icon: '👗', order: 8 },
+        { slug: 'men-fashion', name: "Men's Fashion", nameFr: 'Vêtements Homme', icon: '🤵', order: 7 },
+        { slug: 'women-fashion', name: "Women's Fashion", nameFr: 'Vêtements Femme', icon: '👗', order: 8 },
         { slug: 'shoes', name: 'Shoes', nameFr: 'Chaussures', icon: '👟', order: 9 },
         { slug: 'watches-jewelry', name: 'Watches & Jewelry', nameFr: 'Montres & Bijoux', icon: '⌚', order: 10 },
         { slug: 'vehicles', name: 'Vehicles', nameFr: 'Véhicules', icon: '🚗', order: 11 },
@@ -437,10 +452,9 @@ async function main() {
             create: category,
         });
     }
-
     console.log('✅ Catégories créées');
 
-    // 5. Création des méthodes de paiement...
+    // 5. Méthodes de paiement
     console.log('💰 Création des méthodes de paiement...');
 
     const paymentMethods = [
@@ -460,7 +474,7 @@ async function main() {
             code: 'WAVE',
             phoneNumber: '0700000000',
             description: 'Paiement sans frais via Wave',
-            instruction: 'Envoyez {amount} FCFA vers le 0700000000 via l\'application Wave.',
+            instruction: "Envoyez {amount} FCFA vers le 0700000000 via l'application Wave.",
             icon: '🌊',
             color: 'from-blue-400 to-blue-500',
             active: true,
@@ -497,8 +511,18 @@ async function main() {
             create: method,
         });
     }
-
     console.log('✅ Méthodes de paiement créées');
+
+    console.log('\n🎉 Seeding terminé avec succès !');
+    console.log('\n📋 Résumé :');
+    console.log('   - 4 utilisateurs créés (1 normal, 3 premium)');
+    console.log('   - 4 annonces urgentes');
+    console.log('   - 9 annonces normales');
+    console.log('\n🔑 Identifiants de connexion :');
+    console.log('   Email: jean@demo.com | Mot de passe: demo123');
+    console.log('   Email: techpro@demo.com | Mot de passe: demo123');
+    console.log('   Email: fashion@demo.com | Mot de passe: demo123');
+    console.log('   Email: autoplus@demo.com | Mot de passe: demo123');
 }
 
 main()
