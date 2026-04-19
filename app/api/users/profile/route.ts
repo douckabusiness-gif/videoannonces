@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { SubscriptionService } from '@/lib/subscription-service';
 
 export const dynamic = 'force-dynamic';
 
@@ -85,11 +86,23 @@ export async function PATCH(request: NextRequest) {
             'socialLinks',
             'bannerUrl',
             'whatsappNumber',
+            'subdomain',
         ];
 
         const updateData: any = {};
         for (const field of allowedFields) {
             if (body[field] !== undefined) {
+                // Vérifier les permissions premium pour le sous-domaine
+                if (field === 'subdomain' && body[field] !== '') {
+                    const hasPermission = await SubscriptionService.hasFeature(session.user.id, 'allowSubdomain');
+                    if (!hasPermission) {
+                        return NextResponse.json(
+                            { error: 'Votre plan actuel ne permet pas d\'avoir un sous-domaine personnalisé.' },
+                            { status: 403 }
+                        );
+                    }
+                }
+
                 // If it's email and it's empty string, make it null to prevent DB unique constraint fail
                 if (field === 'email' && body[field] === '') {
                     updateData[field] = null;
@@ -124,6 +137,7 @@ export async function PATCH(request: NextRequest) {
                 socialLinks: true,
                 bannerUrl: true,
                 whatsappNumber: true,
+                subdomain: true,
             }
         });
 

@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { listingSchema } from '@/lib/validations';
 import { isSoloBusinessMode, soloPublishDeniedMessage, userCanPublishListings } from '@/lib/solo-business';
+import { SubscriptionService } from '@/lib/subscription-service';
 
 // GET - Récupérer les annonces
 export async function GET(request: NextRequest) {
@@ -150,26 +151,13 @@ export async function POST(request: NextRequest) {
 
         const validated = validationResult.data;
 
-        // Vérifier limite annonces gratuites
-        const user = await prisma.user.findUnique({
-            where: { id: session.user.id },
-            select: { premium: true }
-        });
-
-        if (!user?.premium) {
-            const activeListings = await prisma.listing.count({
-                where: {
-                    userId: session.user.id,
-                    status: 'active'
-                }
-            });
-
-            if (activeListings >= 5) {
-                return NextResponse.json(
-                    { error: 'Limite de 5 annonces atteinte. Passez à Premium pour plus.' },
-                    { status: 403 }
-                );
-            }
+        // Vérifier les limites de l'abonnement via le service dédié
+        const subscriptionCheck = await SubscriptionService.canCreateListing(session.user.id);
+        if (!subscriptionCheck.allowed) {
+            return NextResponse.json(
+                { error: subscriptionCheck.error },
+                { status: 403 }
+            );
         }
 
         // Créer l'annonce

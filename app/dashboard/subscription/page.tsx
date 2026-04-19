@@ -46,45 +46,23 @@ export default function SubscriptionPage() {
         }
     };
 
-    // Plan gratuit en dur (toujours affiché)
-    const freePlan = {
-        id: 'free',
-        name: 'Gratuit',
-        price: 0,
-        period: '',
-        description: 'Parfait pour commencer',
-        features: [
-            '5 annonces maximum',
-            'Durée: 30 jours par annonce',
-            'Support email',
-            'Vidéos jusqu\'à 60 secondes',
-        ],
-        limitations: [
-            'Pas de sous-domaine',
-            'Pas de boost',
-            'Analytics basiques',
-        ],
-        color: 'from-gray-500 to-gray-600',
-        buttonText: 'Plan actuel',
-        disabled: true,
-    };
+    // Déterminer le plan actuel de l'utilisateur
+    const currentPlanSlug = session?.user?.premiumTier || 'free';
 
     // Transformer les plans BDD en format d'affichage
-    const displayPlans = [
-        freePlan,
-        ...plans.map(plan => ({
-            id: plan.slug,
-            name: plan.name,
-            price: plan.price,
-            period: '/mois',
-            description: plan.description || '',
-            features: plan.features,
-            color: plan.color || 'from-orange-500 to-orange-600',
-            buttonText: `Passer à ${plan.name}`,
-            popular: plan.popular,
-            disabled: false,
-        }))
-    ];
+    const displayPlans = plans.map(plan => ({
+        id: plan.slug,
+        name: plan.name,
+        price: plan.price,
+        period: '/mois',
+        description: plan.description || '',
+        features: plan.features,
+        color: plan.slug === 'free' ? 'from-gray-500 to-gray-600' : (plan.slug === 'premium' ? 'from-orange-500 to-orange-600' : 'from-purple-600 to-indigo-700'),
+        buttonText: plan.slug === currentPlanSlug ? 'Plan Actuel' : `Passer à ${plan.name}`,
+        popular: plan.popular,
+        isCurrent: plan.slug === currentPlanSlug,
+        slug: plan.slug
+    }));
 
     if (loading) {
         return (
@@ -113,60 +91,59 @@ export default function SubscriptionPage() {
             </div>
 
             {/* Plans */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {displayPlans.map((plan: any) => (
                     <div
                         key={plan.id}
-                        className={`bg-white rounded-2xl p-6 shadow-xl border-2 transition-transform hover:scale-105 ${plan.popular ? 'border-orange-500' : 'border-gray-200'
-                            }`}
+                        className={`relative bg-white rounded-3xl p-8 shadow-2xl border-2 transition-all duration-300 hover:scale-[1.03] ${plan.popular ? 'border-orange-500 ring-4 ring-orange-500/10' : 'border-gray-100 hover:border-gray-300'
+                            } ${plan.isCurrent ? 'opacity-90' : ''}`}
                     >
                         {plan.popular && (
-                            <div className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-4">
+                            <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-black px-4 py-2 rounded-full shadow-lg">
                                 ⭐ RECOMMANDÉ
                             </div>
                         )}
 
-                        <h3 className="text-2xl font-black text-gray-900 mb-2">{plan.name}</h3>
-                        <p className="text-gray-600 mb-4">{plan.description}</p>
+                        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${plan.color} flex items-center justify-center text-white text-2xl mb-6 shadow-lg`}>
+                            {plan.slug === 'free' ? '🌱' : (plan.slug === 'premium' ? '🚀' : '👑')}
+                        </div>
 
-                        <div className="mb-6">
-                            <div className="flex items-baseline gap-2">
+                        <h3 className="text-2xl font-black text-gray-900 mb-2 tracking-tight">{plan.name}</h3>
+                        <p className="text-gray-500 text-sm mb-6 h-10 line-clamp-2">{plan.description}</p>
+
+                        <div className="mb-8 p-6 bg-gray-50 rounded-2xl flex flex-col items-center">
+                            <div className="flex items-baseline gap-1">
                                 <span className="text-4xl font-black text-gray-900">
                                     {plan.price.toLocaleString()}
                                 </span>
-                                <span className="text-xl text-gray-600">FCFA{plan.period}</span>
+                                <span className="text-sm font-bold text-gray-500 uppercase tracking-widest">FCFA</span>
                             </div>
+                            <span className="text-xs font-bold text-gray-400 mt-1 uppercase tracking-tighter">{plan.period}</span>
                         </div>
 
-                        <div className="space-y-3 mb-6">
+                        <div className="space-y-4 mb-8 min-h-[200px]">
                             {plan.features.map((feature: string, index: number) => (
                                 <div key={index} className="flex items-start gap-3">
-                                    <div className="text-green-500 text-xl">✓</div>
-                                    <span className="text-gray-700">{feature}</span>
-                                </div>
-                            ))}
-                            {plan.limitations?.map((limitation: string, index: number) => (
-                                <div key={index} className="flex items-start gap-3">
-                                    <div className="text-red-500 text-xl">✗</div>
-                                    <span className="text-gray-500">{limitation}</span>
+                                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs">
+                                        ✓
+                                    </div>
+                                    <span className="text-gray-700 text-sm font-medium">{feature}</span>
                                 </div>
                             ))}
                         </div>
 
-                        {plan.id !== 'free' ? (
+                        {!plan.isCurrent ? (
                             <Link
-                                href="/dashboard/subscription/checkout"
-                                className="block w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 hover:scale-105 transition-all font-bold text-center text-lg shadow-lg"
+                                href={`/dashboard/subscription/checkout?plan=${plan.slug}`}
+                                className={`block w-full px-6 py-4 bg-gradient-to-r ${plan.color} text-white rounded-2xl hover:brightness-110 hover:shadow-xl transition-all font-black text-center text-lg active:scale-95`}
                             >
                                 {plan.buttonText}
                             </Link>
                         ) : (
-                            <button
-                                disabled
-                                className="w-full px-6 py-4 bg-gray-200 text-gray-500 rounded-xl font-bold text-lg cursor-not-allowed"
-                            >
+                            <div className="w-full px-6 py-4 bg-gray-100 text-gray-400 rounded-2xl font-black text-center text-lg flex items-center justify-center gap-2 border-2 border-dashed border-gray-200">
+                                <span>✨</span>
                                 {plan.buttonText}
-                            </button>
+                            </div>
                         )}
                     </div>
                 ))}

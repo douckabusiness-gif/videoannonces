@@ -60,11 +60,11 @@ export const authOptions: NextAuthOptions = {
                         bannerUrl: user.bannerUrl,
                         shopTheme: user.shopTheme,
                         // Phase 1
-                        customColors: user.customColors,
                         logoUrl: user.logoUrl,
                         businessHours: user.businessHours,
                         shopLayout: user.shopLayout,
                         aiReplyEnabled: user.aiReplyEnabled,
+                        premiumTier: user.premiumTier,
                     };
                 } catch (error) {
                     console.error('Auth error:', error);
@@ -105,6 +105,7 @@ export const authOptions: NextAuthOptions = {
                 token.businessHours = user.businessHours;
                 token.shopLayout = user.shopLayout;
                 token.aiReplyEnabled = user.aiReplyEnabled;
+                token.premiumTier = user.premiumTier;
             }
 
             // Handle session update
@@ -134,6 +135,7 @@ export const authOptions: NextAuthOptions = {
                     token.businessHours = dbUser.businessHours;
                     token.shopLayout = dbUser.shopLayout;
                     token.aiReplyEnabled = dbUser.aiReplyEnabled;
+                    token.premiumTier = dbUser.premiumTier;
                 }
             }
 
@@ -168,6 +170,7 @@ export const authOptions: NextAuthOptions = {
                 session.user.businessHours = token.businessHours as any;
                 session.user.shopLayout = token.shopLayout as string | null;
                 session.user.aiReplyEnabled = token.aiReplyEnabled as boolean;
+                session.user.premiumTier = token.premiumTier as string | null;
                 session.user.canPublishListings =
                     (token.canPublishListings as boolean | undefined) ??
                     (await userCanPublishListings(
