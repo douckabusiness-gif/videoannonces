@@ -18,7 +18,6 @@ async function main() {
             slug: 'free',
             description: 'Pour débuter votre activité',
             price: 0,
-            duration: 30, // jours
             features: [
                 '5 annonces vidéo',
                 'Vidéos de 60 secondes max',
@@ -26,17 +25,18 @@ async function main() {
                 'Support standard'
             ],
             maxListings: 5,
-            videoLimit: 60,
+            maxVideoDuration: 60,
+            allowSubdomain: false,
             allowCustomDomain: false,
-            allowLuxuryTheme: false,
-            aiAssistant: false,
+            active: true,
+            popular: false,
+            color: '#64748b'
         },
         {
             name: 'Boutique Premium',
             slug: 'premium',
             description: 'L\'expérience ultime pour booster vos ventes',
             price: 25000,
-            duration: 30, // jours
             features: [
                 'Annonces vidéo illimitées',
                 'Vidéos de 2 minutes max',
@@ -47,10 +47,14 @@ async function main() {
                 'Support VIP 24h/24'
             ],
             maxListings: 9999,
-            videoLimit: 120,
+            maxVideoDuration: 120, // 2 minutes
+            allowSubdomain: true,
             allowCustomDomain: true,
-            allowLuxuryTheme: true,
-            aiAssistant: true,
+            allowLiveStreaming: true,
+            allowStories: true,
+            active: true,
+            popular: true,
+            color: '#b45309'
         }
     ];
 
